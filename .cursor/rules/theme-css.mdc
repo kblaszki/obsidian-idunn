@@ -9,7 +9,7 @@ alwaysApply: false
 - Prefer Obsidian CSS variables over bespoke selectors.
 - Mode colors → `.theme-dark` / `.theme-light`. Shared → `body`. Avoid `:root` unless necessary.
 - Brand hex lives in `--idunn-*` (`src/tokens.css`); map accents to `--text-accent`, `--interactive-accent`, etc.
-- Module order (build): `tokens` → `dark` → `light` → `typography` → `markdown` → `code` → `ui`.
+- Module order (build): `tokens` → `dark` → `light` → `typography` → `markdown` → `code` → `mermaid` → `ui`.
 - Edit `src/`; run `npm run build`. Do not treat generated `theme.css` as the primary edit target.
 - Avoid `!important` unless documenting a core override.
 - Keep Dark and Light contrast intentional — never change only one mode for a shared semantic token without checking the other.

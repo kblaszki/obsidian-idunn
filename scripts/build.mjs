@@ -19,6 +19,7 @@ const MODULES = [
   "typography.css",
   "markdown.css",
   "code.css",
+  "mermaid.css",
   "ui.css",
 ];
 

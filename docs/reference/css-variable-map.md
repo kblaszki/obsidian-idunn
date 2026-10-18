@@ -13,6 +13,7 @@
 | `typography.css` | `body` + heading selectors | `--h1-color` … `--h6-*` |
 | `markdown.css` | `body` + rendered markdown | links, blockquote, table, tag, callout |
 | `code.css` | `body` + token / CM selectors | `--code-size`, token colors |
+| `mermaid.css` | `.mermaid` + LP embeds | center diagrams; `svg { max-width: 100% }` |
 | `ui.css` | `body` + workspace chrome | tabs, nav, dividers, focus |
 
 ## Conventions

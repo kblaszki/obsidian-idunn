@@ -23,13 +23,14 @@
 | `src/typography.css` | Heading scales and colors |
 | `src/markdown.css` | Quotes, tables, tags, links, callouts |
 | `src/code.css` | Code blocks and syntax selectors |
+| `src/mermaid.css` | Mermaid diagram centering / scaling |
 | `src/ui.css` | Ribbon, tabs, nav, focus |
 | `scripts/build.mjs` | Concatenate modules → `theme.css` |
 | `package.json` | `npm run build` / `watch` |
 
 ## Build order
 
-`tokens` → `dark` → `light` → `typography` → `markdown` → `code` → `ui`
+`tokens` → `dark` → `light` → `typography` → `markdown` → `code` → `mermaid` → `ui`
 
 ## Cursor / docs
 
