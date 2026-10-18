@@ -1,0 +1,51 @@
+/* Dark mode — deep navy / slate with cool accents */
+
+.theme-dark {
+  --background-primary: #0e1620;
+  --background-primary-alt: #121c28;
+  --background-secondary: #152030;
+  --background-secondary-alt: #1a2838;
+  --background-modifier-border: #2a3a4c;
+  --background-modifier-border-hover: #3a4e64;
+  --background-modifier-border-focus: var(--idunn-cyan);
+  --background-modifier-hover: rgba(42, 168, 196, 0.08);
+  --background-modifier-active-hover: rgba(42, 168, 196, 0.14);
+  --background-modifier-form-field: #121c28;
+  --background-modifier-box-shadow: rgba(0, 0, 0, 0.35);
+
+  --text-normal: #d6e0ea;
+  --text-muted: #8a9aab;
+  --text-faint: #5c6d80;
+  --text-on-accent: #0e1620;
+  --text-error: #e06c75;
+  --text-success: var(--idunn-emerald-muted);
+  --text-warning: #e5c07b;
+  --text-highlight-bg: rgba(42, 168, 196, 0.25);
+  --text-selection: rgba(42, 168, 196, 0.3);
+
+  --interactive-normal: #1a2838;
+  --interactive-hover: #223548;
+  --interactive-success: var(--idunn-emerald);
+
+  --ribbon-background: #0a121a;
+  --ribbon-background-collapsed: #0a121a;
+  --titlebar-background: #0a121a;
+  --titlebar-background-focused: #0e1620;
+
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: #2a3a4c;
+  --scrollbar-active-thumb-bg: #3a4e64;
+
+  --code-background: #0a121a;
+  --code-normal: #d6e0ea;
+  --code-comment: #5c6d80;
+  --code-function: var(--idunn-cyan-muted);
+  --code-important: #e06c75;
+  --code-keyword: #c678dd;
+  --code-operator: var(--idunn-cyan);
+  --code-property: var(--idunn-emerald-muted);
+  --code-punctuation: #8a9aab;
+  --code-string: #98c379;
+  --code-tag: var(--idunn-cyan);
+  --code-value: #d19a66;
+}

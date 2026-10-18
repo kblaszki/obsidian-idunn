@@ -1,0 +1,14 @@
+---
+description: Idunn Obsidian theme — project purpose, structure, and community constraints
+alwaysApply: true
+---
+
+# Idunn project overview
+
+- **Product:** Obsidian community theme **Idunn** (repo `obsidian-idunn`). Norse spring/renewal mood; ocean blue, cyan, emerald; Dark + Light; aimed at developers and technical writers (C++, Markdown).
+- **Public language:** English for README, docs, manifest, comments.
+- **Theme `name`:** `Idunn` only — never include “Theme” or “Obsidian” in `manifest.json` `name`.
+- **Release artifacts at repo root:** `manifest.json`, `theme.css`, `README.md`, `LICENSE`, screenshots under `screenshots/`.
+- **Source of truth for CSS:** edit `src/*.css`, then `npm run build` → commit `theme.css`. Do not hand-edit `theme.css` as the only change.
+- **Docs:** Diátaxis under `docs/` — start at `docs/index.md`.
+- **Community:** GitHub Release tag must equal `manifest.json` `version`; attach `manifest.json` + `theme.css`.

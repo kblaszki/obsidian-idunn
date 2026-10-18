@@ -1,0 +1,21 @@
+{
+  "name": "obsidian-idunn",
+  "version": "0.1.0",
+  "description": "Idunn — a calm ocean-blue & emerald Obsidian theme for developers and technical writers",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "watch": "node scripts/build.mjs --watch"
+  },
+  "keywords": [
+    "obsidian",
+    "theme",
+    "idunn"
+  ],
+  "author": "kblaszki",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kblaszki/obsidian-idunn.git"
+  }
+}

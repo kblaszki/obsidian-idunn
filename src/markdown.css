@@ -1,0 +1,38 @@
+/* Markdown chrome — quotes, tables, callouts, links */
+
+body {
+  --link-color: var(--idunn-cyan);
+  --link-color-hover: var(--idunn-cyan-muted);
+  --link-external-color: var(--idunn-ocean);
+  --link-unresolved-color: var(--text-muted);
+  --link-unresolved-opacity: 0.7;
+
+  --blockquote-border-thickness: 3px;
+  --blockquote-border-color: var(--idunn-emerald);
+  --blockquote-color: var(--text-muted);
+
+  --table-header-background: var(--background-secondary);
+  --table-header-background-hover: var(--background-secondary-alt);
+  --table-row-even-background: transparent;
+  --table-row-odd-background: var(--background-primary-alt);
+  --table-border-color: var(--background-modifier-border);
+
+  --tag-color: var(--idunn-emerald);
+  --tag-background: rgba(45, 154, 106, 0.12);
+  --tag-background-hover: rgba(45, 154, 106, 0.2);
+
+  --callout-border-width: 0 0 0 4px;
+  --callout-radius: var(--radius-m);
+}
+
+.markdown-rendered blockquote {
+  padding-inline-start: 1em;
+}
+
+.markdown-rendered table {
+  border-collapse: collapse;
+}
+
+.markdown-rendered th {
+  font-weight: 600;
+}

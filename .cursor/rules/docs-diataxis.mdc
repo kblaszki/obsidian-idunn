@@ -1,0 +1,13 @@
+---
+description: Diátaxis conventions for Idunn docs (AI-friendly structure)
+globs: docs/**/*.md
+alwaysApply: false
+---
+
+# Docs (Diátaxis)
+
+- Open with **Scope** and **When to use** (2–3 sentences).
+- Pick one type per file: tutorial (learning path), how-to (checklist to a goal), reference (tables/facts), explanation (why).
+- Prefer checklists and tables; link with relative paths; keep files short.
+- Update `docs/index.md` when adding a new doc.
+- Do not mix long narrative explanation into how-to checklists.

@@ -1,0 +1,36 @@
+/* Shared design tokens — apply in both light and dark modes */
+
+body {
+  /* Idunn brand accents (ocean blue / cyan / emerald) */
+  --idunn-ocean: #1a6b9a;
+  --idunn-cyan: #2aa8c4;
+  --idunn-emerald: #2d9a6a;
+  --idunn-cyan-muted: #5ebfd4;
+  --idunn-emerald-muted: #4caf7a;
+
+  /* Radius — modern but restrained */
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 12px;
+  --input-radius: 6px;
+  --tab-radius-active: 6px 6px 0 0;
+  --checkbox-radius: 4px;
+  --toggle-radius: 14px;
+  --toggle-thumb-radius: 50%;
+  --slider-thumb-radius: 50%;
+
+  /* Typography */
+  --font-text-theme: var(--font-interface);
+  --font-monospace-theme: "JetBrains Mono", "Fira Code", "Cascadia Code", ui-monospace, monospace;
+  --font-text-size: 16px;
+  --line-height-normal: 1.6;
+
+  /* Shared accent bindings */
+  --text-accent: var(--idunn-cyan);
+  --text-accent-hover: var(--idunn-cyan-muted);
+  --interactive-accent: var(--idunn-emerald);
+  --interactive-accent-hover: var(--idunn-emerald-muted);
+  --color-accent: var(--idunn-cyan);
+  --color-accent-1: var(--idunn-ocean);
+  --color-accent-2: var(--idunn-emerald);
+}

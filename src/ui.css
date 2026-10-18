@@ -1,0 +1,45 @@
+/* App chrome — ribbon, sidebar, tabs, inputs */
+
+body {
+  --tab-curve: 6px;
+  --tab-outline-color: transparent;
+  --tab-container-background: var(--background-secondary);
+  --tab-text-color: var(--text-muted);
+  --tab-text-color-active: var(--text-normal);
+  --tab-text-color-focused: var(--text-normal);
+
+  --nav-item-color: var(--text-muted);
+  --nav-item-color-hover: var(--text-normal);
+  --nav-item-color-active: var(--text-normal);
+  --nav-item-color-selected: var(--text-normal);
+  --nav-item-background-hover: var(--background-modifier-hover);
+  --nav-item-background-active: var(--background-modifier-active-hover);
+  --nav-item-background-selected: rgba(42, 168, 196, 0.12);
+
+  --divider-color: var(--background-modifier-border);
+  --divider-color-hover: var(--idunn-cyan);
+
+  --modal-border-color: var(--background-modifier-border);
+  --prompt-border-color: var(--background-modifier-border);
+}
+
+.workspace-tab-header.is-active {
+  box-shadow: inset 0 -2px 0 var(--idunn-cyan);
+}
+
+.workspace-leaf.mod-active .view-header-title {
+  color: var(--text-normal);
+}
+
+.sidebar-toggle-button:hover,
+.clickable-icon:hover {
+  color: var(--idunn-cyan);
+}
+
+/* Focus rings — accessible, on-brand */
+input:focus,
+textarea:focus,
+select:focus,
+.dropdown:focus {
+  box-shadow: 0 0 0 2px rgba(42, 168, 196, 0.35);
+}

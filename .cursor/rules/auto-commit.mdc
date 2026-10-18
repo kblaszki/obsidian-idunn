@@ -1,0 +1,29 @@
+---
+description: Auto-commit every completed change set in this repository
+alwaysApply: true
+---
+
+# Auto-commit
+
+After finishing a coherent unit of work (feature, fix, docs, or rule change) in this repo, **commit immediately** without waiting for the user to ask.
+
+## When
+
+- A task or todo is done and files on disk reflect the intended result
+- Prefer one commit per logical change; if the user asked for several unrelated deliverables in one turn, use separate commits when practical
+- Always include newly created/edited project files that belong to that change (including `.cursor/` and `docs/`)
+
+## How
+
+Follow the project git protocol:
+
+1. `git status`, `git diff`, `git log` (style)
+2. Stage relevant files only — never secrets (`.env`, credentials)
+3. Commit with a concise why-focused message via HEREDOC
+4. Verify with `git status`
+
+## Do not
+
+- Empty commits, amend unless amend rules are met, force push, or skip hooks
+- Push unless the user explicitly asks
+- Commit unrelated leftover WIP mixed into an unrelated task

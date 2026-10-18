@@ -1,0 +1,15 @@
+---
+description: Community Themes release rules — semver, tags, and required assets
+alwaysApply: false
+---
+
+# Community release
+
+Apply when bumping versions, cutting GitHub Releases, or preparing community submission.
+
+- `manifest.json` `version` must be `x.y.z` (semver).
+- GitHub Release **tag** must equal that version exactly.
+- Release assets must include `manifest.json` and `theme.css` (built from `src/`).
+- Screenshots: 16:9, recommended 512×288 — `screenshots/dark.png`, `screenshots/light.png`.
+- Theme folder / display name remains **Idunn**; do not rename after listing.
+- Follow `docs/how-to/prepare-community-release.md` and the `release-theme` skill.

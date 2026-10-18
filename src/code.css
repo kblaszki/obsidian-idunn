@@ -1,0 +1,79 @@
+/* Code blocks & syntax — tuned for C++ and Markdown readability */
+
+body {
+  --code-size: 0.9em;
+  --code-radius: var(--radius-s);
+  --code-white-space: pre;
+}
+
+.markdown-rendered pre,
+.cm-line.HyperMD-codeblock {
+  font-variant-ligatures: contextual;
+}
+
+/* Inline code */
+.markdown-rendered :not(pre) > code {
+  border-radius: var(--radius-s);
+  padding: 0.1em 0.35em;
+  font-size: 0.9em;
+}
+
+/* Fenced code blocks */
+.markdown-rendered pre > code {
+  line-height: 1.55;
+  tab-size: 4;
+}
+
+/*
+ * Language cues for C++ / Markdown — Obsidian maps tokens via --code-* vars.
+ * Extra selectors reinforce keyword / type contrast in reading view.
+ */
+.markdown-rendered .token.keyword,
+.cm-s-obsidian span.cm-keyword {
+  color: var(--code-keyword);
+  font-weight: 500;
+}
+
+.markdown-rendered .token.function,
+.cm-s-obsidian span.cm-def,
+.cm-s-obsidian span.cm-variable-2 {
+  color: var(--code-function);
+}
+
+.markdown-rendered .token.string,
+.cm-s-obsidian span.cm-string {
+  color: var(--code-string);
+}
+
+.markdown-rendered .token.comment,
+.cm-s-obsidian span.cm-comment {
+  color: var(--code-comment);
+  font-style: italic;
+}
+
+.markdown-rendered .token.number,
+.markdown-rendered .token.constant,
+.cm-s-obsidian span.cm-number {
+  color: var(--code-value);
+}
+
+.markdown-rendered .token.operator,
+.cm-s-obsidian span.cm-operator {
+  color: var(--code-operator);
+}
+
+.markdown-rendered .token.tag,
+.cm-s-obsidian span.cm-tag,
+.cm-s-obsidian span.cm-formatting-header {
+  color: var(--code-tag);
+}
+
+/* Markdown in-editor: emphasize headings & links without noise */
+.cm-s-obsidian span.cm-formatting-link,
+.cm-s-obsidian span.cm-url {
+  color: var(--link-color);
+}
+
+.cm-s-obsidian span.cm-hashtag {
+  color: var(--tag-color);
+}
