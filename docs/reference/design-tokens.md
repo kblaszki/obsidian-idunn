@@ -3,15 +3,17 @@
 **Scope:** Brand and semantic color tokens defined by Idunn.  
 **When to use:** Picking a token name or documenting hex values after a palette change.
 
-## Brand (`src/tokens.css`)
+## Brand (`src/tokens.css` + light overrides)
 
-| Token | Default | Role |
-|-------|---------|------|
-| `--idunn-ocean` | `#1a6b9a` | Deep ocean blue |
-| `--idunn-cyan` | `#2aa8c4` | Primary accent / links |
-| `--idunn-emerald` | `#2d9a6a` | Secondary accent / success |
-| `--idunn-cyan-muted` | `#5ebfd4` | Hover / softer cyan |
-| `--idunn-emerald-muted` | `#4caf7a` | Hover / softer emerald |
+Dark defaults live on `body`; `.theme-light` overrides the five brand tokens.
+
+| Token | Dark | Light | Role |
+|-------|------|-------|------|
+| `--idunn-ocean` | `#0e6cb8` | `#1d4ed8` | Interactive accent / depth |
+| `--idunn-cyan` | `#5eb6f5` | `#2563eb` | Links / secondary blue |
+| `--idunn-emerald` | `#3db8a0` | `#0d9488` | Teal brand / success / H2 |
+| `--idunn-cyan-muted` | `#8dceff` | `#1e3a8a` | Link hover |
+| `--idunn-emerald-muted` | `#5ecfb8` | `#2dd4bf` | Soft teal |
 
 ## Shared bindings (`body`)
 
@@ -19,8 +21,8 @@
 |--------------|----------|
 | `--text-accent` | `--idunn-cyan` |
 | `--text-accent-hover` | `--idunn-cyan-muted` |
-| `--interactive-accent` | `--idunn-emerald` |
-| `--interactive-accent-hover` | `--idunn-emerald-muted` |
+| `--interactive-accent` | `--idunn-ocean` |
+| `--interactive-accent-hover` | `--idunn-cyan` |
 | `--color-accent` | `--idunn-cyan` |
 | `--color-accent-1` | `--idunn-ocean` |
 | `--color-accent-2` | `--idunn-emerald` |

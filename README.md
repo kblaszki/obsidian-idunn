@@ -5,7 +5,7 @@
 
 **Idunn** — named after the Norse goddess of spring and renewal — is a clean, modern **Dark & Light** theme for [Obsidian](https://obsidian.md).
 
-Built for developers and technical writers: crystal-clear typography, high-contrast syntax highlighting (especially C++ and Markdown), and a calm palette of ocean blues, cyan, and emerald green that keeps long documentation sessions focused.
+Built for developers and technical writers: crystal-clear typography, high-contrast syntax highlighting (especially C++ and Markdown), and a calm palette of soft teal and clear blues that keeps long documentation sessions focused.
 
 ---
 
@@ -13,7 +13,7 @@ Built for developers and technical writers: crystal-clear typography, high-contr
 
 - **Dual Mode Support** — carefully crafted **Dark** and **Light** color schemes
 - **Developer-Grade Syntax** — readable code blocks with clear contrast for C++ and Markdown
-- **Vibrant Accents** — cyan, emerald, and ocean blue on headings and UI chrome
+- **Vibrant Accents** — soft teal and blue on headings, links, and UI chrome
 - **Distraction-Free** — modern, airy layout suited to writing, studying, and docs
 
 ---

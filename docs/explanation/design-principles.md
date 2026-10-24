@@ -5,7 +5,7 @@
 
 ## Name and mood
 
-Idunn evokes spring and renewal: cool water (ocean / cyan) with living green (emerald). The UI should feel calm and clear, not neon or playful.
+Idunn evokes spring and renewal: living teal (growth) with clear blues (focus and calm water). The UI should feel calm and clear, not neon or playful.
 
 ## Audience
 
@@ -19,20 +19,20 @@ Optimized for **developers and technical documentation** in Obsidian:
 
 | Role | Hue family | Typical use |
 |------|------------|-------------|
-| Primary accent | Cyan | Links, active tab cue, `--text-accent` |
-| Depth | Ocean blue | Secondary accents, external links, light-mode emphasis |
-| Action / growth | Emerald | Interactive accent, tags, blockquote edge, success |
+| Brand / growth | Teal (`--idunn-emerald`) | H2, tags, blockquote edge, success |
+| Links | Soft blue (`--idunn-cyan`) | Links, tab cue, `--text-accent` |
+| Action / depth | Deeper blue (`--idunn-ocean`) | Interactive accent, H4, external emphasis |
 
-Headings step through cyan → emerald so outline structure is scannable without shouting.
+Headings: calm H1 (body text), teal H2, blue H3/H4 — scannable without shouting.
 
 ## CSS strategy
 
 - Override Obsidian’s CSS variables; minimize bespoke selectors.
 - Keep brand hex in `--idunn-*` so accents stay consistent.
 - Rebuild from `src/` so `theme.css` stays a reproducible artifact.
+- Palette experiments belong in `previews/*.html` before changing CSS.
 
 ## Non-goals (for now)
 
 - Heavy animation or decorative flourishes
-- Mimicking a specific IDE skin 1:1
 - Per-plugin restyles unless they break core readability

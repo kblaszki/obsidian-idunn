@@ -1,51 +1,57 @@
-/* Light mode — cool off-white with high-contrast accents */
+/* Light mode — cool paper surfaces with teal + blue accents */
 
 .theme-light {
-  --background-primary: #f4f8fb;
-  --background-primary-alt: #eaf1f6;
-  --background-secondary: #e2ebf2;
-  --background-secondary-alt: #d5e1eb;
-  --background-modifier-border: #c2d0dc;
-  --background-modifier-border-hover: #a8bac9;
+  --idunn-ocean: #1d4ed8;
+  --idunn-cyan: #2563eb;
+  --idunn-emerald: #0d9488;
+  --idunn-cyan-muted: #1e3a8a;
+  --idunn-emerald-muted: #2dd4bf;
+
+  --background-primary: #f8fafc;
+  --background-primary-alt: #f1f5f9;
+  --background-secondary: #f1f5f9;
+  --background-secondary-alt: #e2e8f0;
+  --background-modifier-border: #cbd5e1;
+  --background-modifier-border-hover: #94a3b8;
   --background-modifier-border-focus: var(--idunn-ocean);
-  --background-modifier-hover: rgba(26, 107, 154, 0.08);
-  --background-modifier-active-hover: rgba(26, 107, 154, 0.14);
+  --background-modifier-hover: color-mix(in srgb, var(--idunn-ocean) 8%, transparent);
+  --background-modifier-active-hover: color-mix(in srgb, var(--idunn-ocean) 14%, transparent);
   --background-modifier-form-field: #ffffff;
-  --background-modifier-box-shadow: rgba(14, 22, 32, 0.12);
+  --background-modifier-box-shadow: rgba(15, 23, 42, 0.1);
 
-  --text-normal: #1a2838;
-  --text-muted: #4a5c6e;
-  --text-faint: #7a8c9e;
+  --text-normal: #0f172a;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
   --text-on-accent: #ffffff;
-  --text-error: #c0392b;
+  --text-error: #b91c1c;
   --text-success: var(--idunn-emerald);
-  --text-warning: #b8860b;
-  --text-highlight-bg: rgba(42, 168, 196, 0.22);
-  --text-selection: rgba(26, 107, 154, 0.22);
+  --text-warning: #a16207;
+  --text-highlight-bg: color-mix(in srgb, var(--idunn-cyan) 18%, transparent);
+  --text-selection: color-mix(in srgb, var(--idunn-ocean) 18%, transparent);
 
-  --interactive-normal: #eaf1f6;
-  --interactive-hover: #d5e1eb;
+  --interactive-normal: #f1f5f9;
+  --interactive-hover: #e2e8f0;
   --interactive-success: var(--idunn-emerald);
 
-  --ribbon-background: #e2ebf2;
-  --ribbon-background-collapsed: #e2ebf2;
-  --titlebar-background: #e2ebf2;
-  --titlebar-background-focused: #eaf1f6;
+  --ribbon-background: #f1f5f9;
+  --ribbon-background-collapsed: #f1f5f9;
+  --titlebar-background: #f1f5f9;
+  --titlebar-background-focused: #f8fafc;
 
   --scrollbar-bg: transparent;
-  --scrollbar-thumb-bg: #c2d0dc;
-  --scrollbar-active-thumb-bg: #a8bac9;
+  --scrollbar-thumb-bg: #cbd5e1;
+  --scrollbar-active-thumb-bg: #94a3b8;
 
-  --code-background: #eaf1f6;
-  --code-normal: #1a2838;
-  --code-comment: #7a8c9e;
-  --code-function: var(--idunn-ocean);
-  --code-important: #c0392b;
-  --code-keyword: #8e44ad;
+  --code-background: #f1f5f9;
+  --code-normal: #0f172a;
+  --code-comment: #3f6212;
+  --code-function: #a16207;
+  --code-important: #b91c1c;
+  --code-keyword: #1d4ed8;
   --code-operator: var(--idunn-ocean);
   --code-property: var(--idunn-emerald);
-  --code-punctuation: #4a5c6e;
-  --code-string: #2d7a4a;
+  --code-punctuation: #475569;
+  --code-string: #9a3412;
   --code-tag: var(--idunn-ocean);
-  --code-value: #b86a1a;
+  --code-value: #166534;
 }

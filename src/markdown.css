@@ -18,8 +18,8 @@ body {
   --table-border-color: var(--background-modifier-border);
 
   --tag-color: var(--idunn-emerald);
-  --tag-background: rgba(45, 154, 106, 0.12);
-  --tag-background-hover: rgba(45, 154, 106, 0.2);
+  --tag-background: color-mix(in srgb, var(--idunn-emerald) 16%, transparent);
+  --tag-background-hover: color-mix(in srgb, var(--idunn-emerald) 24%, transparent);
 
   --callout-border-width: 0 0 0 4px;
   --callout-radius: var(--radius-m);

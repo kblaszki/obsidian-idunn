@@ -14,7 +14,7 @@ body {
   --nav-item-color-selected: var(--text-normal);
   --nav-item-background-hover: var(--background-modifier-hover);
   --nav-item-background-active: var(--background-modifier-active-hover);
-  --nav-item-background-selected: rgba(42, 168, 196, 0.12);
+  --nav-item-background-selected: color-mix(in srgb, var(--idunn-cyan) 14%, transparent);
 
   --divider-color: var(--background-modifier-border);
   --divider-color-hover: var(--idunn-cyan);
@@ -41,5 +41,5 @@ input:focus,
 textarea:focus,
 select:focus,
 .dropdown:focus {
-  box-shadow: 0 0 0 2px rgba(42, 168, 196, 0.35);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--idunn-cyan) 40%, transparent);
 }

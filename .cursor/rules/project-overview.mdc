@@ -5,7 +5,8 @@ alwaysApply: true
 
 # Idunn project overview
 
-- **Product:** Obsidian community theme **Idunn** (repo `obsidian-idunn`). Norse spring/renewal mood; ocean blue, cyan, emerald; Dark + Light; aimed at developers and technical writers (C++, Markdown).
+- **Product:** Obsidian community theme **Idunn** (repo `obsidian-idunn`). Norse spring/renewal mood; soft teal + clear blues; Dark + Light; aimed at developers and technical writers (C++, Markdown).
+- **Palette changes:** preview in `previews/*.html` and get user approval before editing `src/` colors.
 - **Public language:** English for README, docs, manifest, comments.
 - **Theme `name`:** `Idunn` only — never include “Theme” or “Obsidian” in `manifest.json` `name`.
 - **Release artifacts at repo root:** `manifest.json`, `theme.css`, `README.md`, `LICENSE`, screenshots under `screenshots/`.

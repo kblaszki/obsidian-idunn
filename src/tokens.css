@@ -1,12 +1,12 @@
-/* Shared design tokens — apply in both light and dark modes */
+/* Shared design tokens — teal + soft blue accents (dark defaults; light overrides in light.css) */
 
 body {
-  /* Idunn brand accents (ocean blue / cyan / emerald) */
-  --idunn-ocean: #1a6b9a;
-  --idunn-cyan: #2aa8c4;
-  --idunn-emerald: #2d9a6a;
-  --idunn-cyan-muted: #5ebfd4;
-  --idunn-emerald-muted: #4caf7a;
+  /* Idunn brand accents */
+  --idunn-ocean: #0e6cb8;
+  --idunn-cyan: #5eb6f5;
+  --idunn-emerald: #3db8a0;
+  --idunn-cyan-muted: #8dceff;
+  --idunn-emerald-muted: #5ecfb8;
 
   /* Radius — modern but restrained */
   --radius-s: 4px;
@@ -28,8 +28,8 @@ body {
   /* Shared accent bindings */
   --text-accent: var(--idunn-cyan);
   --text-accent-hover: var(--idunn-cyan-muted);
-  --interactive-accent: var(--idunn-emerald);
-  --interactive-accent-hover: var(--idunn-emerald-muted);
+  --interactive-accent: var(--idunn-ocean);
+  --interactive-accent-hover: var(--idunn-cyan);
   --color-accent: var(--idunn-cyan);
   --color-accent-1: var(--idunn-ocean);
   --color-accent-2: var(--idunn-emerald);
