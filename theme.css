@@ -92,7 +92,7 @@ body {
 }
 
 /* === src/light.css === */
-/* Light mode — cool paper surfaces with teal + blue accents */
+/* Light mode — mist parchment surfaces (L14); teal + blue accents unchanged */
 
 .theme-light {
   --idunn-ocean: #1d4ed8;
@@ -101,16 +101,16 @@ body {
   --idunn-cyan-muted: #1e3a8a;
   --idunn-emerald-muted: #2dd4bf;
 
-  --background-primary: #f8fafc;
-  --background-primary-alt: #f1f5f9;
-  --background-secondary: #f1f5f9;
-  --background-secondary-alt: #e2e8f0;
-  --background-modifier-border: #cbd5e1;
-  --background-modifier-border-hover: #94a3b8;
+  --background-primary: #eef0f2;
+  --background-primary-alt: #e3e7ec;
+  --background-secondary: #e3e7ec;
+  --background-secondary-alt: #d6dce4;
+  --background-modifier-border: #bcc4cf;
+  --background-modifier-border-hover: #9aa5b2;
   --background-modifier-border-focus: var(--idunn-ocean);
   --background-modifier-hover: color-mix(in srgb, var(--idunn-ocean) 8%, transparent);
   --background-modifier-active-hover: color-mix(in srgb, var(--idunn-ocean) 14%, transparent);
-  --background-modifier-form-field: #ffffff;
+  --background-modifier-form-field: #f4f5f7;
   --background-modifier-box-shadow: rgba(15, 23, 42, 0.1);
 
   --text-normal: #0f172a;
@@ -123,20 +123,20 @@ body {
   --text-highlight-bg: color-mix(in srgb, var(--idunn-cyan) 18%, transparent);
   --text-selection: color-mix(in srgb, var(--idunn-ocean) 18%, transparent);
 
-  --interactive-normal: #f1f5f9;
-  --interactive-hover: #e2e8f0;
+  --interactive-normal: #e3e7ec;
+  --interactive-hover: #d6dce4;
   --interactive-success: var(--idunn-emerald);
 
-  --ribbon-background: #f1f5f9;
-  --ribbon-background-collapsed: #f1f5f9;
-  --titlebar-background: #f1f5f9;
-  --titlebar-background-focused: #f8fafc;
+  --ribbon-background: #e3e7ec;
+  --ribbon-background-collapsed: #e3e7ec;
+  --titlebar-background: #e3e7ec;
+  --titlebar-background-focused: #eef0f2;
 
   --scrollbar-bg: transparent;
-  --scrollbar-thumb-bg: #cbd5e1;
-  --scrollbar-active-thumb-bg: #94a3b8;
+  --scrollbar-thumb-bg: #bcc4cf;
+  --scrollbar-active-thumb-bg: #9aa5b2;
 
-  --code-background: #f1f5f9;
+  --code-background: #e3e7ec;
   --code-normal: #0f172a;
   --code-comment: #3f6212;
   --code-function: #a16207;

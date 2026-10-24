@@ -30,3 +30,14 @@ Dark defaults live on `body`; `.theme-light` overrides the five brand tokens.
 ## Surfaces (mode-specific)
 
 Defined in `src/dark.css` and `src/light.css`: `--background-primary`, `--background-secondary`, `--text-normal`, `--text-muted`, `--code-*`, etc. See [css-variable-map.md](css-variable-map.md).
+
+### Light surfaces (mist parchment)
+
+| Variable | Hex |
+|----------|-----|
+| `--background-primary` | `#eef0f2` |
+| `--background-secondary` | `#e3e7ec` |
+| `--background-secondary-alt` | `#d6dce4` |
+| `--background-modifier-border` | `#bcc4cf` |
+| `--background-modifier-form-field` | `#f4f5f7` |
+| `--code-background` | `#e3e7ec` |
