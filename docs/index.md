@@ -16,6 +16,7 @@
 
 - [Add or change a color token](how-to/add-color-token.md)
 - [Tune syntax highlighting](how-to/tune-syntax-highlighting.md)
+- [Tune Mermaid diagram chrome](how-to/tune-mermaid.md)
 - [Prepare a Community Themes release](how-to/prepare-community-release.md)
 
 ## Reference index

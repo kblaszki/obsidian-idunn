@@ -312,34 +312,149 @@ body {
 }
 
 /* === src/mermaid.css === */
-/* Mermaid — center diagrams; scale wide SVGs to the content column */
+/* Mermaid — center + M5 (teal/blue frames), interim until further design pass */
 
-.markdown-rendered .mermaid {
-  text-align: center;
-  overflow-x: auto;
-}
-
-.markdown-rendered .mermaid svg {
-  display: inline-block;
-  max-width: 100%;
-  height: auto;
-}
-
-/* Live Preview embed wrappers */
-.markdown-source-view.mod-cm6 .cm-embed-block:has(.mermaid),
-.markdown-source-view.mod-cm6 .cm-preview-code-block:has(.mermaid) {
-  text-align: center;
-}
-
+.markdown-rendered .mermaid,
 .markdown-source-view.mod-cm6 .mermaid {
   text-align: center;
   overflow-x: auto;
 }
 
+.markdown-rendered .mermaid svg,
 .markdown-source-view.mod-cm6 .mermaid svg {
   display: inline-block;
   max-width: 100%;
   height: auto;
+}
+
+.markdown-source-view.mod-cm6 .cm-embed-block:has(.mermaid),
+.markdown-source-view.mod-cm6 .cm-preview-code-block:has(.mermaid) {
+  text-align: center;
+}
+
+/*
+ * Diagram chrome tokens (IDE teal/blue gamut).
+ * Scoped here so surface tokens in dark.css / light.css stay unchanged.
+ */
+.theme-dark {
+  --idunn-mermaid-panel: #2b2b2b;
+  --idunn-mermaid-raised: #333333;
+  --idunn-mermaid-border: #3c3c3c;
+  --idunn-mermaid-label-bg: #1f1f1f;
+  --idunn-mermaid-fg: #cccccc;
+  --idunn-mermaid-muted: #9d9d9d;
+  --idunn-mermaid-teal: #4ec9b0;
+  --idunn-mermaid-blue: #569cd6;
+  --idunn-mermaid-link: #4daafc;
+  --idunn-mermaid-accent: #0078d4;
+}
+
+.theme-light {
+  --idunn-mermaid-panel: #eef2f7;
+  --idunn-mermaid-raised: #f4f5f7;
+  --idunn-mermaid-border: #d0d7e2;
+  --idunn-mermaid-label-bg: #eef0f2;
+  --idunn-mermaid-fg: #1f2937;
+  --idunn-mermaid-muted: #64748b;
+  --idunn-mermaid-teal: #0f766e;
+  --idunn-mermaid-blue: #1d4ed8;
+  --idunn-mermaid-link: #1d4ed8;
+  --idunn-mermaid-accent: #2563eb;
+}
+
+/* Nodes */
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node polygon,
+.mermaid .node path {
+  fill: var(--idunn-mermaid-panel) !important;
+  stroke: var(--idunn-mermaid-teal) !important;
+  stroke-width: 1.75px !important;
+}
+
+/* Clusters / subgraphs */
+.mermaid .cluster rect {
+  fill: color-mix(in srgb, var(--idunn-mermaid-blue) 10%, var(--idunn-mermaid-raised)) !important;
+  stroke: var(--idunn-mermaid-blue) !important;
+  stroke-width: 1.5px !important;
+}
+
+/* Edges + arrowheads (!important: Mermaid sets inline SVG fills) */
+.mermaid .edgePath .path,
+.mermaid .flowchart-link,
+.mermaid .messageLine0,
+.mermaid .messageLine1 {
+  stroke: var(--idunn-mermaid-blue) !important;
+  stroke-width: 1.6px !important;
+}
+
+.mermaid .arrowheadPath,
+.mermaid marker path,
+.mermaid [id$="arrowhead"] path {
+  fill: var(--idunn-mermaid-blue) !important;
+  stroke: var(--idunn-mermaid-blue) !important;
+}
+
+/* Labels */
+.mermaid .edgeLabel,
+.mermaid .edgeLabel rect {
+  background-color: var(--idunn-mermaid-label-bg) !important;
+  fill: var(--idunn-mermaid-label-bg) !important;
+  color: var(--idunn-mermaid-fg) !important;
+}
+
+.mermaid .nodeLabel,
+.mermaid .cluster-label,
+.mermaid .label,
+.mermaid .messageText,
+.mermaid .loopText,
+.mermaid .pieTitleText,
+.mermaid text {
+  fill: var(--idunn-mermaid-fg) !important;
+  color: var(--idunn-mermaid-fg) !important;
+}
+
+/* Sequence actors */
+.mermaid .actor {
+  fill: var(--idunn-mermaid-panel) !important;
+  stroke: var(--idunn-mermaid-accent) !important;
+  stroke-width: 1.75px !important;
+}
+
+.mermaid .actor-line,
+.mermaid .actor-man line {
+  stroke: var(--idunn-mermaid-muted) !important;
+}
+
+/*
+ * Pie: keep slice + legend swatch in sync by pairing nth groups.
+ * Fragile across Mermaid versions — revisit when refining Mermaid design.
+ */
+.mermaid .pieCircle:nth-of-type(1),
+.mermaid path.pieCircle:nth-of-type(1),
+.mermaid g.legend > g:nth-child(1) rect {
+  fill: var(--idunn-mermaid-teal) !important;
+}
+.mermaid .pieCircle:nth-of-type(2),
+.mermaid path.pieCircle:nth-of-type(2),
+.mermaid g.legend > g:nth-child(2) rect {
+  fill: var(--idunn-mermaid-blue) !important;
+}
+.mermaid .pieCircle:nth-of-type(3),
+.mermaid path.pieCircle:nth-of-type(3),
+.mermaid g.legend > g:nth-child(3) rect {
+  fill: var(--idunn-mermaid-accent) !important;
+}
+.mermaid .pieCircle:nth-of-type(4),
+.mermaid path.pieCircle:nth-of-type(4),
+.mermaid g.legend > g:nth-child(4) rect {
+  fill: var(--idunn-mermaid-link) !important;
+}
+
+.mermaid .pieTitleText,
+.mermaid .slice,
+.mermaid .legend text {
+  fill: var(--idunn-mermaid-fg) !important;
 }
 
 /* === src/ui.css === */
