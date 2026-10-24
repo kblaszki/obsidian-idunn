@@ -12,7 +12,6 @@
   <style>
     :root { font-family: "Segoe UI", Inter, system-ui, sans-serif; }
 
-    /* Note chrome = current Idunn; diagram tokens = IDE teal/blue gamut */
     html[data-scheme="dark"] {
       --page-bg: #111;
       --page-fg: #e8e8e8;
@@ -21,21 +20,8 @@
       --bg: #1a1c1e;
       --bg-alt: #1e2124;
       --border-ui: #3a4048;
-      /* IDE-inspired diagram tokens */
-      --d-panel: #2b2b2b;
-      --d-raised: #333333;
-      --d-border: #3c3c3c;
-      --d-fg: #cccccc;
-      --d-muted: #9d9d9d;
-      --d-teal: #4ec9b0;
-      --d-blue: #569cd6;
-      --d-link: #4daafc;
-      --d-accent: #0078d4;
-      --d-purple: #c586c0;
-      --d-yellow: #dcdcaa;
-      --d-orange: #ce9178;
-      --d-green: #6a9955;
-      --d-label-bg: #1f1f1f;
+      --fg: #d0d4d8;
+      --muted: #949aa3;
     }
     html[data-scheme="light"] {
       --page-bg: #c8ced6;
@@ -45,20 +31,8 @@
       --bg: #eef0f2;
       --bg-alt: #e3e7ec;
       --border-ui: #bcc4cf;
-      --d-panel: #eef2f7;
-      --d-raised: #f7f9fc;
-      --d-border: #d0d7e2;
-      --d-fg: #1f2937;
-      --d-muted: #64748b;
-      --d-teal: #0f766e;
-      --d-blue: #1d4ed8;
-      --d-link: #1d4ed8;
-      --d-accent: #2563eb;
-      --d-purple: #7e22ce;
-      --d-yellow: #a16207;
-      --d-orange: #9a3412;
-      --d-green: #3f6212;
-      --d-label-bg: #eef0f2;
+      --fg: #0f172a;
+      --muted: #64748b;
     }
 
     * { box-sizing: border-box; }
@@ -83,7 +57,17 @@
       margin: 0.35rem 0 0;
       color: var(--page-muted);
       font-size: 0.9rem;
-      max-width: 42rem;
+      max-width: 44rem;
+    }
+    .note {
+      max-width: 1200px;
+      margin: 0 auto 1rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      border: 1px solid var(--page-border);
+      background: color-mix(in srgb, var(--page-fg) 6%, transparent);
+      color: var(--page-muted);
+      font-size: 0.82rem;
     }
     .toolbar { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .toolbar button {
@@ -106,14 +90,14 @@
       max-width: 1200px;
       margin: 0 auto;
       background: var(--bg);
-      color: var(--d-fg);
+      color: var(--fg);
       border: 1px solid var(--border-ui);
       border-radius: 12px;
       padding: 1.25rem 1.5rem 2rem;
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
     }
     .stage h2 { margin: 0 0 0.35rem; font-size: 1.05rem; }
-    .stage .blurb { margin: 0 0 1.25rem; color: var(--d-muted); font-size: 0.88rem; }
+    .stage .blurb { margin: 0 0 1.25rem; color: var(--muted); font-size: 0.88rem; }
     .diagram {
       margin: 0 0 1.75rem;
       padding: 1rem;
@@ -127,7 +111,7 @@
       margin: 0 0 0.75rem;
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--d-muted);
+      color: var(--muted);
       text-align: left;
     }
     .diagram .mermaid { display: flex; justify-content: center; }
@@ -144,134 +128,6 @@
       border-radius: 4px;
       background: color-mix(in srgb, var(--page-fg) 10%, transparent);
     }
-
-    /* Shared text / labels */
-    .mermaid .nodeLabel,
-    .mermaid .cluster-label,
-    .mermaid .label,
-    .mermaid .actor > text,
-    .mermaid .messageText,
-    .mermaid .loopText,
-    .mermaid .pieTitleText,
-    .mermaid .slice,
-    .mermaid text {
-      fill: var(--d-fg) !important;
-      color: var(--d-fg) !important;
-    }
-    .mermaid .edgeLabel,
-    .mermaid .edgeLabel rect {
-      background-color: var(--d-label-bg) !important;
-      fill: var(--d-label-bg) !important;
-      color: var(--d-fg) !important;
-    }
-
-    /* ========== M4 IDE panels ========== */
-    html[data-style="M4"] .mermaid .node rect,
-    html[data-style="M4"] .mermaid .node circle,
-    html[data-style="M4"] .mermaid .node polygon,
-    html[data-style="M4"] .mermaid .node path {
-      fill: var(--d-panel) !important;
-      stroke: var(--d-border) !important;
-      stroke-width: 1.25px !important;
-    }
-    html[data-style="M4"] .mermaid .cluster rect {
-      fill: var(--d-raised) !important;
-      stroke: var(--d-border) !important;
-    }
-    html[data-style="M4"] .mermaid .edgePath .path,
-    html[data-style="M4"] .mermaid .flowchart-link,
-    html[data-style="M4"] .mermaid .messageLine0,
-    html[data-style="M4"] .mermaid .messageLine1 {
-      stroke: var(--d-muted) !important;
-      stroke-width: 1.5px !important;
-    }
-    html[data-style="M4"] .mermaid .arrowheadPath,
-    html[data-style="M4"] .mermaid marker path {
-      fill: var(--d-muted) !important;
-      stroke: var(--d-muted) !important;
-    }
-    html[data-style="M4"] .mermaid .actor {
-      fill: var(--d-raised) !important;
-      stroke: var(--d-border) !important;
-    }
-    html[data-style="M4"] .mermaid path.pieCircle:nth-of-type(1) { fill: var(--d-teal) !important; }
-    html[data-style="M4"] .mermaid path.pieCircle:nth-of-type(2) { fill: var(--d-blue) !important; }
-    html[data-style="M4"] .mermaid path.pieCircle:nth-of-type(3) { fill: var(--d-link) !important; }
-    html[data-style="M4"] .mermaid path.pieCircle:nth-of-type(4) { fill: var(--d-muted) !important; }
-
-    /* ========== M5 Teal + Blue frames ========== */
-    html[data-style="M5"] .mermaid .node rect,
-    html[data-style="M5"] .mermaid .node circle,
-    html[data-style="M5"] .mermaid .node polygon,
-    html[data-style="M5"] .mermaid .node path {
-      fill: var(--d-panel) !important;
-      stroke: var(--d-teal) !important;
-      stroke-width: 1.75px !important;
-    }
-    html[data-style="M5"] .mermaid .cluster rect {
-      fill: color-mix(in srgb, var(--d-blue) 10%, var(--d-raised)) !important;
-      stroke: var(--d-blue) !important;
-      stroke-width: 1.5px !important;
-    }
-    html[data-style="M5"] .mermaid .edgePath .path,
-    html[data-style="M5"] .mermaid .flowchart-link,
-    html[data-style="M5"] .mermaid .messageLine0,
-    html[data-style="M5"] .mermaid .messageLine1 {
-      stroke: var(--d-blue) !important;
-      stroke-width: 1.6px !important;
-    }
-    html[data-style="M5"] .mermaid .arrowheadPath,
-    html[data-style="M5"] .mermaid marker path {
-      fill: var(--d-blue) !important;
-      stroke: var(--d-blue) !important;
-    }
-    html[data-style="M5"] .mermaid .actor {
-      fill: var(--d-panel) !important;
-      stroke: var(--d-accent) !important;
-      stroke-width: 1.75px !important;
-    }
-    html[data-style="M5"] .mermaid path.pieCircle:nth-of-type(1) { fill: var(--d-teal) !important; }
-    html[data-style="M5"] .mermaid path.pieCircle:nth-of-type(2) { fill: var(--d-blue) !important; }
-    html[data-style="M5"] .mermaid path.pieCircle:nth-of-type(3) { fill: var(--d-accent) !important; }
-    html[data-style="M5"] .mermaid path.pieCircle:nth-of-type(4) { fill: var(--d-link) !important; }
-
-    /* ========== M6 Syntax chrome ========== */
-    html[data-style="M6"] .mermaid .node rect,
-    html[data-style="M6"] .mermaid .node circle,
-    html[data-style="M6"] .mermaid .node polygon,
-    html[data-style="M6"] .mermaid .node path {
-      fill: color-mix(in srgb, var(--d-teal) 14%, var(--d-panel)) !important;
-      stroke: var(--d-link) !important;
-      stroke-width: 1.5px !important;
-    }
-    html[data-style="M6"] .mermaid .cluster rect {
-      fill: color-mix(in srgb, var(--d-purple) 8%, var(--d-raised)) !important;
-      stroke: var(--d-purple) !important;
-    }
-    html[data-style="M6"] .mermaid .edgePath .path,
-    html[data-style="M6"] .mermaid .flowchart-link {
-      stroke: var(--d-blue) !important;
-      stroke-width: 1.5px !important;
-    }
-    html[data-style="M6"] .mermaid .messageLine0,
-    html[data-style="M6"] .mermaid .messageLine1 {
-      stroke: var(--d-link) !important;
-    }
-    html[data-style="M6"] .mermaid .arrowheadPath,
-    html[data-style="M6"] .mermaid marker path {
-      fill: var(--d-link) !important;
-      stroke: var(--d-link) !important;
-    }
-    html[data-style="M6"] .mermaid .actor {
-      fill: color-mix(in srgb, var(--d-blue) 12%, var(--d-panel)) !important;
-      stroke: var(--d-yellow) !important;
-      stroke-width: 1.5px !important;
-    }
-    html[data-style="M6"] .mermaid path.pieCircle:nth-of-type(1) { fill: var(--d-blue) !important; }
-    html[data-style="M6"] .mermaid path.pieCircle:nth-of-type(2) { fill: var(--d-teal) !important; }
-    html[data-style="M6"] .mermaid path.pieCircle:nth-of-type(3) { fill: var(--d-yellow) !important; }
-    html[data-style="M6"] .mermaid path.pieCircle:nth-of-type(4) { fill: var(--d-orange) !important; }
-    html[data-style="M6"] .mermaid path.pieCircle:nth-of-type(5) { fill: var(--d-purple) !important; }
   </style>
 </head>
 <body>
@@ -279,9 +135,8 @@
     <div>
       <h1>Idunn — Mermaid (IDE teal / blue)</h1>
       <p>
-        New round: diagram chrome inspired by an IDE teal/blue palette
-        (<code>#4ec9b0</code>, <code>#569cd6</code>, panel grays) on Idunn note surfaces.
-        Previous M1–M3 replaced. Reply with <strong>M4</strong>, <strong>M5</strong>, or <strong>M6</strong>.
+        Styles use Mermaid <code>themeVariables</code> (not CSS slice hacks), so pie
+        slices and legend stay in sync. Reply with <strong>M4</strong>, <strong>M5</strong>, or <strong>M6</strong>.
       </p>
     </div>
     <div>
@@ -297,9 +152,14 @@
     </div>
   </header>
 
+  <p class="note">
+    Fixed: earlier CSS <code>nth-of-type</code> overrides painted pie wedges differently from the
+    legend. Colors now come from <code>pie1…pie4</code> in Mermaid config (same source for both).
+  </p>
+
   <div class="stage">
     <h2 id="style-title">M4 — IDE panels</h2>
-    <p class="blurb" id="style-blurb">Neutral panel fills (#2b2b2b / light paper) · muted edges · teal/blue pie.</p>
+    <p class="blurb" id="style-blurb">Neutral panels · muted lines · teal/blue/link/muted pie.</p>
 
     <div class="diagram">
       <h3>Flowchart</h3>
@@ -344,25 +204,162 @@ pie showData
   </div>
 
   <footer>
-    Preview: <code>previews/mermaid-idunn.html</code> (network for Mermaid CDN).
-    Pick a style before we touch <code>src/mermaid.css</code>.
+    Preview: <code>previews/mermaid-idunn.html</code> (needs network for Mermaid CDN).
   </footer>
 
   <script>
+    /* IDE-inspired hex — dark / light */
+    const IDE = {
+      dark: {
+        panel: "#2b2b2b",
+        raised: "#333333",
+        border: "#3c3c3c",
+        fg: "#cccccc",
+        muted: "#9d9d9d",
+        teal: "#4ec9b0",
+        blue: "#569cd6",
+        link: "#4daafc",
+        accent: "#0078d4",
+        purple: "#c586c0",
+        yellow: "#dcdcaa",
+        orange: "#ce9178",
+        labelBg: "#1f1f1f",
+        noteBg: "#1a1c1e",
+      },
+      light: {
+        panel: "#eef2f7",
+        raised: "#f7f9fc",
+        border: "#d0d7e2",
+        fg: "#1f2937",
+        muted: "#64748b",
+        teal: "#0f766e",
+        blue: "#1d4ed8",
+        link: "#1d4ed8",
+        accent: "#2563eb",
+        purple: "#7e22ce",
+        yellow: "#a16207",
+        orange: "#9a3412",
+        labelBg: "#eef0f2",
+        noteBg: "#eef0f2",
+      },
+    };
+
     const BLURBS = {
       M4: {
         title: "M4 — IDE panels",
-        text: "Neutral panel fills · muted edges · teal/blue pie — calm, editor-like.",
+        text: "Neutral panel fills · muted edges · pie = teal / blue / link / muted (legend matches).",
       },
       M5: {
         title: "M5 — Teal + Blue frames",
-        text: "Panel fills with teal node borders, blue edges/clusters, accent actors.",
+        text: "Panel fills, teal node border, blue lines · pie = teal / blue / accent / link.",
       },
       M6: {
         title: "M6 — Syntax chrome",
-        text: "Richer IDE syntax hues: teal fills, link strokes, purple clusters, yellow/orange pie.",
+        text: "Teal-tinted nodes, link borders · pie = blue / teal / yellow / orange (syntax hues).",
       },
     };
+
+    function themeVariables(scheme, style) {
+      const c = IDE[scheme];
+      const base = {
+        darkMode: scheme === "dark",
+        background: c.noteBg,
+        fontFamily: "Segoe UI, Inter, system-ui, sans-serif",
+        fontSize: "16px",
+        primaryTextColor: c.fg,
+        secondaryTextColor: c.fg,
+        tertiaryTextColor: c.fg,
+        lineColor: c.muted,
+        textColor: c.fg,
+        mainBkg: c.panel,
+        nodeBorder: c.border,
+        clusterBkg: c.raised,
+        clusterBorder: c.border,
+        titleColor: c.fg,
+        edgeLabelBackground: c.labelBg,
+        /* sequence */
+        actorBkg: c.panel,
+        actorBorder: c.border,
+        actorTextColor: c.fg,
+        actorLineColor: c.muted,
+        signalColor: c.muted,
+        signalTextColor: c.fg,
+        labelBoxBkgColor: c.raised,
+        labelBoxBorderColor: c.border,
+        labelTextColor: c.fg,
+        loopTextColor: c.fg,
+        activationBkgColor: c.raised,
+        activationBorderColor: c.blue,
+        sequenceNumberColor: c.fg,
+        /* pie legend + slices share these */
+        pieTitleTextColor: c.fg,
+        pieSectionTextColor: c.fg,
+        pieLegendTextColor: c.fg,
+        pieStrokeColor: c.border,
+        pieStrokeWidth: "1px",
+        pieOuterStrokeColor: c.border,
+        pieOpacity: "0.95",
+      };
+
+      if (style === "M4") {
+        return {
+          ...base,
+          primaryColor: c.panel,
+          primaryBorderColor: c.border,
+          primaryTextColor: c.fg,
+          secondaryColor: c.raised,
+          secondaryBorderColor: c.border,
+          tertiaryColor: c.labelBg,
+          tertiaryBorderColor: c.border,
+          lineColor: c.muted,
+          pie1: c.teal,
+          pie2: c.blue,
+          pie3: c.link,
+          pie4: c.muted,
+        };
+      }
+      if (style === "M5") {
+        return {
+          ...base,
+          primaryColor: c.panel,
+          primaryBorderColor: c.teal,
+          primaryTextColor: c.fg,
+          secondaryColor: c.raised,
+          secondaryBorderColor: c.blue,
+          tertiaryColor: c.labelBg,
+          tertiaryBorderColor: c.blue,
+          lineColor: c.blue,
+          actorBorder: c.accent,
+          signalColor: c.blue,
+          clusterBorder: c.blue,
+          nodeBorder: c.teal,
+          pie1: c.teal,
+          pie2: c.blue,
+          pie3: c.accent,
+          pie4: c.link,
+        };
+      }
+      /* M6 */
+      return {
+        ...base,
+        primaryColor: c.panel,
+        primaryBorderColor: c.link,
+        primaryTextColor: c.fg,
+        secondaryColor: c.raised,
+        secondaryBorderColor: c.purple,
+        tertiaryColor: c.labelBg,
+        tertiaryBorderColor: c.purple,
+        lineColor: c.blue,
+        actorBorder: c.yellow,
+        signalColor: c.link,
+        clusterBorder: c.purple,
+        nodeBorder: c.link,
+        pie1: c.blue,
+        pie2: c.teal,
+        pie3: c.yellow,
+        pie4: c.orange,
+      };
+    }
 
     const diagramSources = [];
     document.querySelectorAll("pre.mermaid").forEach((el, i) => {
@@ -374,12 +371,17 @@ pie showData
       const mermaid = window.__mermaid;
       if (!mermaid) return;
       const scheme = document.documentElement.getAttribute("data-scheme");
+      const style = document.documentElement.getAttribute("data-style");
+
+      /* theme: base is required for themeVariables to apply */
       mermaid.initialize({
         startOnLoad: false,
-        theme: scheme === "dark" ? "dark" : "default",
+        theme: "base",
+        themeVariables: themeVariables(scheme, style),
         securityLevel: "loose",
         flowchart: { htmlLabels: true, curve: "basis" },
       });
+
       const nodes = document.querySelectorAll("pre.mermaid");
       for (let i = 0; i < nodes.length; i++) {
         const el = nodes[i];
@@ -404,6 +406,7 @@ pie showData
       });
       document.getElementById("style-title").textContent = BLURBS[style].title;
       document.getElementById("style-blurb").textContent = BLURBS[style].text;
+      renderAll();
     }
 
     document.querySelectorAll("[data-scheme]").forEach((btn) => {
