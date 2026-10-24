@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Idunn — light surface variants</title>
+  <style>
+    :root {
+      --page-bg: #c8ced6;
+      --page-fg: #1a1a1a;
+      --page-muted: #4a5560;
+      --page-border: #9aa3ad;
+      font-family: "Segoe UI", Inter, system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--page-bg);
+      color: var(--page-fg);
+      line-height: 1.5;
+      padding: 1.25rem 1.5rem 3rem;
+    }
+    header {
+      max-width: 1600px;
+      margin: 0 auto 1.25rem;
+    }
+    header h1 {
+      font-size: 1.25rem;
+      font-weight: 650;
+      margin: 0;
+    }
+    header p {
+      margin: 0.35rem 0 0;
+      color: var(--page-muted);
+      font-size: 0.9rem;
+      max-width: 48rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      max-width: 1600px;
+      margin-inline: auto;
+    }
+    .card {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--fg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+    .card-head {
+      padding: 0.85rem 1rem;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .card-head h2 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 650;
+    }
+    .card-head .tagline {
+      margin: 0.2rem 0 0;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .card-body {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .swatches {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.4rem;
+    }
+    .swatch {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      font-size: 0.65rem;
+    }
+    .swatch .chip { height: 36px; }
+    .swatch .label {
+      padding: 0.25rem 0.3rem;
+      background: var(--bg2);
+      color: var(--muted);
+      word-break: break-all;
+      font-family: ui-monospace, monospace;
+    }
+    .surfaces {
+      display: flex;
+      height: 28px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .surfaces span { flex: 1; }
+    .mock-note {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+    }
+    .mock-note .h1 { font-size: 1.35rem; font-weight: 700; color: var(--h1); margin: 0 0 0.35rem; }
+    .mock-note .h2 { font-size: 1.15rem; font-weight: 650; color: var(--h2); margin: 0.6rem 0 0.25rem; }
+    .mock-note .h3 { font-size: 1.02rem; font-weight: 600; color: var(--h3); margin: 0.5rem 0 0.2rem; }
+    .mock-note .h4 { font-size: 0.95rem; font-weight: 600; color: var(--h4); margin: 0.4rem 0 0.2rem; }
+    .mock-note p { margin: 0.35rem 0; color: var(--fg); font-size: 0.88rem; }
+    .mock-note a { color: var(--link); }
+    .mock-note .quote {
+      border-left: 3px solid var(--emerald);
+      padding-left: 0.65rem;
+      color: var(--muted);
+      margin: 0.5rem 0;
+      font-size: 0.85rem;
+    }
+    .mock-note .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      margin-top: 0.65rem;
+    }
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .pill {
+      background: color-mix(in srgb, var(--emerald) 16%, transparent);
+      color: var(--emerald);
+      border-radius: 999px;
+      padding: 0.15rem 0.55rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .field {
+      margin-top: 0.5rem;
+      padding: 0.45rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--raised);
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    .code {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.65rem 0.75rem;
+      font-family: "Cascadia Code", "Fira Code", ui-monospace, monospace;
+      font-size: 0.78rem;
+      line-height: 1.55;
+      overflow-x: auto;
+    }
+    .c-comment { color: var(--c-comment); }
+    .c-kw { color: var(--c-kw); }
+    .c-type { color: var(--c-type); }
+    .c-fn { color: var(--c-fn); }
+    .c-str { color: var(--c-str); }
+    .c-num { color: var(--c-num); }
+    .c-punct { color: var(--c-punct); }
+    table.hex {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.72rem;
+      font-family: ui-monospace, monospace;
+    }
+    table.hex th, table.hex td {
+      text-align: left;
+      padding: 0.28rem 0.35rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+    }
+    table.hex th { color: var(--fg); font-weight: 600; }
+    table.hex td.hex-val { color: var(--fg); user-select: all; }
+    .pick {
+      margin-top: auto;
+      padding-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .pick strong { color: var(--fg); }
+    footer {
+      max-width: 1600px;
+      margin: 1.5rem auto 0;
+      color: var(--page-muted);
+      font-size: 0.85rem;
+    }
+    footer code {
+      font-size: 0.8em;
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+      background: rgba(15, 23, 42, 0.08);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Idunn — light surfaces only</h1>
+    <p>
+      Dark mode is unchanged. Compare softer light backgrounds against <strong>L0 Current B</strong>.
+      Brand teal/blue stays the same; only paper / panels / borders / raised fields differ.
+      Reply in chat with <strong>L0</strong>–<strong>L4</strong> (or ask to tweak a surface hex).
+    </p>
+  </header>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>
+    Dev preview: <code>previews/palette-light.html</code>. CSS (<code>src/light.css</code>) waits for your pick.
+  </footer>
+
+  <script>
+    /* Brand + syntax from current light B — shared across variants */
+    const BRAND = {
+      ocean: "#1d4ed8",
+      cyan: "#2563eb",
+      emerald: "#0d9488",
+      cyanMuted: "#1e3a8a",
+      emeraldMuted: "#2dd4bf",
+      fg: "#0f172a",
+      muted: "#64748b",
+      faint: "#94a3b8",
+      h1: "#0f172a",
+      h2: "#0d9488",
+      h3: "#2563eb",
+      h4: "#1d4ed8",
+      link: "#2563eb",
+      accent: "#1d4ed8",
+      cComment: "#3f6212",
+      cKw: "#1d4ed8",
+      cType: "#0d9488",
+      cFn: "#a16207",
+      cStr: "#9a3412",
+      cNum: "#166534",
+      cPunct: "#475569",
+    };
+
+    const VARIANTS = [
+      {
+        id: "L0",
+        title: "L0 — Current B",
+        tagline: "Reference · bright paper (what you have now)",
+        bg: "#f8fafc",
+        bg2: "#f1f5f9",
+        bg3: "#e2e8f0",
+        border: "#cbd5e1",
+        raised: "#ffffff",
+        codeBg: "#f1f5f9",
+      },
+      {
+        id: "L1",
+        title: "L1 — Soft gray",
+        tagline: "Cooler, darker gray · less white blast",
+        bg: "#e8ecf1",
+        bg2: "#dde3ea",
+        bg3: "#d0d7e0",
+        border: "#b8c2ce",
+        raised: "#eef1f5",
+        codeBg: "#dde3ea",
+      },
+      {
+        id: "L2",
+        title: "L2 — Mist blue",
+        tagline: "Blue-gray mid-tone · soft depth",
+        bg: "#e4ebf3",
+        bg2: "#d5e0ec",
+        bg3: "#c5d4e4",
+        border: "#aebfd0",
+        raised: "#ebf1f7",
+        codeBg: "#d5e0ec",
+      },
+      {
+        id: "L3",
+        title: "L3 — Teal wash",
+        tagline: "Subtle teal paper · matches brand hue",
+        bg: "#e6eef0",
+        bg2: "#d7e4e6",
+        bg3: "#c8d8db",
+        border: "#aec2c6",
+        raised: "#eef4f5",
+        codeBg: "#d7e4e6",
+      },
+      {
+        id: "L4",
+        title: "L4 — Warm slate",
+        tagline: "Warmer stone · still muted (not cream)",
+        bg: "#ebe8e4",
+        bg2: "#e0dcd6",
+        bg3: "#d4cfc8",
+        border: "#c0b8ae",
+        raised: "#f2efeb",
+        codeBg: "#e0dcd6",
+      },
+    ];
+
+    function applyVars(el, v) {
+      const p = { ...BRAND, ...v };
+      const map = {
+        "--bg": p.bg, "--bg2": p.bg2, "--bg3": p.bg3, "--border": p.border,
+        "--raised": p.raised, "--fg": p.fg, "--muted": p.muted,
+        "--ocean": p.ocean, "--cyan": p.cyan, "--emerald": p.emerald,
+        "--h1": p.h1, "--h2": p.h2, "--h3": p.h3, "--h4": p.h4,
+        "--link": p.link, "--accent": p.accent, "--code-bg": p.codeBg,
+        "--c-comment": p.cComment, "--c-kw": p.cKw, "--c-type": p.cType,
+        "--c-fn": p.cFn, "--c-str": p.cStr, "--c-num": p.cNum, "--c-punct": p.cPunct,
+      };
+      for (const [k, val] of Object.entries(map)) el.style.setProperty(k, val);
+    }
+
+    function swatch(name, color) {
+      return `<div class="swatch"><div class="chip" style="background:${color}"></div><div class="label">${name}<br>${color}</div></div>`;
+    }
+
+    function cardHTML(v) {
+      const pick = v.id === "L0"
+        ? "Keep current light if bright paper is OK."
+        : `Reply in chat: <strong>${v.id}</strong>`;
+      return `
+        <article class="card" data-id="${v.id}">
+          <div class="card-head">
+            <h2>${v.title}</h2>
+            <p class="tagline">${v.tagline}</p>
+          </div>
+          <div class="card-body">
+            <div class="swatches">
+              ${swatch("ocean", BRAND.ocean)}
+              ${swatch("cyan", BRAND.cyan)}
+              ${swatch("emerald", BRAND.emerald)}
+              ${swatch("cyan-m", BRAND.cyanMuted)}
+              ${swatch("em-m", BRAND.emeraldMuted)}
+            </div>
+            <div class="surfaces" title="primary / secondary / alt / border">
+              <span style="background:${v.bg}"></span>
+              <span style="background:${v.bg2}"></span>
+              <span style="background:${v.bg3}"></span>
+              <span style="background:${v.border}"></span>
+            </div>
+            <div class="mock-note">
+              <div class="h1">Spring notes</div>
+              <div class="h2">Theme accents</div>
+              <div class="h3">Links and actions</div>
+              <div class="h4">Nested detail</div>
+              <p>Body text with a <a href="#">wiki link</a> — check glare on the paper.</p>
+              <div class="quote">Blockquote on softer surface.</div>
+              <div class="row">
+                <span class="btn">Interactive</span>
+                <span class="pill">#idunn</span>
+              </div>
+              <div class="field">Raised field (not pure white in L1–L4)</div>
+            </div>
+            <pre class="code"><span class="c-comment">// syntax on this paper</span>
+<span class="c-kw">auto</span> <span class="c-fn">greet</span><span class="c-punct">(</span><span class="c-type">std</span><span class="c-punct">::</span><span class="c-type">string</span> name<span class="c-punct">)</span> <span class="c-punct">{</span>
+  <span class="c-kw">return</span> <span class="c-str">"Hello, "</span> <span class="c-punct">+</span> name<span class="c-punct">;</span>
+<span class="c-punct">}</span>
+<span class="c-type">int</span> n <span class="c-punct">=</span> <span class="c-num">42</span><span class="c-punct">;</span></pre>
+            <table class="hex">
+              <thead><tr><th>Surface</th><th>Hex</th></tr></thead>
+              <tbody>
+                <tr><td>primary</td><td class="hex-val">${v.bg}</td></tr>
+                <tr><td>secondary</td><td class="hex-val">${v.bg2}</td></tr>
+                <tr><td>alt</td><td class="hex-val">${v.bg3}</td></tr>
+                <tr><td>border</td><td class="hex-val">${v.border}</td></tr>
+                <tr><td>raised / form</td><td class="hex-val">${v.raised}</td></tr>
+                <tr><td>code bg</td><td class="hex-val">${v.codeBg}</td></tr>
+              </tbody>
+            </table>
+            <p class="pick">${pick}</p>
+          </div>
+        </article>`;
+    }
+
+    const grid = document.getElementById("grid");
+    grid.innerHTML = VARIANTS.map(cardHTML).join("");
+    grid.querySelectorAll(".card").forEach((card) => {
+      const v = VARIANTS.find((x) => x.id === card.dataset.id);
+      applyVars(card, v);
+    });
+  </script>
+</body>
+</html>
