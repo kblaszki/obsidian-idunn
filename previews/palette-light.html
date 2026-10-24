@@ -209,9 +209,10 @@
   <header>
     <h1>Idunn — light surfaces only</h1>
     <p>
-      Dark mode is unchanged. Compare softer light backgrounds against <strong>L0 Current B</strong>.
+      Dark mode is unchanged. <strong>L2 Mist blue</strong> is kept from the previous round;
+      the other columns are new proposals in a similar “less glare” direction.
       Brand teal/blue stays the same; only paper / panels / borders / raised fields differ.
-      Reply in chat with <strong>L0</strong>–<strong>L4</strong> (or ask to tweak a surface hex).
+      Reply with <strong>L2</strong> or <strong>L5</strong>–<strong>L9</strong>.
     </p>
   </header>
 
@@ -249,31 +250,9 @@
 
     const VARIANTS = [
       {
-        id: "L0",
-        title: "L0 — Current B",
-        tagline: "Reference · bright paper (what you have now)",
-        bg: "#f8fafc",
-        bg2: "#f1f5f9",
-        bg3: "#e2e8f0",
-        border: "#cbd5e1",
-        raised: "#ffffff",
-        codeBg: "#f1f5f9",
-      },
-      {
-        id: "L1",
-        title: "L1 — Soft gray",
-        tagline: "Cooler, darker gray · less white blast",
-        bg: "#e8ecf1",
-        bg2: "#dde3ea",
-        bg3: "#d0d7e0",
-        border: "#b8c2ce",
-        raised: "#eef1f5",
-        codeBg: "#dde3ea",
-      },
-      {
         id: "L2",
         title: "L2 — Mist blue",
-        tagline: "Blue-gray mid-tone · soft depth",
+        tagline: "Kept · blue-gray mid-tone · your shortlist",
         bg: "#e4ebf3",
         bg2: "#d5e0ec",
         bg3: "#c5d4e4",
@@ -282,26 +261,59 @@
         codeBg: "#d5e0ec",
       },
       {
-        id: "L3",
-        title: "L3 — Teal wash",
-        tagline: "Subtle teal paper · matches brand hue",
-        bg: "#e6eef0",
-        bg2: "#d7e4e6",
-        bg3: "#c8d8db",
-        border: "#aec2c6",
-        raised: "#eef4f5",
-        codeBg: "#d7e4e6",
+        id: "L5",
+        title: "L5 — Deeper mist",
+        tagline: "Same family as L2 · one step darker / denser",
+        bg: "#d8e2ed",
+        bg2: "#c9d6e5",
+        bg3: "#b8c9db",
+        border: "#9aafc4",
+        raised: "#e2eaf3",
+        codeBg: "#c9d6e5",
       },
       {
-        id: "L4",
-        title: "L4 — Warm slate",
-        tagline: "Warmer stone · still muted (not cream)",
-        bg: "#ebe8e4",
-        bg2: "#e0dcd6",
-        bg3: "#d4cfc8",
-        border: "#c0b8ae",
-        raised: "#f2efeb",
-        codeBg: "#e0dcd6",
+        id: "L6",
+        title: "L6 — Steel paper",
+        tagline: "Neutral cool gray-blue · less chromatic than L2",
+        bg: "#e2e6eb",
+        bg2: "#d3d9e0",
+        bg3: "#c4ccd6",
+        border: "#a8b2be",
+        raised: "#eaedf1",
+        codeBg: "#d3d9e0",
+      },
+      {
+        id: "L7",
+        title: "L7 — Fog slate",
+        tagline: "Desaturated blue fog · soft, low contrast panels",
+        bg: "#e7ebf0",
+        bg2: "#dbe1e8",
+        bg3: "#cdd5df",
+        border: "#b0bac6",
+        raised: "#eef1f5",
+        codeBg: "#dbe1e8",
+      },
+      {
+        id: "L8",
+        title: "L8 — Glacier",
+        tagline: "Cooler cyan-leaning paper · crisp edges",
+        bg: "#e0eaf0",
+        bg2: "#d0dee8",
+        bg3: "#bed0de",
+        border: "#9cb4c6",
+        raised: "#e8f0f5",
+        codeBg: "#d0dee8",
+      },
+      {
+        id: "L9",
+        title: "L9 — Ink wash",
+        tagline: "Stronger mid-tone · farthest from white glare",
+        bg: "#d2dce6",
+        bg2: "#c2cfdb",
+        bg3: "#b0c0d0",
+        border: "#8fa3b6",
+        raised: "#dce5ee",
+        codeBg: "#c2cfdb",
       },
     ];
 
@@ -324,9 +336,7 @@
     }
 
     function cardHTML(v) {
-      const pick = v.id === "L0"
-        ? "Keep current light if bright paper is OK."
-        : `Reply in chat: <strong>${v.id}</strong>`;
+      const pick = `Reply in chat: <strong>${v.id}</strong>`;
       return `
         <article class="card" data-id="${v.id}">
           <div class="card-head">
