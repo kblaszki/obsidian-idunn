@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" data-scheme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Idunn — palette retune preview</title>
+  <style>
+    :root {
+      --page-bg: #111;
+      --page-fg: #e8e8e8;
+      --page-muted: #999;
+      --page-border: #333;
+      font-family: "Segoe UI", Inter, system-ui, sans-serif;
+    }
+    html[data-scheme="light"] {
+      --page-bg: #e8ecf0;
+      --page-fg: #1a1a1a;
+      --page-muted: #555;
+      --page-border: #c5cdd6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--page-bg);
+      color: var(--page-fg);
+      line-height: 1.5;
+      padding: 1.25rem 1.5rem 3rem;
+    }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      max-width: 1600px;
+      margin-inline: auto;
+    }
+    header h1 {
+      font-size: 1.25rem;
+      font-weight: 650;
+      margin: 0;
+    }
+    header p {
+      margin: 0.25rem 0 0;
+      color: var(--page-muted);
+      font-size: 0.9rem;
+      max-width: 42rem;
+    }
+    .toolbar {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .toolbar button {
+      appearance: none;
+      border: 1px solid var(--page-border);
+      background: transparent;
+      color: var(--page-fg);
+      padding: 0.45rem 0.85rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.875rem;
+    }
+    .toolbar button[aria-pressed="true"] {
+      background: var(--page-fg);
+      color: var(--page-bg);
+      border-color: transparent;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      max-width: 1600px;
+      margin-inline: auto;
+    }
+    .card {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--fg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .card-head {
+      padding: 0.85rem 1rem;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .card-head h2 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 650;
+      color: var(--fg);
+    }
+    .card-head .tagline {
+      margin: 0.2rem 0 0;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .card-body { padding: 1rem; display: flex; flex-direction: column; gap: 1rem; }
+
+    .swatches {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.4rem;
+    }
+    .swatch {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      font-size: 0.65rem;
+    }
+    .swatch .chip {
+      height: 36px;
+    }
+    .swatch .label {
+      padding: 0.25rem 0.3rem;
+      background: var(--bg2);
+      color: var(--muted);
+      word-break: break-all;
+      font-family: ui-monospace, monospace;
+    }
+
+    .surfaces {
+      display: flex;
+      height: 28px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .surfaces span { flex: 1; }
+
+    .mock-note {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+    }
+    .mock-note .h1 { font-size: 1.35rem; font-weight: 700; color: var(--h1); margin: 0 0 0.35rem; }
+    .mock-note .h2 { font-size: 1.15rem; font-weight: 650; color: var(--h2); margin: 0.6rem 0 0.25rem; }
+    .mock-note .h3 { font-size: 1.02rem; font-weight: 600; color: var(--h3); margin: 0.5rem 0 0.2rem; }
+    .mock-note .h4 { font-size: 0.95rem; font-weight: 600; color: var(--h4); margin: 0.4rem 0 0.2rem; }
+    .mock-note p { margin: 0.35rem 0; color: var(--fg); font-size: 0.88rem; }
+    .mock-note a { color: var(--link); }
+    .mock-note .quote {
+      border-left: 3px solid var(--emerald);
+      padding-left: 0.65rem;
+      color: var(--muted);
+      margin: 0.5rem 0;
+      font-size: 0.85rem;
+    }
+    .mock-note .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      margin-top: 0.65rem;
+    }
+    .btn {
+      background: var(--accent);
+      color: var(--on-accent);
+      border: none;
+      border-radius: 6px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: default;
+    }
+    .pill {
+      background: color-mix(in srgb, var(--emerald) 18%, transparent);
+      color: var(--emerald);
+      border-radius: 999px;
+      padding: 0.15rem 0.55rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .code {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.65rem 0.75rem;
+      font-family: "Cascadia Code", "Fira Code", ui-monospace, monospace;
+      font-size: 0.78rem;
+      line-height: 1.55;
+      overflow-x: auto;
+    }
+    .c-comment { color: var(--c-comment); }
+    .c-kw { color: var(--c-kw); }
+    .c-type { color: var(--c-type); }
+    .c-fn { color: var(--c-fn); }
+    .c-str { color: var(--c-str); }
+    .c-num { color: var(--c-num); }
+    .c-punct { color: var(--c-punct); }
+
+    table.hex {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.72rem;
+      font-family: ui-monospace, monospace;
+    }
+    table.hex th, table.hex td {
+      text-align: left;
+      padding: 0.28rem 0.35rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+    }
+    table.hex th { color: var(--fg); font-weight: 600; }
+    table.hex td.hex-val { color: var(--fg); user-select: all; }
+    .pick {
+      margin-top: auto;
+      padding-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .pick strong { color: var(--fg); }
+
+    footer {
+      max-width: 1600px;
+      margin: 1.5rem auto 0;
+      color: var(--page-muted);
+      font-size: 0.85rem;
+    }
+    footer code {
+      font-size: 0.8em;
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+      background: color-mix(in srgb, var(--page-fg) 8%, transparent);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Idunn palette retune</h1>
+      <p>
+        Compare the current theme with proposed teal/blue gamuts.
+        Toggle scheme, then reply in chat with <strong>A</strong>, <strong>B</strong>, or <strong>C</strong>
+        (or ask to tweak a specific token). CSS is not changed until you pick.
+      </p>
+    </div>
+    <div class="toolbar" role="group" aria-label="Color scheme">
+      <button type="button" id="btn-dark" aria-pressed="true">Dark</button>
+      <button type="button" id="btn-light" aria-pressed="false">Light</button>
+    </div>
+  </header>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>
+    Dev-only preview (<code>previews/palette-retune.html</code>). Open in a browser.
+    After you choose a column, the agent will apply that map to <code>src/*.css</code>.
+  </footer>
+
+  <script>
+    const PALETTES = {
+      current: {
+        id: "current",
+        title: "Current Idunn",
+        tagline: "Ocean navy · cyan · emerald (as in repo today)",
+        dark: {
+          ocean: "#1a6b9a", cyan: "#2aa8c4", emerald: "#2d9a6a",
+          cyanMuted: "#5ebfd4", emeraldMuted: "#4caf7a",
+          bg: "#0e1620", bg2: "#152030", bg3: "#1a2838", border: "#2a3a4c",
+          fg: "#d6e0ea", muted: "#8a9aab",
+          h1: "#2aa8c4", h2: "#5ebfd4", h3: "#2d9a6a", h4: "#4caf7a",
+          link: "#2aa8c4", accent: "#2d9a6a", onAccent: "#0e1620",
+          codeBg: "#0a121a",
+          cComment: "#5c6d80", cKw: "#c678dd", cType: "#4caf7a",
+          cFn: "#5ebfd4", cStr: "#98c379", cNum: "#d19a66", cPunct: "#8a9aab",
+        },
+        light: {
+          ocean: "#1a6b9a", cyan: "#2aa8c4", emerald: "#2d9a6a",
+          cyanMuted: "#5ebfd4", emeraldMuted: "#4caf7a",
+          bg: "#f4f8fb", bg2: "#e2ebf2", bg3: "#eaf1f6", border: "#c2d0dc",
+          fg: "#1a2838", muted: "#4a5c6e",
+          h1: "#2aa8c4", h2: "#5ebfd4", h3: "#2d9a6a", h4: "#4caf7a",
+          link: "#2aa8c4", accent: "#2d9a6a", onAccent: "#ffffff",
+          codeBg: "#eaf1f6",
+          cComment: "#7a8c9e", cKw: "#8e44ad", cType: "#2d9a6a",
+          cFn: "#1a6b9a", cStr: "#2d7a4a", cNum: "#b86a1a", cPunct: "#4a5c6e",
+        },
+      },
+      A: {
+        id: "A",
+        title: "Proposed A — Teal + Blue IDE",
+        tagline: "Default proposal · gray IDE surfaces · teal brand · blue links",
+        dark: {
+          ocean: "#0078d4", cyan: "#4daafc", emerald: "#4ec9b0",
+          cyanMuted: "#6cb6ff", emeraldMuted: "#6fd4bc",
+          bg: "#1f1f1f", bg2: "#2b2b2b", bg3: "#333333", border: "#3c3c3c",
+          fg: "#cccccc", muted: "#9d9d9d",
+          h1: "#cccccc", h2: "#4ec9b0", h3: "#4daafc", h4: "#0078d4",
+          link: "#4daafc", accent: "#0078d4", onAccent: "#ffffff",
+          codeBg: "#2b2b2b",
+          cComment: "#6a9955", cKw: "#569cd6", cType: "#4ec9b0",
+          cFn: "#dcdcaa", cStr: "#ce9178", cNum: "#b5cea8", cPunct: "#d4d4d4",
+        },
+        light: {
+          ocean: "#2563eb", cyan: "#1d4ed8", emerald: "#0f766e",
+          cyanMuted: "#1e40af", emeraldMuted: "#14b8a6",
+          bg: "#f7f9fc", bg2: "#eef2f7", bg3: "#ffffff", border: "#d0d7e2",
+          fg: "#1f2937", muted: "#64748b",
+          h1: "#1f2937", h2: "#0f766e", h3: "#1d4ed8", h4: "#2563eb",
+          link: "#1d4ed8", accent: "#2563eb", onAccent: "#ffffff",
+          codeBg: "#eef2f7",
+          cComment: "#3f6212", cKw: "#1d4ed8", cType: "#0f766e",
+          cFn: "#a16207", cStr: "#9a3412", cNum: "#166534", cPunct: "#475569",
+        },
+      },
+      B: {
+        id: "B",
+        title: "Proposed B — Softer teal",
+        tagline: "Same roles as A · gentler teal · slightly cooler gray dark",
+        dark: {
+          ocean: "#0e6cb8", cyan: "#5eb6f5", emerald: "#3db8a0",
+          cyanMuted: "#8dceff", emeraldMuted: "#5ecfb8",
+          bg: "#1a1c1e", bg2: "#25282c", bg3: "#2e3238", border: "#3a4048",
+          fg: "#d0d4d8", muted: "#949aa3",
+          h1: "#d0d4d8", h2: "#3db8a0", h3: "#5eb6f5", h4: "#0e6cb8",
+          link: "#5eb6f5", accent: "#0e6cb8", onAccent: "#ffffff",
+          codeBg: "#25282c",
+          cComment: "#6a9955", cKw: "#569cd6", cType: "#3db8a0",
+          cFn: "#dcdcaa", cStr: "#ce9178", cNum: "#b5cea8", cPunct: "#c8ccd0",
+        },
+        light: {
+          ocean: "#1d4ed8", cyan: "#2563eb", emerald: "#0d9488",
+          cyanMuted: "#1e3a8a", emeraldMuted: "#2dd4bf",
+          bg: "#f8fafc", bg2: "#f1f5f9", bg3: "#ffffff", border: "#cbd5e1",
+          fg: "#0f172a", muted: "#64748b",
+          h1: "#0f172a", h2: "#0d9488", h3: "#2563eb", h4: "#1d4ed8",
+          link: "#2563eb", accent: "#1d4ed8", onAccent: "#ffffff",
+          codeBg: "#f1f5f9",
+          cComment: "#3f6212", cKw: "#1d4ed8", cType: "#0d9488",
+          cFn: "#a16207", cStr: "#9a3412", cNum: "#166534", cPunct: "#475569",
+        },
+      },
+      C: {
+        id: "C",
+        title: "Proposed C — Navy depth",
+        tagline: "Teal + blue accents · darker navy surfaces (closer to current depth)",
+        dark: {
+          ocean: "#0078d4", cyan: "#4daafc", emerald: "#4ec9b0",
+          cyanMuted: "#6cb6ff", emeraldMuted: "#6fd4bc",
+          bg: "#121820", bg2: "#1a2430", bg3: "#223040", border: "#2e3e50",
+          fg: "#d2dbe6", muted: "#8a97a8",
+          h1: "#d2dbe6", h2: "#4ec9b0", h3: "#4daafc", h4: "#0078d4",
+          link: "#4daafc", accent: "#0078d4", onAccent: "#ffffff",
+          codeBg: "#0e141c",
+          cComment: "#6a9955", cKw: "#569cd6", cType: "#4ec9b0",
+          cFn: "#dcdcaa", cStr: "#ce9178", cNum: "#b5cea8", cPunct: "#d4d4d4",
+        },
+        light: {
+          ocean: "#2563eb", cyan: "#1d4ed8", emerald: "#0f766e",
+          cyanMuted: "#1e40af", emeraldMuted: "#14b8a6",
+          bg: "#f3f7fb", bg2: "#e4edf5", bg3: "#ffffff", border: "#c5d0dc",
+          fg: "#1a2838", muted: "#5a6b7c",
+          h1: "#1a2838", h2: "#0f766e", h3: "#1d4ed8", h4: "#2563eb",
+          link: "#1d4ed8", accent: "#2563eb", onAccent: "#ffffff",
+          codeBg: "#e8eef5",
+          cComment: "#3f6212", cKw: "#1d4ed8", cType: "#0f766e",
+          cFn: "#a16207", cStr: "#9a3412", cNum: "#166534", cPunct: "#475569",
+        },
+      },
+    };
+
+    const order = ["current", "A", "B", "C"];
+
+    function applyVars(el, p) {
+      const map = {
+        "--bg": p.bg, "--bg2": p.bg2, "--bg3": p.bg3, "--border": p.border,
+        "--fg": p.fg, "--muted": p.muted,
+        "--ocean": p.ocean, "--cyan": p.cyan, "--emerald": p.emerald,
+        "--cyan-muted": p.cyanMuted, "--emerald-muted": p.emeraldMuted,
+        "--h1": p.h1, "--h2": p.h2, "--h3": p.h3, "--h4": p.h4,
+        "--link": p.link, "--accent": p.accent, "--on-accent": p.onAccent,
+        "--code-bg": p.codeBg,
+        "--c-comment": p.cComment, "--c-kw": p.cKw, "--c-type": p.cType,
+        "--c-fn": p.cFn, "--c-str": p.cStr, "--c-num": p.cNum, "--c-punct": p.cPunct,
+      };
+      for (const [k, v] of Object.entries(map)) el.style.setProperty(k, v);
+    }
+
+    function swatch(name, color) {
+      return `<div class="swatch"><div class="chip" style="background:${color}"></div><div class="label">${name}<br>${color}</div></div>`;
+    }
+
+    function cardHTML(meta, p) {
+      const pickHint = meta.id === "current"
+        ? "Reference only — keep if you prefer status quo."
+        : `Reply in chat: <strong>${meta.id}</strong>`;
+      return `
+        <article class="card" data-id="${meta.id}">
+          <div class="card-head">
+            <h2>${meta.title}</h2>
+            <p class="tagline">${meta.tagline}</p>
+          </div>
+          <div class="card-body">
+            <div class="swatches">
+              ${swatch("ocean", p.ocean)}
+              ${swatch("cyan", p.cyan)}
+              ${swatch("emerald", p.emerald)}
+              ${swatch("cyan-m", p.cyanMuted)}
+              ${swatch("em-m", p.emeraldMuted)}
+            </div>
+            <div class="surfaces" title="primary / secondary / raised / border">
+              <span style="background:${p.bg}"></span>
+              <span style="background:${p.bg2}"></span>
+              <span style="background:${p.bg3}"></span>
+              <span style="background:${p.border}"></span>
+            </div>
+            <div class="mock-note">
+              <div class="h1">Spring notes</div>
+              <div class="h2">Theme accents</div>
+              <div class="h3">Links and actions</div>
+              <div class="h4">Nested detail</div>
+              <p>Body text with a <a href="#">wiki link</a> and calm contrast.</p>
+              <div class="quote">Blockquote edge uses teal brand.</div>
+              <div class="row">
+                <span class="btn">Interactive</span>
+                <span class="pill">#idunn</span>
+              </div>
+            </div>
+            <pre class="code" aria-label="Syntax sample"><span class="c-comment">// syntax sample</span>
+<span class="c-kw">auto</span> <span class="c-fn">greet</span><span class="c-punct">(</span><span class="c-type">std</span><span class="c-punct">::</span><span class="c-type">string</span> name<span class="c-punct">)</span> <span class="c-punct">{</span>
+  <span class="c-kw">return</span> <span class="c-str">"Hello, "</span> <span class="c-punct">+</span> name<span class="c-punct">;</span>
+<span class="c-punct">}</span>
+<span class="c-type">int</span> n <span class="c-punct">=</span> <span class="c-num">42</span><span class="c-punct">;</span></pre>
+            <table class="hex">
+              <thead><tr><th>Token</th><th>Hex</th></tr></thead>
+              <tbody>
+                <tr><td>ocean</td><td class="hex-val">${p.ocean}</td></tr>
+                <tr><td>cyan</td><td class="hex-val">${p.cyan}</td></tr>
+                <tr><td>emerald</td><td class="hex-val">${p.emerald}</td></tr>
+                <tr><td>bg primary</td><td class="hex-val">${p.bg}</td></tr>
+                <tr><td>bg secondary</td><td class="hex-val">${p.bg2}</td></tr>
+                <tr><td>text</td><td class="hex-val">${p.fg}</td></tr>
+                <tr><td>link / accent</td><td class="hex-val">${p.link} / ${p.accent}</td></tr>
+              </tbody>
+            </table>
+            <p class="pick">${pickHint}</p>
+          </div>
+        </article>`;
+    }
+
+    function render() {
+      const scheme = document.documentElement.getAttribute("data-scheme") || "dark";
+      const grid = document.getElementById("grid");
+      grid.innerHTML = order.map((key) => {
+        const meta = PALETTES[key];
+        const p = meta[scheme];
+        const wrap = document.createElement("div");
+        wrap.innerHTML = cardHTML(meta, p);
+        const card = wrap.firstElementChild;
+        applyVars(card, p);
+        return card.outerHTML;
+      }).join("");
+      // re-apply vars after innerHTML (styles on elements)
+      grid.querySelectorAll(".card").forEach((card) => {
+        const meta = PALETTES[card.dataset.id === "current" ? "current" : card.dataset.id];
+        applyVars(card, meta[scheme]);
+      });
+    }
+
+    function setScheme(scheme) {
+      document.documentElement.setAttribute("data-scheme", scheme);
+      document.getElementById("btn-dark").setAttribute("aria-pressed", scheme === "dark" ? "true" : "false");
+      document.getElementById("btn-light").setAttribute("aria-pressed", scheme === "light" ? "true" : "false");
+      render();
+    }
+
+    document.getElementById("btn-dark").addEventListener("click", () => setScheme("dark"));
+    document.getElementById("btn-light").addEventListener("click", () => setScheme("light"));
+    render();
+  </script>
+</body>
+</html>
