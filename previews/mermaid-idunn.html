@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" data-scheme="dark" data-style="M1">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Idunn — Mermaid style variants</title>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    window.__mermaid = mermaid;
+    window.dispatchEvent(new Event("mermaid-ready"));
+  </script>
+  <style>
+    :root {
+      font-family: "Segoe UI", Inter, system-ui, sans-serif;
+    }
+
+    /* Page chrome */
+    html[data-scheme="dark"] {
+      --page-bg: #111;
+      --page-fg: #e8e8e8;
+      --page-muted: #999;
+      --page-border: #333;
+      /* Idunn dark B */
+      --bg: #1a1c1e;
+      --bg-alt: #1e2124;
+      --bg2: #25282c;
+      --bg3: #2e3238;
+      --border: #3a4048;
+      --fg: #d0d4d8;
+      --muted: #949aa3;
+      --ocean: #0e6cb8;
+      --cyan: #5eb6f5;
+      --emerald: #3db8a0;
+      --cyan-muted: #8dceff;
+      --raised: #1e2124;
+    }
+    html[data-scheme="light"] {
+      --page-bg: #c8ced6;
+      --page-fg: #1a1a1a;
+      --page-muted: #4a5560;
+      --page-border: #9aa3ad;
+      /* Idunn light L14 */
+      --bg: #eef0f2;
+      --bg-alt: #e3e7ec;
+      --bg2: #e3e7ec;
+      --bg3: #d6dce4;
+      --border: #bcc4cf;
+      --fg: #0f172a;
+      --muted: #64748b;
+      --ocean: #1d4ed8;
+      --cyan: #2563eb;
+      --emerald: #0d9488;
+      --cyan-muted: #1e3a8a;
+      --raised: #f4f5f7;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--page-bg);
+      color: var(--page-fg);
+      line-height: 1.5;
+      padding: 1.25rem 1.5rem 3rem;
+    }
+    header {
+      max-width: 1200px;
+      margin: 0 auto 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    header h1 { margin: 0; font-size: 1.25rem; font-weight: 650; }
+    header p {
+      margin: 0.35rem 0 0;
+      color: var(--page-muted);
+      font-size: 0.9rem;
+      max-width: 40rem;
+    }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .toolbar button {
+      appearance: none;
+      border: 1px solid var(--page-border);
+      background: transparent;
+      color: var(--page-fg);
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.85rem;
+    }
+    .toolbar button[aria-pressed="true"] {
+      background: var(--page-fg);
+      color: var(--page-bg);
+      border-color: transparent;
+    }
+
+    .stage {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: var(--bg);
+      color: var(--fg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem 2rem;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+    .stage h2 {
+      margin: 0 0 0.35rem;
+      font-size: 1.05rem;
+    }
+    .stage .blurb {
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .diagram {
+      margin: 0 0 1.75rem;
+      padding: 1rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow-x: auto;
+      text-align: center;
+    }
+    .diagram h3 {
+      margin: 0 0 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-align: left;
+    }
+    .diagram .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+    .diagram .mermaid svg {
+      max-width: 100%;
+      height: auto;
+    }
+    footer {
+      max-width: 1200px;
+      margin: 1.25rem auto 0;
+      color: var(--page-muted);
+      font-size: 0.85rem;
+    }
+    footer code {
+      font-size: 0.8em;
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+      background: color-mix(in srgb, var(--page-fg) 10%, transparent);
+    }
+
+    /* ========== M1 Soft native ========== */
+    html[data-style="M1"] .mermaid .node rect,
+    html[data-style="M1"] .mermaid .node circle,
+    html[data-style="M1"] .mermaid .node polygon,
+    html[data-style="M1"] .mermaid .node path {
+      fill: var(--bg2) !important;
+      stroke: var(--border) !important;
+      stroke-width: 1.25px !important;
+    }
+    html[data-style="M1"] .mermaid .cluster rect {
+      fill: var(--bg-alt) !important;
+      stroke: var(--border) !important;
+      stroke-width: 1px !important;
+    }
+    html[data-style="M1"] .mermaid .edgePath .path,
+    html[data-style="M1"] .mermaid .flowchart-link {
+      stroke: var(--muted) !important;
+      stroke-width: 1.5px !important;
+    }
+    html[data-style="M1"] .mermaid .arrowheadPath,
+    html[data-style="M1"] .mermaid marker path {
+      fill: var(--muted) !important;
+      stroke: var(--muted) !important;
+    }
+    html[data-style="M1"] .mermaid .edgeLabel,
+    html[data-style="M1"] .mermaid .edgeLabel rect {
+      background-color: var(--bg) !important;
+      fill: var(--bg) !important;
+      color: var(--fg) !important;
+    }
+    html[data-style="M1"] .mermaid .nodeLabel,
+    html[data-style="M1"] .mermaid .cluster-label,
+    html[data-style="M1"] .mermaid .label,
+    html[data-style="M1"] .mermaid text {
+      fill: var(--fg) !important;
+      color: var(--fg) !important;
+    }
+    html[data-style="M1"] .mermaid .actor,
+    html[data-style="M1"] .mermaid .actor-man {
+      fill: var(--bg2) !important;
+      stroke: var(--border) !important;
+    }
+    html[data-style="M1"] .mermaid .messageLine0,
+    html[data-style="M1"] .mermaid .messageLine1 {
+      stroke: var(--muted) !important;
+    }
+    html[data-style="M1"] .mermaid .pieCircle:nth-child(1) { fill: var(--cyan) !important; }
+    html[data-style="M1"] .mermaid .pieCircle:nth-child(2) { fill: var(--emerald) !important; }
+    html[data-style="M1"] .mermaid .pieCircle:nth-child(3) { fill: var(--ocean) !important; }
+    html[data-style="M1"] .mermaid .pieCircle:nth-child(4) { fill: var(--muted) !important; }
+    html[data-style="M1"] .mermaid .pieTitleText,
+    html[data-style="M1"] .mermaid .slice { fill: var(--fg) !important; }
+
+    /* ========== M2 Teal frame ========== */
+    html[data-style="M2"] .mermaid .node rect,
+    html[data-style="M2"] .mermaid .node circle,
+    html[data-style="M2"] .mermaid .node polygon,
+    html[data-style="M2"] .mermaid .node path {
+      fill: color-mix(in srgb, var(--emerald) 12%, var(--bg2)) !important;
+      stroke: var(--emerald) !important;
+      stroke-width: 1.5px !important;
+    }
+    html[data-style="M2"] .mermaid .cluster rect {
+      fill: color-mix(in srgb, var(--cyan) 8%, var(--bg-alt)) !important;
+      stroke: var(--cyan) !important;
+      stroke-width: 1.25px !important;
+    }
+    html[data-style="M2"] .mermaid .edgePath .path,
+    html[data-style="M2"] .mermaid .flowchart-link {
+      stroke: var(--cyan) !important;
+      stroke-width: 1.5px !important;
+    }
+    html[data-style="M2"] .mermaid .arrowheadPath,
+    html[data-style="M2"] .mermaid marker path {
+      fill: var(--cyan) !important;
+      stroke: var(--cyan) !important;
+    }
+    html[data-style="M2"] .mermaid .edgeLabel,
+    html[data-style="M2"] .mermaid .edgeLabel rect {
+      background-color: var(--bg) !important;
+      fill: var(--bg) !important;
+      color: var(--fg) !important;
+    }
+    html[data-style="M2"] .mermaid .nodeLabel,
+    html[data-style="M2"] .mermaid .cluster-label,
+    html[data-style="M2"] .mermaid .label,
+    html[data-style="M2"] .mermaid text {
+      fill: var(--fg) !important;
+      color: var(--fg) !important;
+    }
+    html[data-style="M2"] .mermaid .actor {
+      fill: color-mix(in srgb, var(--ocean) 14%, var(--bg2)) !important;
+      stroke: var(--ocean) !important;
+    }
+    html[data-style="M2"] .mermaid .messageLine0,
+    html[data-style="M2"] .mermaid .messageLine1 {
+      stroke: var(--ocean) !important;
+    }
+    html[data-style="M2"] .mermaid .pieCircle:nth-child(1) { fill: var(--cyan) !important; }
+    html[data-style="M2"] .mermaid .pieCircle:nth-child(2) { fill: var(--emerald) !important; }
+    html[data-style="M2"] .mermaid .pieCircle:nth-child(3) { fill: var(--ocean) !important; }
+    html[data-style="M2"] .mermaid .pieCircle:nth-child(4) { fill: var(--cyan-muted) !important; }
+    html[data-style="M2"] .mermaid .pieTitleText,
+    html[data-style="M2"] .mermaid .slice { fill: var(--fg) !important; }
+
+    /* ========== M3 High contrast ========== */
+    html[data-style="M3"] .mermaid .node rect,
+    html[data-style="M3"] .mermaid .node circle,
+    html[data-style="M3"] .mermaid .node polygon,
+    html[data-style="M3"] .mermaid .node path {
+      fill: var(--raised) !important;
+      stroke: var(--fg) !important;
+      stroke-width: 2px !important;
+    }
+    html[data-style="M3"] .mermaid .cluster rect {
+      fill: var(--bg2) !important;
+      stroke: var(--muted) !important;
+      stroke-width: 1.75px !important;
+    }
+    html[data-style="M3"] .mermaid .edgePath .path,
+    html[data-style="M3"] .mermaid .flowchart-link {
+      stroke: var(--fg) !important;
+      stroke-width: 2px !important;
+    }
+    html[data-style="M3"] .mermaid .arrowheadPath,
+    html[data-style="M3"] .mermaid marker path {
+      fill: var(--fg) !important;
+      stroke: var(--fg) !important;
+    }
+    html[data-style="M3"] .mermaid .edgeLabel,
+    html[data-style="M3"] .mermaid .edgeLabel rect {
+      background-color: var(--bg) !important;
+      fill: var(--bg) !important;
+      color: var(--fg) !important;
+    }
+    html[data-style="M3"] .mermaid .nodeLabel,
+    html[data-style="M3"] .mermaid .cluster-label,
+    html[data-style="M3"] .mermaid .label,
+    html[data-style="M3"] .mermaid text {
+      fill: var(--fg) !important;
+      color: var(--fg) !important;
+      font-weight: 600 !important;
+    }
+    html[data-style="M3"] .mermaid .actor {
+      fill: var(--raised) !important;
+      stroke: var(--fg) !important;
+      stroke-width: 2px !important;
+    }
+    html[data-style="M3"] .mermaid .messageLine0,
+    html[data-style="M3"] .mermaid .messageLine1 {
+      stroke: var(--fg) !important;
+      stroke-width: 2px !important;
+    }
+    html[data-style="M3"] .mermaid .pieCircle:nth-child(1) { fill: var(--cyan) !important; }
+    html[data-style="M3"] .mermaid .pieCircle:nth-child(2) { fill: var(--emerald) !important; }
+    html[data-style="M3"] .mermaid .pieCircle:nth-child(3) { fill: var(--ocean) !important; }
+    html[data-style="M3"] .mermaid .pieCircle:nth-child(4) { fill: var(--muted) !important; }
+    html[data-style="M3"] .mermaid .pieTitleText,
+    html[data-style="M3"] .mermaid .slice { fill: var(--fg) !important; font-weight: 600 !important; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Idunn — Mermaid styles</h1>
+      <p>
+        Real Mermaid diagrams on current Idunn Dark B / Light L14 surfaces.
+        Compare <strong>M1 Soft native</strong>, <strong>M2 Teal frame</strong>, <strong>M3 High contrast</strong>.
+        Reply in chat with <strong>M1</strong>, <strong>M2</strong>, or <strong>M3</strong> — theme CSS waits for your pick.
+      </p>
+    </div>
+    <div>
+      <div class="toolbar" role="group" aria-label="Scheme" style="margin-bottom:0.5rem">
+        <button type="button" data-scheme="dark" aria-pressed="true">Dark</button>
+        <button type="button" data-scheme="light" aria-pressed="false">Light</button>
+      </div>
+      <div class="toolbar" role="group" aria-label="Style">
+        <button type="button" data-style="M1" aria-pressed="true">M1 Soft</button>
+        <button type="button" data-style="M2" aria-pressed="false">M2 Teal</button>
+        <button type="button" data-style="M3" aria-pressed="false">M3 Contrast</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="stage">
+    <h2 id="style-title">M1 — Soft native</h2>
+    <p class="blurb" id="style-blurb">Nodes = theme panels; muted edges; brand only on pie slices.</p>
+
+    <div class="diagram">
+      <h3>Flowchart</h3>
+      <pre class="mermaid">
+flowchart LR
+  A[src modules] --> B[npm run build]
+  B --> C[theme.css]
+  C --> D[Vault]
+  C --> E[Release]
+  subgraph QA[Visual QA]
+    D
+    E
+  end
+      </pre>
+    </div>
+
+    <div class="diagram">
+      <h3>Sequence</h3>
+      <pre class="mermaid">
+sequenceDiagram
+  actor Dev
+  participant Repo
+  participant Obsidian
+  Dev->>Repo: edit CSS
+  Dev->>Repo: build
+  Repo-->>Obsidian: theme.css
+  Obsidian-->>Dev: reload theme
+      </pre>
+    </div>
+
+    <div class="diagram">
+      <h3>Pie</h3>
+      <pre class="mermaid">
+pie showData
+  title Accent mix
+  "Cyan" : 40
+  "Emerald" : 35
+  "Ocean" : 25
+      </pre>
+    </div>
+  </div>
+
+  <footer>
+    Preview: <code>previews/mermaid-idunn.html</code> (needs network for Mermaid CDN).
+    After you pick a style, it will be ported to <code>src/mermaid.css</code>.
+  </footer>
+
+  <script>
+    const BLURBS = {
+      M1: {
+        title: "M1 — Soft native",
+        text: "Nodes = theme panels; muted edges; brand mainly on pie slices.",
+      },
+      M2: {
+        title: "M2 — Teal frame",
+        text: "Like M1, plus emerald/cyan frames and light brand-tinted fills.",
+      },
+      M3: {
+        title: "M3 — High contrast",
+        text: "Thicker strokes, stronger arrows and labels — readability first.",
+      },
+    };
+
+    const diagramSources = [];
+    document.querySelectorAll("pre.mermaid").forEach((el, i) => {
+      diagramSources.push(el.textContent);
+      el.dataset.idx = String(i);
+    });
+
+    async function renderAll() {
+      const mermaid = window.__mermaid;
+      if (!mermaid) return;
+      const scheme = document.documentElement.getAttribute("data-scheme");
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: scheme === "dark" ? "dark" : "default",
+        securityLevel: "loose",
+        flowchart: { htmlLabels: true, curve: "basis" },
+      });
+      const nodes = document.querySelectorAll("pre.mermaid");
+      for (let i = 0; i < nodes.length; i++) {
+        const el = nodes[i];
+        el.removeAttribute("data-processed");
+        el.textContent = diagramSources[i];
+      }
+      await mermaid.run({ nodes });
+    }
+
+    function setScheme(scheme) {
+      document.documentElement.setAttribute("data-scheme", scheme);
+      document.querySelectorAll("[data-scheme]").forEach((btn) => {
+        btn.setAttribute("aria-pressed", btn.getAttribute("data-scheme") === scheme ? "true" : "false");
+      });
+      renderAll();
+    }
+
+    function setStyle(style) {
+      document.documentElement.setAttribute("data-style", style);
+      document.querySelectorAll("[data-style]").forEach((btn) => {
+        btn.setAttribute("aria-pressed", btn.getAttribute("data-style") === style ? "true" : "false");
+      });
+      document.getElementById("style-title").textContent = BLURBS[style].title;
+      document.getElementById("style-blurb").textContent = BLURBS[style].text;
+    }
+
+    document.querySelectorAll("[data-scheme]").forEach((btn) => {
+      btn.addEventListener("click", () => setScheme(btn.getAttribute("data-scheme")));
+    });
+    document.querySelectorAll("[data-style]").forEach((btn) => {
+      btn.addEventListener("click", () => setStyle(btn.getAttribute("data-style")));
+    });
+
+    function boot() {
+      if (window.__mermaid) renderAll();
+      else window.addEventListener("mermaid-ready", renderAll, { once: true });
+    }
+    boot();
+  </script>
+</body>
+</html>
