@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-scheme="dark" data-style="M5">
+<html lang="en" data-scheme="dark" data-style="S4">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -141,9 +141,8 @@
       <h1>Idunn — Mermaid × style.less</h1>
       <p>
         <code>old/style.less</code> has no Mermaid rules — these proposals apply its
-        <em>composition</em> (teal primary chrome, blue secondary, quiet panels, no glow,
-        syntax hues only where content is semantic). Reply with <strong>M5</strong>,
-        <strong>S1</strong>, <strong>S2</strong>, or <strong>S3</strong>.
+        <em>composition</em> plus a screen-matched option. Reply with <strong>M5</strong>,
+        <strong>S1</strong>, <strong>S2</strong>, <strong>S3</strong>, or <strong>S4</strong>.
       </p>
     </div>
     <div>
@@ -152,37 +151,46 @@
         <button type="button" data-scheme="light" aria-pressed="false">Light</button>
       </div>
       <div class="toolbar" role="group" aria-label="Style">
-        <button type="button" data-style="M5" aria-pressed="true">M5 Current</button>
+        <button type="button" data-style="M5" aria-pressed="false">M5 Current</button>
         <button type="button" data-style="S1" aria-pressed="false">S1 Hierarchy</button>
         <button type="button" data-style="S2" aria-pressed="false">S2 Code fence</button>
         <button type="button" data-style="S3" aria-pressed="false">S3 Syntax pie</button>
+        <button type="button" data-style="S4" aria-pressed="true">S4 Screens</button>
       </div>
     </div>
   </header>
 
   <p class="note">
-    <strong>From style.less:</strong> teal (<code>#4ec9b0</code>) = structural accent
-    (headings, bullets, code left border) · blue (<code>#569cd6</code>) = secondary / keyword ·
-    panels <code>#2b2b2b</code> / border <code>#3c3c3c</code> · syntax hues stay in code, not
-    everyday chrome. Colors via Mermaid <code>themeVariables</code> (pie + legend stay in sync).
+    <strong>S4</strong> targets your vault screenshots: flowchart = steel-blue node frames + grey
+    edges · sequence = teal actors / lifelines / signals · quadrant = teal frame + points.
+    Other styles still follow <code>style.less</code> hierarchy. Colors via Mermaid
+    <code>themeVariables</code>.
   </p>
 
   <div class="stage">
-    <h2 id="style-title">M5 — Current theme baseline</h2>
-    <p class="blurb" id="style-blurb">What Idunn ships today: teal node frames, blue edges, accent actors.</p>
+    <h2 id="style-title">S4 — Screen match</h2>
+    <p class="blurb" id="style-blurb">Closest to your sequence / architecture / quadrant screenshots.</p>
 
     <div class="diagram">
-      <h3>Flowchart</h3>
+      <h3>Flowchart (architecture)</h3>
       <pre class="mermaid">
-flowchart LR
-  A[src modules] --> B[npm run build]
-  B --> C[theme.css]
-  C --> D[Vault]
-  C --> E[Release]
-  subgraph QA[Visual QA]
-    D
-    E
+flowchart TB
+  subgraph Ingress
+    R[HttpRouter]
+    A[AuthMiddleware]
   end
+  subgraph Services
+    T[TaskService]
+    U[UserService]
+  end
+  subgraph Data
+    P[PgTaskRepository]
+    DB[(PostgreSQL)]
+  end
+  R --> T
+  A --> U
+  T --> P
+  P --> DB
       </pre>
     </div>
 
@@ -190,13 +198,35 @@ flowchart LR
       <h3>Sequence</h3>
       <pre class="mermaid">
 sequenceDiagram
-  actor Dev
-  participant Repo
-  participant Obsidian
-  Dev->>Repo: edit CSS
-  Dev->>Repo: build
-  Repo-->>Obsidian: theme.css
-  Obsidian-->>Dev: reload theme
+  participant Client
+  participant API as API C++
+  participant DB as PostgreSQL
+  Client->>API: POST /tasks
+  API->>DB: INSERT
+  DB-->>API: OK
+  API-->>Client: 201 Created
+  Client->>API: GET /tasks
+  API->>DB: SELECT
+  DB-->>API: rows
+  API-->>Client: 200 OK
+      </pre>
+    </div>
+
+    <div class="diagram">
+      <h3>Quadrant</h3>
+      <pre class="mermaid">
+quadrantChart
+  title Feature Prioritization
+  x-axis Low Effort --> High Effort
+  y-axis Low Impact --> High Impact
+  quadrant-1 Quick wins
+  quadrant-2 Strategic
+  quadrant-3 Fill-ins
+  quadrant-4 Reconsider
+  Webhook retries: [0.25, 0.8]
+  Bulk task import: [0.7, 0.75]
+  Dark mode dashboard: [0.7, 0.25]
+  Custom emoji picker: [0.85, 0.15]
       </pre>
     </div>
 
@@ -206,7 +236,7 @@ sequenceDiagram
 pie showData
   title Accent mix
   "Teal" : 35
-  "Blue" : 30
+  "Steel" : 30
   "Link" : 20
   "Muted" : 15
       </pre>
@@ -222,14 +252,18 @@ pie showData
     /* Tokens aligned with old/style.less (--cpp-*) + Idunn light counterparts */
     const IDE = {
       dark: {
-        bg: "#1f1f1f",
-        panel: "#2b2b2b",
-        raised: "#333333",
+        bg: "#1a1a1a",
+        panel: "#2a2e36",
+        raised: "#32363f",
         border: "#3c3c3c",
         codeBg: "#3c3c3c",
-        fg: "#cccccc",
-        muted: "#9d9d9d",
+        fg: "#e8e8e8",
+        muted: "#8b919a",
         teal: "#4ec9b0",
+        /* Slightly cyan teal from vault screens */
+        screenTeal: "#5bb9a8",
+        /* Flowchart node frames from architecture shot */
+        steel: "#5a7a90",
         blue: "#569cd6",
         link: "#4daafc",
         accent: "#0078d4",
@@ -237,8 +271,8 @@ pie showData
         yellow: "#dcdcaa",
         orange: "#ce9178",
         green: "#6a9955",
-        labelBg: "#1f1f1f",
-        noteBg: "#1f1f1f",
+        labelBg: "#1a1a1a",
+        noteBg: "#1a1a1a",
       },
       light: {
         bg: "#eef0f2",
@@ -249,6 +283,8 @@ pie showData
         fg: "#1f2937",
         muted: "#64748b",
         teal: "#0f766e",
+        screenTeal: "#0f766e",
+        steel: "#475569",
         blue: "#1d4ed8",
         link: "#1d4ed8",
         accent: "#2563eb",
@@ -277,6 +313,10 @@ pie showData
       S3: {
         title: "S3 — Calm chrome + syntax pie",
         text: "S1 chrome (teal frames, muted lines) · pie = keyword/type/control/function (Prism hues from style.less). Best if pie should feel “IDE syntax”, not brand accents.",
+      },
+      S4: {
+        title: "S4 — Screen match",
+        text: "From your screenshots: steel-blue flowchart frames + grey edges · sequence all in screen-teal · quadrant teal titles/points · flat panels, bright labels. Closest visual twin.",
       },
     };
 
@@ -391,25 +431,74 @@ pie showData
         };
       }
 
-      /* S3 — S1 chrome + syntax pie (keyword / type / control / function) */
+      if (style === "S3") {
+        /* S1 chrome + syntax pie (keyword / type / control / function) */
+        return {
+          ...base,
+          primaryColor: c.panel,
+          primaryBorderColor: c.teal,
+          secondaryColor: c.raised,
+          secondaryBorderColor: c.border,
+          tertiaryColor: c.labelBg,
+          tertiaryBorderColor: c.border,
+          lineColor: c.muted,
+          actorBorder: c.teal,
+          signalColor: c.muted,
+          clusterBorder: c.teal,
+          nodeBorder: c.teal,
+          activationBorderColor: c.teal,
+          pie1: c.blue,
+          pie2: c.teal,
+          pie3: c.purple,
+          pie4: c.yellow,
+        };
+      }
+
+      /* S4 — vault screenshot look */
       return {
         ...base,
         primaryColor: c.panel,
-        primaryBorderColor: c.teal,
+        primaryBorderColor: c.steel,
+        primaryTextColor: c.fg,
         secondaryColor: c.raised,
         secondaryBorderColor: c.border,
         tertiaryColor: c.labelBg,
         tertiaryBorderColor: c.border,
         lineColor: c.muted,
-        actorBorder: c.teal,
-        signalColor: c.muted,
-        clusterBorder: c.teal,
-        nodeBorder: c.teal,
-        activationBorderColor: c.teal,
-        pie1: c.blue,
-        pie2: c.teal,
-        pie3: c.purple,
-        pie4: c.yellow,
+        mainBkg: c.panel,
+        nodeBorder: c.steel,
+        clusterBkg: c.raised,
+        clusterBorder: c.border,
+        titleColor: c.screenTeal,
+        actorBkg: c.panel,
+        actorBorder: c.screenTeal,
+        actorTextColor: c.fg,
+        actorLineColor: c.screenTeal,
+        signalColor: c.screenTeal,
+        signalTextColor: c.fg,
+        activationBorderColor: c.screenTeal,
+        activationBkgColor: c.raised,
+        labelBoxBorderColor: c.screenTeal,
+        /* quadrantChart */
+        quadrant1Fill: c.raised,
+        quadrant2Fill: c.raised,
+        quadrant3Fill: c.panel,
+        quadrant4Fill: c.panel,
+        quadrant1TextFill: c.fg,
+        quadrant2TextFill: c.fg,
+        quadrant3TextFill: c.fg,
+        quadrant4TextFill: c.fg,
+        quadrantPointFill: c.screenTeal,
+        quadrantPointTextFill: c.fg,
+        quadrantXAxisTextFill: c.fg,
+        quadrantYAxisTextFill: c.fg,
+        quadrantInternalBorderStrokeFill: c.steel,
+        quadrantExternalBorderStrokeFill: c.screenTeal,
+        quadrantTitleFill: c.screenTeal,
+        pie1: c.screenTeal,
+        pie2: c.steel,
+        pie3: c.link,
+        pie4: c.muted,
       };
     }
 
@@ -430,7 +519,11 @@ pie showData
         theme: "base",
         themeVariables: themeVariables(scheme, style),
         securityLevel: "loose",
-        flowchart: { htmlLabels: true, curve: "basis" },
+        /* S4 screens use straight architecture edges */
+        flowchart: {
+          htmlLabels: true,
+          curve: style === "S4" ? "linear" : "basis",
+        },
       });
 
       const nodes = document.querySelectorAll("pre.mermaid");
