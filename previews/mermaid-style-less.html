@@ -81,16 +81,14 @@
       fill: color-mix(in srgb, var(--idunn-mermaid-accent) 28%, var(--idunn-mermaid-panel)) !important;
       stroke: var(--idunn-mermaid-accent) !important;
     }
-    /* Dark preview: full SVG invert for gantt/timeline (same as theme) */
-    html[data-scheme="dark"] .mermaid:has(.grid) > svg,
-    html[data-scheme="dark"] .mermaid:has(.timeline-node) > svg {
+    /* Dark preview: SVG invert for gantt only (white labels) */
+    html[data-scheme="dark"] .mermaid:has(.grid) > svg {
       filter: invert(100%) hue-rotate(180deg) saturate(1.25) !important;
     }
     .mermaid .grid .tick text { font-size: 10px !important; }
     .mermaid .grid .tick:nth-child(3n+1) text,
     .mermaid .grid .tick:nth-child(3n+2) text { opacity: 0 !important; }
     .mermaid .grid .tick:nth-child(3n) text { opacity: 1 !important; }
-    /* Light-only chrome for gantt/timeline */
     html[data-scheme="light"] .mermaid .task0,
     html[data-scheme="light"] .mermaid .task1,
     html[data-scheme="light"] .mermaid .task2,
@@ -99,15 +97,23 @@
       stroke: var(--idunn-mermaid-screen-teal) !important;
     }
     html[data-scheme="light"] .mermaid [class*="taskText"],
-    html[data-scheme="light"] .mermaid .grid .tick text,
-    html[data-scheme="light"] .mermaid .timeline-node text {
+    html[data-scheme="light"] .mermaid .grid .tick text {
       fill: var(--idunn-mermaid-fg) !important;
     }
-    html[data-scheme="light"] .mermaid .timeline-node rect,
-    html[data-scheme="light"] .mermaid .section--1 rect,
-    html[data-scheme="light"] .mermaid .section-0 rect {
+    /* Timeline painted in both schemes (no invert) */
+    .mermaid .timeline-node rect,
+    .mermaid .section--1 rect,
+    .mermaid .section-0 rect,
+    .mermaid .section-root rect {
       fill: var(--idunn-mermaid-panel) !important;
       stroke: var(--idunn-mermaid-screen-teal) !important;
+    }
+    .mermaid .timeline-node text,
+    .mermaid .section--1 text,
+    .mermaid .section-0 text,
+    .mermaid .taskWrapper text,
+    .mermaid .eventWrapper text {
+      fill: var(--idunn-mermaid-fg) !important;
     }
 
     * { box-sizing: border-box; }

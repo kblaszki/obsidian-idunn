@@ -20,8 +20,8 @@ Do **not** put Mermaid hex into `tokens.css` unless they become shared brand tok
 | Sequence | S4 | Screen-teal actors, lifelines, signals |
 | Quadrant | S4 | Screen-teal title/points, steel internal axes |
 | Pie | S4 | screen-teal → steel → link → muted (legend paired in CSS) |
-| Gantt | S5 | Dark: Obsidian SVG invert (white labels). Light: panel bars + Idunn strokes. Thinned axis ticks. |
-| Timeline | S5 | Dark: SVG invert. Light: panel nodes (`section--1` / `timeline-node`). |
+| Gantt | S5 | Dark: SVG invert only (white labels). Light: panel bars. Thinned axis ticks. |
+| Timeline | S5 | Panel nodes (`section--1` / `timeline-node`), no SVG invert |
 
 Preview: `previews/mermaid-style-less.html` (`themeVariables`). Obsidian theme uses CSS overrides — pie/quadrant pairing may need DevTools checks after Mermaid upgrades.
 
@@ -30,7 +30,7 @@ Preview: `previews/mermaid-style-less.html` (`themeVariables`). Obsidian theme u
 - Dark mode applies `filter: invert()` on Mermaid SVG; Idunn sets `filter: none` so panels stay dark and labels light.  
 - Node/edge text is often HTML (`foreignObject` / `.nodeLabel`) — set `color`, not only SVG `fill`.  
 - Sequence labels use SVG `tspan` (`text.actor > tspan`, `.messageText`) — override those, not only `text`.  
-- Gantt/timeline dark mode: Mermaid’s `#<svgId> … !important` fills cannot be overridden — keep Obsidian’s **SVG** `filter: invert(…)` on those diagrams only (`:has(.grid)` / `:has(.timeline-node)`). Do not paint dark fills there (they would invert wrong).  
+- Gantt dark mode: Mermaid’s `#<svgId> … !important` fills cannot be overridden — use SVG `filter: invert(…)` on `:has(.grid)` only. Do not paint gantt fills in dark (they would invert wrong). Timeline stays painted (no invert).  
 - Gantt axis: hide 2/3 of `.grid .tick` labels so dates don’t collide.  
 - Timeline first lane is often `.section--1` / `.timeline-node`.  
 - Empty/branch edge-label rects: keep `--idunn-mermaid-label-bg: transparent`.
