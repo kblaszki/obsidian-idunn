@@ -81,9 +81,14 @@
       fill: color-mix(in srgb, var(--idunn-mermaid-accent) 28%, var(--idunn-mermaid-panel)) !important;
       stroke: var(--idunn-mermaid-accent) !important;
     }
-    /* Dark preview: SVG invert for gantt only (white labels) */
+    /* Dark preview: SVG invert for gantt + dark ink so invert → white labels */
     html[data-scheme="dark"] .mermaid:has(.grid) > svg {
       filter: invert(100%) hue-rotate(180deg) saturate(1.25) !important;
+    }
+    html[data-scheme="dark"] .mermaid:has(.grid) text,
+    html[data-scheme="dark"] .mermaid:has(.grid) tspan {
+      fill: #111111 !important;
+      color: #111111 !important;
     }
     .mermaid .grid .tick text { font-size: 10px !important; }
     .mermaid .grid .tick:nth-child(3n+1) text,

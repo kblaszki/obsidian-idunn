@@ -30,7 +30,7 @@ Preview: `previews/mermaid-style-less.html` (`themeVariables`). Obsidian theme u
 - Dark mode applies `filter: invert()` on Mermaid SVG; Idunn sets `filter: none` so panels stay dark and labels light.  
 - Node/edge text is often HTML (`foreignObject` / `.nodeLabel`) — set `color`, not only SVG `fill`.  
 - Sequence labels use SVG `tspan` (`text.actor > tspan`, `.messageText`) — override those, not only `text`.  
-- Gantt dark mode: Mermaid’s `#<svgId> … !important` fills cannot be overridden — use SVG `filter: invert(…)` on `:has(.grid)` only. Do not paint gantt fills in dark (they would invert wrong). Timeline stays painted (no invert).  
+- Gantt dark mode: SVG `filter: invert(…)` on `:has(.grid)`, plus force text/`tspan` fill to `#111` so the shared light `--idunn-mermaid-fg` does not invert back to black. Do not paint gantt bar fills in dark. Timeline stays painted (no invert).  
 - Gantt axis: hide 2/3 of `.grid .tick` labels so dates don’t collide.  
 - Timeline first lane is often `.section--1` / `.timeline-node`.  
 - Empty/branch edge-label rects: keep `--idunn-mermaid-label-bg: transparent`.

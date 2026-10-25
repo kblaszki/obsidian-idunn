@@ -34,6 +34,23 @@ body.theme-dark .markdown-source-view.mod-cm6 .mermaid:has(.grid) > svg {
   filter: invert(100%) hue-rotate(180deg) saturate(1.25) !important;
 }
 
+/*
+ * Shared rule `body .mermaid text { fill: --idunn-mermaid-fg }` is *light* in dark
+ * mode. Under SVG invert that becomes black again. Force near-black ink on gantt
+ * text so invert yields white (titles, tasks, outside labels, axis dates).
+ */
+body.theme-dark .mermaid:has(.grid) text,
+body.theme-dark .mermaid:has(.grid) tspan,
+body.theme-dark .mermaid:has(.grid) foreignObject,
+body.theme-dark .mermaid:has(.grid) foreignObject *,
+body.theme-dark .markdown-source-view.mod-cm6 .mermaid:has(.grid) text,
+body.theme-dark .markdown-source-view.mod-cm6 .mermaid:has(.grid) tspan {
+  fill: #111111 !important;
+  color: #111111 !important;
+  -webkit-text-fill-color: #111111 !important;
+  stroke: none !important;
+}
+
 .markdown-source-view.mod-cm6 .cm-embed-block:has(.mermaid),
 .markdown-source-view.mod-cm6 .cm-preview-code-block:has(.mermaid) {
   display: flex;
