@@ -1,7 +1,7 @@
 # How to: tune Mermaid diagram chrome
 
-**Scope:** Adjust flowchart / sequence / pie colors for Idunn Mermaid.  
-**When to use:** After changing brand accents, or when refining diagram look (current baseline: **M5** teal/blue frames).
+**Scope:** Adjust flowchart / sequence / pie / quadrant colors for Idunn Mermaid.  
+**When to use:** After changing brand accents, or when refining diagram look (current baseline: **S5** hybrid).
 
 ## Where
 
@@ -12,21 +12,24 @@
 
 Do **not** put Mermaid hex into `tokens.css` unless they become shared brand tokens.
 
-## Current baseline (M5)
+## Current baseline (S5 hybrid)
 
-- Node fill: panel gray; stroke: teal  
-- Edges / arrowheads: blue  
-- Actors: accent blue border  
-- Pie series: teal → blue → accent → link (legend swatches paired in CSS)
+| Diagram | Source | Look |
+|---------|--------|------|
+| Flowchart | S3 | Teal node/cluster frames, muted edges |
+| Sequence | S4 | Screen-teal actors, lifelines, signals |
+| Quadrant | S4 | Screen-teal title/points, steel internal axes |
+| Pie | S4 | screen-teal → steel → link → muted (legend paired in CSS) |
 
-Preview experiments: `previews/mermaid-idunn.html` (uses Mermaid `themeVariables`; Obsidian theme uses CSS overrides — pie pairing may need DevTools checks after Mermaid upgrades).
+Preview: `previews/mermaid-style-less.html` (`themeVariables`). Obsidian theme uses CSS overrides — pie/quadrant pairing may need DevTools checks after Mermaid upgrades.
 
 ## Checklist
 
 1. Edit `--idunn-mermaid-*` under the right scheme only.  
-2. `npm run build`.  
-3. Verify Dark + Light on flowchart, sequence, and pie (slice **and** legend).  
-4. Prefer token edits over new `!important` selectors.
+2. Keep flowchart edges (`.edgePath` / `.flowchart-link`) separate from sequence (`.messageLine*`).  
+3. `npm run build`.  
+4. Verify Dark + Light on flowchart, sequence, quadrant, and pie (slice **and** legend).  
+5. Prefer token edits over new `!important` selectors.
 
 ## Related
 

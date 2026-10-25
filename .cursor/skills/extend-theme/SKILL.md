@@ -18,7 +18,7 @@ description: Extends the Idunn Obsidian theme by adding or changing CSS tokens, 
    | Headings | `src/typography.css` |
    | Quotes, tables, tags, links | `src/markdown.css` |
    | Syntax selectors | `src/code.css` |
-   | Mermaid diagrams (M5 baseline) | `src/mermaid.css` (`--idunn-mermaid-*`) |
+   | Mermaid diagrams (S5 hybrid) | `src/mermaid.css` (`--idunn-mermaid-*`) |
    | Tabs, nav, focus | `src/ui.css` |
 
 3. Prefer Obsidian CSS variables; keep brand hex in `--idunn-*`.

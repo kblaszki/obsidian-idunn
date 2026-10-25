@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-scheme="dark" data-style="S4">
+<html lang="en" data-scheme="dark" data-style="S5">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -141,8 +141,8 @@
       <h1>Idunn — Mermaid × style.less</h1>
       <p>
         <code>old/style.less</code> has no Mermaid rules — these proposals apply its
-        <em>composition</em> plus a screen-matched option. Reply with <strong>M5</strong>,
-        <strong>S1</strong>, <strong>S2</strong>, <strong>S3</strong>, or <strong>S4</strong>.
+        <em>composition</em> plus screen-matched options.
+        <strong>S5</strong> is the chosen hybrid (in theme). Compare with M5 / S1–S4.
       </p>
     </div>
     <div>
@@ -155,21 +155,21 @@
         <button type="button" data-style="S1" aria-pressed="false">S1 Hierarchy</button>
         <button type="button" data-style="S2" aria-pressed="false">S2 Code fence</button>
         <button type="button" data-style="S3" aria-pressed="false">S3 Syntax pie</button>
-        <button type="button" data-style="S4" aria-pressed="true">S4 Screens</button>
+        <button type="button" data-style="S4" aria-pressed="false">S4 Screens</button>
+        <button type="button" data-style="S5" aria-pressed="true">S5 Hybrid</button>
       </div>
     </div>
   </header>
 
   <p class="note">
-    <strong>S4</strong> targets your vault screenshots: flowchart = steel-blue node frames + grey
-    edges · sequence = teal actors / lifelines / signals · quadrant = teal frame + points.
-    Other styles still follow <code>style.less</code> hierarchy. Colors via Mermaid
-    <code>themeVariables</code>.
+    <strong>S5 (theme baseline):</strong> flowchart = S3 (teal frames, muted edges, syntax-calm
+    chrome) · sequence + quadrant + pie = S4 (screen-teal signals, steel pie slice). Colors via
+    Mermaid <code>themeVariables</code> here; Obsidian uses CSS in <code>src/mermaid.css</code>.
   </p>
 
   <div class="stage">
-    <h2 id="style-title">S4 — Screen match</h2>
-    <p class="blurb" id="style-blurb">Closest to your sequence / architecture / quadrant screenshots.</p>
+    <h2 id="style-title">S5 — Hybrid (theme)</h2>
+    <p class="blurb" id="style-blurb">Flowchart from S3 · sequence / quadrant / pie from S4.</p>
 
     <div class="diagram">
       <h3>Flowchart (architecture)</h3>
@@ -318,6 +318,10 @@ pie showData
         title: "S4 — Screen match",
         text: "From your screenshots: steel-blue flowchart frames + grey edges · sequence all in screen-teal · quadrant teal titles/points · flat panels, bright labels. Closest visual twin.",
       },
+      S5: {
+        title: "S5 — Hybrid (theme)",
+        text: "Chosen mix: flowchart = S3 (teal node/cluster frames, muted edges) · sequence = S4 screen-teal · quadrant = S4 · pie = S4 (screen-teal / steel / link / muted).",
+      },
     };
 
     function themeVariables(scheme, style) {
@@ -454,11 +458,59 @@ pie showData
         };
       }
 
-      /* S4 — vault screenshot look */
+      if (style === "S4") {
+        /* S4 — vault screenshot look */
+        return {
+          ...base,
+          primaryColor: c.panel,
+          primaryBorderColor: c.steel,
+          primaryTextColor: c.fg,
+          secondaryColor: c.raised,
+          secondaryBorderColor: c.border,
+          tertiaryColor: c.labelBg,
+          tertiaryBorderColor: c.border,
+          lineColor: c.muted,
+          mainBkg: c.panel,
+          nodeBorder: c.steel,
+          clusterBkg: c.raised,
+          clusterBorder: c.border,
+          titleColor: c.screenTeal,
+          actorBkg: c.panel,
+          actorBorder: c.screenTeal,
+          actorTextColor: c.fg,
+          actorLineColor: c.screenTeal,
+          signalColor: c.screenTeal,
+          signalTextColor: c.fg,
+          activationBorderColor: c.screenTeal,
+          activationBkgColor: c.raised,
+          labelBoxBorderColor: c.screenTeal,
+          quadrant1Fill: c.raised,
+          quadrant2Fill: c.raised,
+          quadrant3Fill: c.panel,
+          quadrant4Fill: c.panel,
+          quadrant1TextFill: c.fg,
+          quadrant2TextFill: c.fg,
+          quadrant3TextFill: c.fg,
+          quadrant4TextFill: c.fg,
+          quadrantPointFill: c.screenTeal,
+          quadrantPointTextFill: c.fg,
+          quadrantXAxisTextFill: c.fg,
+          quadrantYAxisTextFill: c.fg,
+          quadrantInternalBorderStrokeFill: c.steel,
+          quadrantExternalBorderStrokeFill: c.screenTeal,
+          quadrantTitleFill: c.screenTeal,
+          pie1: c.screenTeal,
+          pie2: c.steel,
+          pie3: c.link,
+          pie4: c.muted,
+        };
+      }
+
+      /* S5 — flowchart S3 + sequence/quadrant/pie S4 */
       return {
         ...base,
         primaryColor: c.panel,
-        primaryBorderColor: c.steel,
+        primaryBorderColor: c.teal,
         primaryTextColor: c.fg,
         secondaryColor: c.raised,
         secondaryBorderColor: c.border,
@@ -466,9 +518,9 @@ pie showData
         tertiaryBorderColor: c.border,
         lineColor: c.muted,
         mainBkg: c.panel,
-        nodeBorder: c.steel,
+        nodeBorder: c.teal,
         clusterBkg: c.raised,
-        clusterBorder: c.border,
+        clusterBorder: c.teal,
         titleColor: c.screenTeal,
         actorBkg: c.panel,
         actorBorder: c.screenTeal,
@@ -479,7 +531,6 @@ pie showData
         activationBorderColor: c.screenTeal,
         activationBkgColor: c.raised,
         labelBoxBorderColor: c.screenTeal,
-        /* quadrantChart */
         quadrant1Fill: c.raised,
         quadrant2Fill: c.raised,
         quadrant3Fill: c.panel,
