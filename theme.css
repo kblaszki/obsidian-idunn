@@ -312,24 +312,36 @@ body {
 }
 
 /* === src/mermaid.css === */
-/* Mermaid — center + hybrid: flowchart S3, sequence/quadrant/pie S4 */
+/* Mermaid — center + hybrid: flowchart S3, sequence/quadrant/pie S4
+ *
+ * Obsidian dark mode injects filter: invert() on Mermaid SVG. That flips our
+ * dark panels to light grey and labels to black — disable it, then paint.
+ */
 
 .markdown-rendered .mermaid,
 .markdown-source-view.mod-cm6 .mermaid {
-  text-align: center;
+  display: flex;
+  justify-content: center;
   overflow-x: auto;
 }
 
 .markdown-rendered .mermaid svg,
 .markdown-source-view.mod-cm6 .mermaid svg {
-  display: inline-block;
+  display: block;
   max-width: 100%;
   height: auto;
 }
 
+/* Critical: stop Obsidian’s invert so theme colors stay as authored */
+.theme-dark .mermaid svg,
+.theme-dark .markdown-source-view.mod-cm6 .mermaid svg {
+  filter: none !important;
+}
+
 .markdown-source-view.mod-cm6 .cm-embed-block:has(.mermaid),
 .markdown-source-view.mod-cm6 .cm-preview-code-block:has(.mermaid) {
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 /*
@@ -340,7 +352,7 @@ body {
   --idunn-mermaid-panel: #2a2e36;
   --idunn-mermaid-raised: #32363f;
   --idunn-mermaid-border: #3c3c3c;
-  --idunn-mermaid-label-bg: #1a1a1a;
+  --idunn-mermaid-label-bg: transparent;
   --idunn-mermaid-fg: #e8e8e8;
   --idunn-mermaid-muted: #8b919a;
   --idunn-mermaid-teal: #4ec9b0;
@@ -355,7 +367,7 @@ body {
   --idunn-mermaid-panel: #eef2f7;
   --idunn-mermaid-raised: #f4f5f7;
   --idunn-mermaid-border: #d0d7e2;
-  --idunn-mermaid-label-bg: #eef0f2;
+  --idunn-mermaid-label-bg: transparent;
   --idunn-mermaid-fg: #1f2937;
   --idunn-mermaid-muted: #64748b;
   --idunn-mermaid-teal: #0f766e;
@@ -368,140 +380,177 @@ body {
 
 /* ——— Flowchart (S3): teal frames, muted edges ——— */
 
-.mermaid .node rect,
-.mermaid .node circle,
-.mermaid .node polygon,
-.mermaid .node path {
+body .mermaid .node rect,
+body .mermaid .node circle,
+body .mermaid .node ellipse,
+body .mermaid .node polygon,
+body .mermaid .node path {
   fill: var(--idunn-mermaid-panel) !important;
   stroke: var(--idunn-mermaid-teal) !important;
   stroke-width: 1.75px !important;
 }
 
-.mermaid .cluster rect {
+body .mermaid .cluster rect {
   fill: var(--idunn-mermaid-raised) !important;
   stroke: var(--idunn-mermaid-teal) !important;
   stroke-width: 1.5px !important;
 }
 
-.mermaid .edgePath .path,
-.mermaid .flowchart-link {
+body .mermaid .edgePath .path,
+body .mermaid .flowchart-link {
   stroke: var(--idunn-mermaid-muted) !important;
   stroke-width: 1.6px !important;
 }
 
-/* Flowchart arrowheads (sequence uses message lines, not these markers) */
-.mermaid .edgePath .arrowheadPath,
-.mermaid .flowchart marker path,
-.mermaid marker#flowchart-pointEnd path,
-.mermaid marker#flowchart-pointStart path,
-.mermaid [id*="flowchart"][id$="arrowhead"] path,
-.mermaid [id*="flowchart"][id*="pointEnd"] path {
+/* Flowchart arrowheads */
+body .mermaid .edgePath .arrowheadPath,
+body .mermaid marker#flowchart-pointEnd path,
+body .mermaid marker#flowchart-pointStart path,
+body .mermaid marker#flowchart-pointEnd,
+body .mermaid marker#flowchart-pointStart,
+body .mermaid .marker.flowchart-pointEnd,
+body .mermaid .marker.flowchart-pointStart {
+  fill: var(--idunn-mermaid-muted) !important;
+  stroke: var(--idunn-mermaid-muted) !important;
+}
+
+/* Generic flowchart markers (Obsidian Mermaid versions vary) */
+body .mermaid svg[id*="mermaid"] marker.path,
+body .mermaid .flowchart marker path {
   fill: var(--idunn-mermaid-muted) !important;
   stroke: var(--idunn-mermaid-muted) !important;
 }
 
 /* ——— Sequence (S4): screen-teal actors, lifelines, signals ——— */
 
-.mermaid .actor {
+body .mermaid .actor {
   fill: var(--idunn-mermaid-panel) !important;
   stroke: var(--idunn-mermaid-screen-teal) !important;
   stroke-width: 1.75px !important;
 }
 
-.mermaid .actor-line,
-.mermaid .actor-man line {
+body .mermaid .actor-line,
+body .mermaid .actor-man line {
   stroke: var(--idunn-mermaid-screen-teal) !important;
 }
 
-.mermaid .messageLine0,
-.mermaid .messageLine1 {
+body .mermaid .messageLine0,
+body .mermaid .messageLine1 {
   stroke: var(--idunn-mermaid-screen-teal) !important;
   stroke-width: 1.6px !important;
 }
 
-.mermaid .sequenceNumber {
+body .mermaid .sequenceNumber {
   fill: var(--idunn-mermaid-fg) !important;
 }
 
-.mermaid .activation0,
-.mermaid .activation1,
-.mermaid .activation2 {
+body .mermaid .activation0,
+body .mermaid .activation1,
+body .mermaid .activation2 {
   fill: var(--idunn-mermaid-raised) !important;
   stroke: var(--idunn-mermaid-screen-teal) !important;
 }
 
-/* ——— Labels (shared) ——— */
-
-.mermaid .edgeLabel,
-.mermaid .edgeLabel rect {
-  background-color: var(--idunn-mermaid-label-bg) !important;
-  fill: var(--idunn-mermaid-label-bg) !important;
-  color: var(--idunn-mermaid-fg) !important;
-}
-
-.mermaid .nodeLabel,
-.mermaid .cluster-label,
-.mermaid .label,
-.mermaid .messageText,
-.mermaid .loopText,
-.mermaid .pieTitleText,
-.mermaid text {
-  fill: var(--idunn-mermaid-fg) !important;
-  color: var(--idunn-mermaid-fg) !important;
-}
-
-/* ——— Quadrant (S4) ——— */
-
-.mermaid .quadrant .border,
-.mermaid .quadrant-border,
-.mermaid g.quadrant Group rect,
-.mermaid .quadrants line,
-.mermaid svg[aria-roledescription="quadrant-chart"] > g > rect {
-  stroke: var(--idunn-mermaid-screen-teal) !important;
-}
-
-.mermaid .quadrant-point,
-.mermaid .data-point circle,
-.mermaid circle.quadrant-point {
+/* Sequence arrowheads stay teal (not muted flowchart markers) */
+body .mermaid marker#arrowhead path,
+body .mermaid marker#crosshead path,
+body .mermaid marker#sequencenumber path,
+body .mermaid .actor-man circle {
   fill: var(--idunn-mermaid-screen-teal) !important;
   stroke: var(--idunn-mermaid-screen-teal) !important;
 }
 
-/* Mermaid quadrantChart axis / outer strokes (version-sensitive) */
-.mermaid .quadrantChart text[class*="title"],
-.mermaid text.quadrant-title {
+/* ——— Labels (HTML foreignObject + SVG text) ——— */
+
+body .mermaid .nodeLabel,
+body .mermaid .edgeLabel,
+body .mermaid .label,
+body .mermaid .cluster-label,
+body .mermaid .messageText,
+body .mermaid .loopText,
+body .mermaid .pieTitleText,
+body .mermaid foreignObject,
+body .mermaid foreignObject div,
+body .mermaid foreignObject span {
+  color: var(--idunn-mermaid-fg) !important;
+}
+
+body .mermaid .nodeLabel,
+body .mermaid .cluster-label,
+body .mermaid .label,
+body .mermaid .messageText,
+body .mermaid .loopText,
+body .mermaid .pieTitleText,
+body .mermaid text {
+  fill: var(--idunn-mermaid-fg) !important;
+}
+
+/*
+ * Edge label chips: transparent so empty/branch labels don’t paint dark squares
+ * on the canvas (Obsidian + Mermaid often emit rect backgrounds for |yes|/|no|).
+ */
+body .mermaid .edgeLabel {
+  background-color: var(--idunn-mermaid-label-bg) !important;
+  color: var(--idunn-mermaid-fg) !important;
+}
+
+body .mermaid .edgeLabel rect,
+body .mermaid .edgeLabel > rect,
+body .mermaid .labelBkg {
+  fill: var(--idunn-mermaid-label-bg) !important;
+  stroke: none !important;
+  opacity: 0 !important;
+}
+
+/* ——— Quadrant (S4) ——— */
+
+body .mermaid .quadrant .border,
+body .mermaid .quadrant-border,
+body .mermaid .quadrants line,
+body .mermaid svg[aria-roledescription="quadrant-chart"] > g > rect {
+  stroke: var(--idunn-mermaid-screen-teal) !important;
+}
+
+body .mermaid .quadrant-point,
+body .mermaid .data-point circle,
+body .mermaid circle.quadrant-point {
+  fill: var(--idunn-mermaid-screen-teal) !important;
+  stroke: var(--idunn-mermaid-screen-teal) !important;
+}
+
+body .mermaid .quadrantChart text[class*="title"],
+body .mermaid text.quadrant-title {
   fill: var(--idunn-mermaid-screen-teal) !important;
 }
 
 /*
  * Pie (S4): screen-teal → steel → link → muted.
  * Keep slice + legend swatch in sync by pairing nth groups.
- * Fragile across Mermaid versions.
  */
-.mermaid .pieCircle:nth-of-type(1),
-.mermaid path.pieCircle:nth-of-type(1),
-.mermaid g.legend > g:nth-child(1) rect {
+body .mermaid .pieCircle:nth-of-type(1),
+body .mermaid path.pieCircle:nth-of-type(1),
+body .mermaid g.legend > g:nth-child(1) rect {
   fill: var(--idunn-mermaid-screen-teal) !important;
 }
-.mermaid .pieCircle:nth-of-type(2),
-.mermaid path.pieCircle:nth-of-type(2),
-.mermaid g.legend > g:nth-child(2) rect {
+body .mermaid .pieCircle:nth-of-type(2),
+body .mermaid path.pieCircle:nth-of-type(2),
+body .mermaid g.legend > g:nth-child(2) rect {
   fill: var(--idunn-mermaid-steel) !important;
 }
-.mermaid .pieCircle:nth-of-type(3),
-.mermaid path.pieCircle:nth-of-type(3),
-.mermaid g.legend > g:nth-child(3) rect {
+body .mermaid .pieCircle:nth-of-type(3),
+body .mermaid path.pieCircle:nth-of-type(3),
+body .mermaid g.legend > g:nth-child(3) rect {
   fill: var(--idunn-mermaid-link) !important;
 }
-.mermaid .pieCircle:nth-of-type(4),
-.mermaid path.pieCircle:nth-of-type(4),
-.mermaid g.legend > g:nth-child(4) rect {
+body .mermaid .pieCircle:nth-of-type(4),
+body .mermaid path.pieCircle:nth-of-type(4),
+body .mermaid g.legend > g:nth-child(4) rect {
   fill: var(--idunn-mermaid-muted) !important;
 }
 
-.mermaid .pieTitleText,
-.mermaid .slice,
-.mermaid .legend text {
+body .mermaid .pieTitleText,
+body .mermaid .slice,
+body .mermaid .legend text {
   fill: var(--idunn-mermaid-fg) !important;
 }
 
