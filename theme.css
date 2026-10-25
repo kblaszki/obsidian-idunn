@@ -390,6 +390,18 @@ body.theme-dark .markdown-source-view.mod-cm6 .mermaid:has(.grid) tspan {
   --idunn-mermaid-accent: #0078d4;
   /* Text on filled gantt/timeline bars (bright teal / blue) */
   --idunn-mermaid-on-bar: #1a1a1a;
+  /*
+   * Gantt pre-invert paints — SVG filter flips these into dark Idunn chrome
+   * (teal / steel / blue). Same family as light tokens.
+   */
+  --idunn-mermaid-gantt-panel: #eef2f7;
+  --idunn-mermaid-gantt-raised: #f4f5f7;
+  --idunn-mermaid-gantt-border: #d0d7e2;
+  --idunn-mermaid-gantt-teal: #0f766e;
+  --idunn-mermaid-gantt-steel: #475569;
+  --idunn-mermaid-gantt-link: #1d4ed8;
+  --idunn-mermaid-gantt-accent: #2563eb;
+  --idunn-mermaid-gantt-muted: #64748b;
 }
 
 .theme-light {
@@ -406,6 +418,15 @@ body.theme-dark .markdown-source-view.mod-cm6 .mermaid:has(.grid) tspan {
   --idunn-mermaid-link: #1d4ed8;
   --idunn-mermaid-accent: #2563eb;
   --idunn-mermaid-on-bar: #f8fafc;
+  /* Gantt paints (no invert) — alias diagram tokens */
+  --idunn-mermaid-gantt-panel: var(--idunn-mermaid-panel);
+  --idunn-mermaid-gantt-raised: var(--idunn-mermaid-raised);
+  --idunn-mermaid-gantt-border: var(--idunn-mermaid-border);
+  --idunn-mermaid-gantt-teal: var(--idunn-mermaid-screen-teal);
+  --idunn-mermaid-gantt-steel: var(--idunn-mermaid-steel);
+  --idunn-mermaid-gantt-link: var(--idunn-mermaid-link);
+  --idunn-mermaid-gantt-accent: var(--idunn-mermaid-accent);
+  --idunn-mermaid-gantt-muted: var(--idunn-mermaid-muted);
 }
 
 /* ——— Flowchart (S3): teal frames, muted edges ——— */
@@ -618,8 +639,10 @@ body .mermaid .legend text {
 
 /*
  * ——— Gantt ———
- * Dark: SVG invert only (see top) → white labels. Do not paint bar fills in dark
- * (they would invert). Light: Idunn panel chrome + dark labels.
+ * Both schemes paint via --idunn-mermaid-gantt-*.
+ * Dark: those tokens are pre-invert (light family) so SVG filter yields
+ * teal / steel / blue chrome. Light: aliases to normal diagram tokens.
+ * Labels: dark keeps #111 under invert (see top); light uses --idunn-mermaid-fg.
  */
 
 body .mermaid .grid .tick text {
@@ -640,89 +663,93 @@ body .mermaid .grid path {
   stroke-width: 0 !important;
 }
 
-body.theme-light .mermaid .exclude-range {
-  fill: var(--idunn-mermaid-border) !important;
+body .mermaid:has(.grid) .exclude-range {
+  fill: var(--idunn-mermaid-gantt-border) !important;
   opacity: 0.35 !important;
 }
 
-body.theme-light .mermaid .section {
+body .mermaid:has(.grid) .section {
   stroke: none !important;
 }
 
-body.theme-light .mermaid .section0,
-body.theme-light .mermaid .section2 {
-  fill: var(--idunn-mermaid-raised) !important;
+body .mermaid:has(.grid) .section0,
+body .mermaid:has(.grid) .section2 {
+  fill: var(--idunn-mermaid-gantt-raised) !important;
   opacity: 0.45 !important;
 }
 
-body.theme-light .mermaid .section1,
-body.theme-light .mermaid .section3 {
-  fill: var(--idunn-mermaid-panel) !important;
+body .mermaid:has(.grid) .section1,
+body .mermaid:has(.grid) .section3 {
+  fill: var(--idunn-mermaid-gantt-panel) !important;
   opacity: 0.35 !important;
 }
 
-body.theme-light .mermaid .sectionTitle,
-body.theme-light .mermaid .sectionTitle0,
-body.theme-light .mermaid .sectionTitle1,
-body.theme-light .mermaid .sectionTitle2,
-body.theme-light .mermaid .sectionTitle3,
-body.theme-light .mermaid .titleText,
-body.theme-light .mermaid .titleText > tspan {
-  fill: var(--idunn-mermaid-screen-teal) !important;
+body.theme-light .mermaid:has(.grid) .sectionTitle,
+body.theme-light .mermaid:has(.grid) .sectionTitle0,
+body.theme-light .mermaid:has(.grid) .sectionTitle1,
+body.theme-light .mermaid:has(.grid) .sectionTitle2,
+body.theme-light .mermaid:has(.grid) .sectionTitle3,
+body.theme-light .mermaid:has(.grid) .titleText,
+body.theme-light .mermaid:has(.grid) .titleText > tspan {
+  fill: var(--idunn-mermaid-gantt-teal) !important;
   stroke: none !important;
 }
 
-body.theme-light .mermaid .grid .tick {
-  stroke: var(--idunn-mermaid-border) !important;
+body .mermaid:has(.grid) .grid .tick {
+  stroke: var(--idunn-mermaid-gantt-border) !important;
 }
 
-body.theme-light .mermaid .today {
+body .mermaid:has(.grid) .today {
   fill: none !important;
-  stroke: var(--idunn-mermaid-link) !important;
+  stroke: var(--idunn-mermaid-gantt-link) !important;
   stroke-width: 2px !important;
 }
 
-body.theme-light .mermaid .task0,
-body.theme-light .mermaid .task1,
-body.theme-light .mermaid .task2,
-body.theme-light .mermaid .task3 {
-  fill: var(--idunn-mermaid-panel) !important;
-  stroke: var(--idunn-mermaid-screen-teal) !important;
+/* Default task — soft teal wash + teal frame (flowchart kinship) */
+body .mermaid:has(.grid) .task0,
+body .mermaid:has(.grid) .task1,
+body .mermaid:has(.grid) .task2,
+body .mermaid:has(.grid) .task3 {
+  fill: color-mix(in srgb, var(--idunn-mermaid-gantt-teal) 14%, var(--idunn-mermaid-gantt-panel)) !important;
+  stroke: var(--idunn-mermaid-gantt-teal) !important;
   stroke-width: 1.75px !important;
 }
 
-body.theme-light .mermaid .active0,
-body.theme-light .mermaid .active1,
-body.theme-light .mermaid .active2,
-body.theme-light .mermaid .active3 {
-  fill: color-mix(in srgb, var(--idunn-mermaid-link) 22%, var(--idunn-mermaid-panel)) !important;
-  stroke: var(--idunn-mermaid-link) !important;
+/* Active — link-blue wash */
+body .mermaid:has(.grid) .active0,
+body .mermaid:has(.grid) .active1,
+body .mermaid:has(.grid) .active2,
+body .mermaid:has(.grid) .active3 {
+  fill: color-mix(in srgb, var(--idunn-mermaid-gantt-link) 26%, var(--idunn-mermaid-gantt-panel)) !important;
+  stroke: var(--idunn-mermaid-gantt-link) !important;
   stroke-width: 1.75px !important;
 }
 
-body.theme-light .mermaid .done0,
-body.theme-light .mermaid .done1,
-body.theme-light .mermaid .done2,
-body.theme-light .mermaid .done3 {
-  fill: var(--idunn-mermaid-raised) !important;
-  stroke: var(--idunn-mermaid-muted) !important;
+/* Done — muted / steel */
+body .mermaid:has(.grid) .done0,
+body .mermaid:has(.grid) .done1,
+body .mermaid:has(.grid) .done2,
+body .mermaid:has(.grid) .done3 {
+  fill: color-mix(in srgb, var(--idunn-mermaid-gantt-steel) 12%, var(--idunn-mermaid-gantt-raised)) !important;
+  stroke: var(--idunn-mermaid-gantt-muted) !important;
   stroke-width: 1.5px !important;
 }
 
-body.theme-light .mermaid .crit0,
-body.theme-light .mermaid .crit1,
-body.theme-light .mermaid .crit2,
-body.theme-light .mermaid .crit3 {
-  fill: color-mix(in srgb, var(--idunn-mermaid-accent) 28%, var(--idunn-mermaid-panel)) !important;
-  stroke: var(--idunn-mermaid-accent) !important;
+/* Crit — accent blue */
+body .mermaid:has(.grid) .crit0,
+body .mermaid:has(.grid) .crit1,
+body .mermaid:has(.grid) .crit2,
+body .mermaid:has(.grid) .crit3 {
+  fill: color-mix(in srgb, var(--idunn-mermaid-gantt-accent) 30%, var(--idunn-mermaid-gantt-panel)) !important;
+  stroke: var(--idunn-mermaid-gantt-accent) !important;
   stroke-width: 1.75px !important;
 }
 
-body.theme-light .mermaid [class*="taskText"],
-body.theme-light .mermaid [class*="doneText"],
-body.theme-light .mermaid [class*="activeText"],
-body.theme-light .mermaid [class*="critText"],
-body.theme-light .mermaid .grid .tick text {
+body.theme-light .mermaid:has(.grid) [class*="taskText"],
+body.theme-light .mermaid:has(.grid) [class*="doneText"],
+body.theme-light .mermaid:has(.grid) [class*="activeText"],
+body.theme-light .mermaid:has(.grid) [class*="critText"],
+body.theme-light .mermaid:has(.grid) .grid .tick text {
   fill: var(--idunn-mermaid-fg) !important;
   color: var(--idunn-mermaid-fg) !important;
 }

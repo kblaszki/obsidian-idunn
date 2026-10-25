@@ -35,6 +35,15 @@
       --idunn-mermaid-link: #4daafc;
       --idunn-mermaid-accent: #0078d4;
       --idunn-mermaid-on-bar: #1a1a1a;
+      /* Pre-invert gantt paints (parity with src/mermaid.css) */
+      --idunn-mermaid-gantt-panel: #eef2f7;
+      --idunn-mermaid-gantt-raised: #f4f5f7;
+      --idunn-mermaid-gantt-border: #d0d7e2;
+      --idunn-mermaid-gantt-teal: #0f766e;
+      --idunn-mermaid-gantt-steel: #475569;
+      --idunn-mermaid-gantt-link: #1d4ed8;
+      --idunn-mermaid-gantt-accent: #2563eb;
+      --idunn-mermaid-gantt-muted: #64748b;
     }
     html[data-scheme="light"] {
       --page-bg: #c8ced6;
@@ -58,28 +67,60 @@
       --idunn-mermaid-link: #1d4ed8;
       --idunn-mermaid-accent: #2563eb;
       --idunn-mermaid-on-bar: #f8fafc;
+      --idunn-mermaid-gantt-panel: var(--idunn-mermaid-panel);
+      --idunn-mermaid-gantt-raised: var(--idunn-mermaid-raised);
+      --idunn-mermaid-gantt-border: var(--idunn-mermaid-border);
+      --idunn-mermaid-gantt-teal: var(--idunn-mermaid-screen-teal);
+      --idunn-mermaid-gantt-steel: var(--idunn-mermaid-steel);
+      --idunn-mermaid-gantt-link: var(--idunn-mermaid-link);
+      --idunn-mermaid-gantt-accent: var(--idunn-mermaid-accent);
+      --idunn-mermaid-gantt-muted: var(--idunn-mermaid-muted);
     }
 
     /* Preview parity with src/mermaid.css — gantt + timeline */
-    .mermaid .sectionTitle,
-    .mermaid .titleText { fill: var(--idunn-mermaid-screen-teal) !important; }
-    .mermaid .grid .tick { stroke: var(--idunn-mermaid-border) !important; }
-    .mermaid .today { stroke: var(--idunn-mermaid-link) !important; }
-    .mermaid .task0, .mermaid .task1, .mermaid .task2, .mermaid .task3 {
-      fill: var(--idunn-mermaid-panel) !important;
-      stroke: var(--idunn-mermaid-screen-teal) !important;
+    .mermaid:has(.grid) .section0,
+    .mermaid:has(.grid) .section2 {
+      fill: var(--idunn-mermaid-gantt-raised) !important;
+      opacity: 0.45 !important;
     }
-    .mermaid .active0, .mermaid .active1, .mermaid .active2, .mermaid .active3 {
-      fill: color-mix(in srgb, var(--idunn-mermaid-link) 22%, var(--idunn-mermaid-panel)) !important;
-      stroke: var(--idunn-mermaid-link) !important;
+    .mermaid:has(.grid) .section1,
+    .mermaid:has(.grid) .section3 {
+      fill: var(--idunn-mermaid-gantt-panel) !important;
+      opacity: 0.35 !important;
     }
-    .mermaid .done0, .mermaid .done1, .mermaid .done2, .mermaid .done3 {
-      fill: var(--idunn-mermaid-raised) !important;
-      stroke: var(--idunn-mermaid-muted) !important;
+    html[data-scheme="light"] .mermaid:has(.grid) .sectionTitle,
+    html[data-scheme="light"] .mermaid:has(.grid) .titleText {
+      fill: var(--idunn-mermaid-gantt-teal) !important;
     }
-    .mermaid .crit0, .mermaid .crit1, .mermaid .crit2, .mermaid .crit3 {
-      fill: color-mix(in srgb, var(--idunn-mermaid-accent) 28%, var(--idunn-mermaid-panel)) !important;
-      stroke: var(--idunn-mermaid-accent) !important;
+    .mermaid:has(.grid) .grid .tick { stroke: var(--idunn-mermaid-gantt-border) !important; }
+    .mermaid:has(.grid) .today {
+      fill: none !important;
+      stroke: var(--idunn-mermaid-gantt-link) !important;
+      stroke-width: 2px !important;
+    }
+    .mermaid:has(.grid) .task0, .mermaid:has(.grid) .task1,
+    .mermaid:has(.grid) .task2, .mermaid:has(.grid) .task3 {
+      fill: color-mix(in srgb, var(--idunn-mermaid-gantt-teal) 14%, var(--idunn-mermaid-gantt-panel)) !important;
+      stroke: var(--idunn-mermaid-gantt-teal) !important;
+      stroke-width: 1.75px !important;
+    }
+    .mermaid:has(.grid) .active0, .mermaid:has(.grid) .active1,
+    .mermaid:has(.grid) .active2, .mermaid:has(.grid) .active3 {
+      fill: color-mix(in srgb, var(--idunn-mermaid-gantt-link) 26%, var(--idunn-mermaid-gantt-panel)) !important;
+      stroke: var(--idunn-mermaid-gantt-link) !important;
+      stroke-width: 1.75px !important;
+    }
+    .mermaid:has(.grid) .done0, .mermaid:has(.grid) .done1,
+    .mermaid:has(.grid) .done2, .mermaid:has(.grid) .done3 {
+      fill: color-mix(in srgb, var(--idunn-mermaid-gantt-steel) 12%, var(--idunn-mermaid-gantt-raised)) !important;
+      stroke: var(--idunn-mermaid-gantt-muted) !important;
+      stroke-width: 1.5px !important;
+    }
+    .mermaid:has(.grid) .crit0, .mermaid:has(.grid) .crit1,
+    .mermaid:has(.grid) .crit2, .mermaid:has(.grid) .crit3 {
+      fill: color-mix(in srgb, var(--idunn-mermaid-gantt-accent) 30%, var(--idunn-mermaid-gantt-panel)) !important;
+      stroke: var(--idunn-mermaid-gantt-accent) !important;
+      stroke-width: 1.75px !important;
     }
     /* Dark preview: SVG invert for gantt + dark ink so invert → white labels */
     html[data-scheme="dark"] .mermaid:has(.grid) > svg {
@@ -94,15 +135,8 @@
     .mermaid .grid .tick:nth-child(3n+1) text,
     .mermaid .grid .tick:nth-child(3n+2) text { opacity: 0 !important; }
     .mermaid .grid .tick:nth-child(3n) text { opacity: 1 !important; }
-    html[data-scheme="light"] .mermaid .task0,
-    html[data-scheme="light"] .mermaid .task1,
-    html[data-scheme="light"] .mermaid .task2,
-    html[data-scheme="light"] .mermaid .task3 {
-      fill: var(--idunn-mermaid-panel) !important;
-      stroke: var(--idunn-mermaid-screen-teal) !important;
-    }
-    html[data-scheme="light"] .mermaid [class*="taskText"],
-    html[data-scheme="light"] .mermaid .grid .tick text {
+    html[data-scheme="light"] .mermaid:has(.grid) [class*="taskText"],
+    html[data-scheme="light"] .mermaid:has(.grid) .grid .tick text {
       fill: var(--idunn-mermaid-fg) !important;
     }
     /* Timeline painted in both schemes (no invert) */
