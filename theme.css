@@ -523,10 +523,6 @@ body .mermaid text {
   fill: var(--idunn-mermaid-fg) !important;
 }
 
-body .mermaid tspan {
-  fill: inherit;
-}
-
 /*
  * Edge label chips: transparent so empty/branch labels don’t paint dark squares
  * on the canvas (Obsidian + Mermaid often emit rect backgrounds for |yes|/|no|).
@@ -596,7 +592,7 @@ body .mermaid .legend text {
   fill: var(--idunn-mermaid-fg) !important;
 }
 
-/* ——— Gantt (S5 / IDE chrome) ——— */
+/* ——— Gantt (S5) — panel bars + accent stroke; always light labels ——— */
 
 body .mermaid .exclude-range {
   fill: var(--idunn-mermaid-border) !important;
@@ -632,13 +628,7 @@ body .mermaid .titleText > tspan {
 
 body .mermaid .grid .tick {
   stroke: var(--idunn-mermaid-border) !important;
-  opacity: 0.9 !important;
-}
-
-body .mermaid .grid .tick text,
-body .mermaid .grid .tick text > tspan {
-  fill: var(--idunn-mermaid-muted) !important;
-  stroke: none !important;
+  opacity: 0.75 !important;
 }
 
 body .mermaid .grid path {
@@ -651,122 +641,74 @@ body .mermaid .today {
   stroke-width: 2px !important;
 }
 
-/* Default task bars — screen-teal like sequence chrome */
+/* Default / active / done / crit bars — dark panel fills (readable light text) */
 body .mermaid .task0,
 body .mermaid .task1,
 body .mermaid .task2,
 body .mermaid .task3 {
-  fill: var(--idunn-mermaid-screen-teal) !important;
-  stroke: var(--idunn-mermaid-steel) !important;
-  stroke-width: 1.5px !important;
+  fill: var(--idunn-mermaid-panel) !important;
+  stroke: var(--idunn-mermaid-screen-teal) !important;
+  stroke-width: 1.75px !important;
 }
 
-body .mermaid .taskText,
-body .mermaid .taskText0,
-body .mermaid .taskText1,
-body .mermaid .taskText2,
-body .mermaid .taskText3,
-body .mermaid .taskText > tspan,
-body .mermaid .taskText0 > tspan,
-body .mermaid .taskText1 > tspan,
-body .mermaid .taskText2 > tspan,
-body .mermaid .taskText3 > tspan {
-  fill: var(--idunn-mermaid-on-bar) !important;
-  stroke: none !important;
-}
-
-body .mermaid .taskTextOutsideRight,
-body .mermaid .taskTextOutsideLeft,
-body .mermaid .taskTextOutside0,
-body .mermaid .taskTextOutside1,
-body .mermaid .taskTextOutside2,
-body .mermaid .taskTextOutside3,
-body .mermaid .taskTextOutsideRight > tspan,
-body .mermaid .taskTextOutsideLeft > tspan {
-  fill: var(--idunn-mermaid-fg) !important;
-  stroke: none !important;
-}
-
-/* Active */
 body .mermaid .active0,
 body .mermaid .active1,
 body .mermaid .active2,
 body .mermaid .active3 {
-  fill: var(--idunn-mermaid-link) !important;
-  stroke: var(--idunn-mermaid-blue) !important;
+  fill: color-mix(in srgb, var(--idunn-mermaid-link) 22%, var(--idunn-mermaid-panel)) !important;
+  stroke: var(--idunn-mermaid-link) !important;
+  stroke-width: 1.75px !important;
 }
 
-body .mermaid .activeText0,
-body .mermaid .activeText1,
-body .mermaid .activeText2,
-body .mermaid .activeText3,
-body .mermaid .activeText0 > tspan,
-body .mermaid .activeText1 > tspan,
-body .mermaid .activeText2 > tspan,
-body .mermaid .activeText3 > tspan {
-  fill: var(--idunn-mermaid-on-bar) !important;
-}
-
-/* Done */
 body .mermaid .done0,
 body .mermaid .done1,
 body .mermaid .done2,
 body .mermaid .done3 {
-  fill: var(--idunn-mermaid-steel) !important;
+  fill: var(--idunn-mermaid-raised) !important;
   stroke: var(--idunn-mermaid-muted) !important;
+  stroke-width: 1.5px !important;
 }
 
-/* Steel done bars need light text (not on-bar dark) */
-body .mermaid .doneText0,
-body .mermaid .doneText1,
-body .mermaid .doneText2,
-body .mermaid .doneText3,
-body .mermaid .doneText0 > tspan,
-body .mermaid .doneText1 > tspan,
-body .mermaid .doneText2 > tspan,
-body .mermaid .doneText3 > tspan {
-  fill: var(--idunn-mermaid-fg) !important;
-}
-
-/* Outside labels on done bars stay diagram-fg */
-body .mermaid .doneText0.taskTextOutsideLeft,
-body .mermaid .doneText0.taskTextOutsideRight,
-body .mermaid .doneText1.taskTextOutsideLeft,
-body .mermaid .doneText1.taskTextOutsideRight,
-body .mermaid .doneText2.taskTextOutsideLeft,
-body .mermaid .doneText2.taskTextOutsideRight,
-body .mermaid .doneText3.taskTextOutsideLeft,
-body .mermaid .doneText3.taskTextOutsideRight {
-  fill: var(--idunn-mermaid-fg) !important;
-}
-
-/* Critical */
 body .mermaid .crit0,
 body .mermaid .crit1,
 body .mermaid .crit2,
 body .mermaid .crit3 {
-  fill: var(--idunn-mermaid-accent) !important;
-  stroke: var(--idunn-mermaid-link) !important;
+  fill: color-mix(in srgb, var(--idunn-mermaid-accent) 28%, var(--idunn-mermaid-panel)) !important;
+  stroke: var(--idunn-mermaid-accent) !important;
+  stroke-width: 1.75px !important;
 }
 
-body .mermaid .critText0,
-body .mermaid .critText1,
-body .mermaid .critText2,
-body .mermaid .critText3,
-body .mermaid .critText0 > tspan,
-body .mermaid .critText1 > tspan,
-body .mermaid .critText2 > tspan,
-body .mermaid .critText3 > tspan {
-  fill: var(--idunn-mermaid-on-bar) !important;
+/*
+ * All gantt copy → diagram fg (never Mermaid’s #333).
+ * Attribute selectors catch doneText0 / activeText2 / taskTextOutsideLeft, etc.
+ */
+body .mermaid [class*="taskText"],
+body .mermaid [class*="taskText"] > tspan,
+body .mermaid [class*="Text0"],
+body .mermaid [class*="Text1"],
+body .mermaid [class*="Text2"],
+body .mermaid [class*="Text3"],
+body .mermaid [class*="Text0"] > tspan,
+body .mermaid [class*="Text1"] > tspan,
+body .mermaid [class*="Text2"] > tspan,
+body .mermaid [class*="Text3"] > tspan,
+body .mermaid .grid .tick text,
+body .mermaid .grid .tick text > tspan,
+body .mermaid .grid text,
+body .mermaid .grid tspan {
+  fill: var(--idunn-mermaid-fg) !important;
+  color: var(--idunn-mermaid-fg) !important;
+  stroke: none !important;
 }
 
-/* ——— Timeline (S5 — same accent ladder as pie) ——— */
+/* ——— Timeline (S5) — panel nodes; teal→steel→blue→link; no cScale purple ——— */
 
 body .mermaid .eventWrapper {
   filter: none !important;
 }
 
-body .mermaid .lineWrapper line {
+body .mermaid .lineWrapper line,
+body .mermaid .timeline-node + .lineWrapper line {
   stroke: var(--idunn-mermaid-muted) !important;
   stroke-width: 1.75px !important;
 }
@@ -776,7 +718,18 @@ body .mermaid .edge {
   fill: none !important;
 }
 
-/* Section / event nodes — cycle teal → steel → blue → link */
+/* Mermaid timeline uses section--1 for the first lane (r%n - 1) */
+body .mermaid .timeline-node rect,
+body .mermaid .timeline-node path,
+body .mermaid .timeline-node circle,
+body .mermaid .timeline-node polygon,
+body .mermaid .section--1 rect,
+body .mermaid .section--1 path,
+body .mermaid .section--1 circle,
+body .mermaid .section--1 polygon,
+body .mermaid .section-root rect,
+body .mermaid .section-root path,
+body .mermaid .section-root circle,
 body .mermaid .section-0 rect,
 body .mermaid .section-0 path,
 body .mermaid .section-0 circle,
@@ -837,6 +790,10 @@ body .mermaid .task-type-7 {
   stroke-width: 1.75px !important;
 }
 
+body .mermaid .timeline-node text,
+body .mermaid .timeline-node text > tspan,
+body .mermaid .section--1 text,
+body .mermaid .section--1 text > tspan,
 body .mermaid .section-0 text,
 body .mermaid .section-0 text > tspan,
 body .mermaid .section-1 text,
@@ -864,14 +821,7 @@ body .mermaid .taskWrapper text > tspan {
   color: var(--idunn-mermaid-fg) !important;
 }
 
-body .mermaid .section-root rect,
-body .mermaid .section-root path,
-body .mermaid .section-root circle {
-  fill: var(--idunn-mermaid-panel) !important;
-  stroke: var(--idunn-mermaid-screen-teal) !important;
-  stroke-width: 1.75px !important;
-}
-
+body .mermaid .section--1 line,
 body .mermaid .section-0 line,
 body .mermaid .section-1 line,
 body .mermaid .section-2 line,
@@ -880,10 +830,16 @@ body .mermaid .section-3 line {
   stroke-width: 2px !important;
 }
 
+body .mermaid .section-edge--1,
 body .mermaid .section-edge-0,
 body .mermaid .section-edge-1,
 body .mermaid .section-edge-2,
 body .mermaid .section-edge-3 {
+  stroke: var(--idunn-mermaid-screen-teal) !important;
+}
+
+/* Timeline axis arrow (often raw stroke=black from renderer) */
+body .mermaid .lineWrapper > line {
   stroke: var(--idunn-mermaid-screen-teal) !important;
 }
 

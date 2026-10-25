@@ -64,42 +64,34 @@
     .mermaid .sectionTitle,
     .mermaid .titleText { fill: var(--idunn-mermaid-screen-teal) !important; }
     .mermaid .grid .tick { stroke: var(--idunn-mermaid-border) !important; }
-    .mermaid .grid .tick text { fill: var(--idunn-mermaid-muted) !important; }
     .mermaid .today { stroke: var(--idunn-mermaid-link) !important; }
     .mermaid .task0, .mermaid .task1, .mermaid .task2, .mermaid .task3 {
-      fill: var(--idunn-mermaid-screen-teal) !important;
-      stroke: var(--idunn-mermaid-steel) !important;
-    }
-    .mermaid .taskText0, .mermaid .taskText1, .mermaid .taskText2, .mermaid .taskText3 {
-      fill: var(--idunn-mermaid-on-bar) !important;
-    }
-    .mermaid .taskTextOutsideRight, .mermaid .taskTextOutsideLeft,
-    .mermaid .taskTextOutside0, .mermaid .taskTextOutside1,
-    .mermaid .taskTextOutside2, .mermaid .taskTextOutside3 {
-      fill: var(--idunn-mermaid-fg) !important;
+      fill: var(--idunn-mermaid-panel) !important;
+      stroke: var(--idunn-mermaid-screen-teal) !important;
     }
     .mermaid .active0, .mermaid .active1, .mermaid .active2, .mermaid .active3 {
-      fill: var(--idunn-mermaid-link) !important;
-      stroke: var(--idunn-mermaid-blue) !important;
-    }
-    .mermaid .activeText0, .mermaid .activeText1, .mermaid .activeText2, .mermaid .activeText3 {
-      fill: var(--idunn-mermaid-on-bar) !important;
-    }
-    .mermaid .done0, .mermaid .done1, .mermaid .done2, .mermaid .done3 {
-      fill: var(--idunn-mermaid-steel) !important;
-      stroke: var(--idunn-mermaid-muted) !important;
-    }
-    .mermaid .doneText0, .mermaid .doneText1, .mermaid .doneText2, .mermaid .doneText3 {
-      fill: var(--idunn-mermaid-fg) !important;
-    }
-    .mermaid .crit0, .mermaid .crit1, .mermaid .crit2, .mermaid .crit3 {
-      fill: var(--idunn-mermaid-accent) !important;
+      fill: color-mix(in srgb, var(--idunn-mermaid-link) 22%, var(--idunn-mermaid-panel)) !important;
       stroke: var(--idunn-mermaid-link) !important;
     }
-    .mermaid .critText0, .mermaid .critText1, .mermaid .critText2, .mermaid .critText3 {
-      fill: var(--idunn-mermaid-on-bar) !important;
+    .mermaid .done0, .mermaid .done1, .mermaid .done2, .mermaid .done3 {
+      fill: var(--idunn-mermaid-raised) !important;
+      stroke: var(--idunn-mermaid-muted) !important;
     }
-    .mermaid .lineWrapper line { stroke: var(--idunn-mermaid-muted) !important; }
+    .mermaid .crit0, .mermaid .crit1, .mermaid .crit2, .mermaid .crit3 {
+      fill: color-mix(in srgb, var(--idunn-mermaid-accent) 28%, var(--idunn-mermaid-panel)) !important;
+      stroke: var(--idunn-mermaid-accent) !important;
+    }
+    .mermaid [class*="taskText"],
+    .mermaid [class*="taskText"] > tspan,
+    .mermaid [class*="Text0"], .mermaid [class*="Text1"],
+    .mermaid [class*="Text2"], .mermaid [class*="Text3"],
+    .mermaid .grid .tick text, .mermaid .grid text, .mermaid .grid tspan {
+      fill: var(--idunn-mermaid-fg) !important;
+      color: var(--idunn-mermaid-fg) !important;
+    }
+    .mermaid .lineWrapper line { stroke: var(--idunn-mermaid-screen-teal) !important; }
+    .mermaid .timeline-node rect, .mermaid .timeline-node path, .mermaid .timeline-node circle,
+    .mermaid .section--1 rect, .mermaid .section--1 path, .mermaid .section--1 circle,
     .mermaid .section-0 rect, .mermaid .section-0 path, .mermaid .section-0 circle,
     .mermaid .section-root rect, .mermaid .section-root path, .mermaid .section-root circle {
       fill: var(--idunn-mermaid-panel) !important;
@@ -113,6 +105,7 @@
       fill: var(--idunn-mermaid-panel) !important;
       stroke: var(--idunn-mermaid-blue) !important;
     }
+    .mermaid .timeline-node text, .mermaid .section--1 text,
     .mermaid .section-0 text, .mermaid .section-1 text, .mermaid .section-2 text,
     .mermaid .section-root text, .mermaid .eventWrapper text, .mermaid .taskWrapper text {
       fill: var(--idunn-mermaid-fg) !important;
