@@ -27,6 +27,7 @@ Preview: `previews/mermaid-style-less.html` (`themeVariables`). Obsidian theme u
 
 - Dark mode applies `filter: invert()` on Mermaid SVG; Idunn sets `filter: none` so panels stay dark and labels light.  
 - Node/edge text is often HTML (`foreignObject` / `.nodeLabel`) — set `color`, not only SVG `fill`.  
+- Sequence labels use SVG `tspan` (`text.actor > tspan`, `.messageText`) — override those, not only `text`.  
 - Empty/branch edge-label rects look like dark squares if filled; keep `--idunn-mermaid-label-bg: transparent`.
 
 ## Checklist

@@ -332,9 +332,12 @@ body {
   height: auto;
 }
 
-/* Critical: stop Obsidian’s invert so theme colors stay as authored */
-.theme-dark .mermaid svg,
-.theme-dark .markdown-source-view.mod-cm6 .mermaid svg {
+/*
+ * Obsidian ships: .theme-dark .mermaid > svg { filter: invert(100%) hue-rotate(180deg) … }
+ * Kill that so our dark panels / light labels stay as authored.
+ */
+body.theme-dark .mermaid > svg,
+body.theme-dark .markdown-source-view.mod-cm6 .mermaid > svg {
   filter: none !important;
 }
 
@@ -452,6 +455,7 @@ body .mermaid .activation2 {
 }
 
 /* Sequence arrowheads stay teal (not muted flowchart markers) */
+body .mermaid [id$="arrowhead"] path,
 body .mermaid marker#arrowhead path,
 body .mermaid marker#crosshead path,
 body .mermaid marker#sequencenumber path,
@@ -460,14 +464,46 @@ body .mermaid .actor-man circle {
   stroke: var(--idunn-mermaid-screen-teal) !important;
 }
 
-/* ——— Labels (HTML foreignObject + SVG text) ——— */
+/*
+ * Sequence text: Mermaid paints fill on tspan (text.actor > tspan, .messageText),
+ * not only on <text> — those stay #333 unless tspans are targeted.
+ */
+body .mermaid text.actor,
+body .mermaid text.actor > tspan,
+body .mermaid text.actor-box,
+body .mermaid text.actor-box > tspan,
+body .mermaid text.actor-man,
+body .mermaid text.actor-man > tspan,
+body .mermaid .messageText,
+body .mermaid .messageText > tspan,
+body .mermaid .labelText,
+body .mermaid .labelText > tspan,
+body .mermaid .loopText,
+body .mermaid .loopText > tspan {
+  fill: var(--idunn-mermaid-fg) !important;
+  color: var(--idunn-mermaid-fg) !important;
+  stroke: none !important;
+}
+
+/* Notes keep dark text on pale yellow for contrast */
+body .mermaid .note {
+  fill: #fff5ad !important;
+  stroke: #decc93 !important;
+}
+
+body .mermaid .noteText,
+body .mermaid .noteText > tspan {
+  fill: #1f2937 !important;
+  color: #1f2937 !important;
+  stroke: none !important;
+}
+
+/* ——— Labels (flowchart HTML foreignObject + shared SVG text) ——— */
 
 body .mermaid .nodeLabel,
 body .mermaid .edgeLabel,
 body .mermaid .label,
 body .mermaid .cluster-label,
-body .mermaid .messageText,
-body .mermaid .loopText,
 body .mermaid .pieTitleText,
 body .mermaid foreignObject,
 body .mermaid foreignObject div,
@@ -478,11 +514,14 @@ body .mermaid foreignObject span {
 body .mermaid .nodeLabel,
 body .mermaid .cluster-label,
 body .mermaid .label,
-body .mermaid .messageText,
-body .mermaid .loopText,
 body .mermaid .pieTitleText,
+body .mermaid .nodeLabel tspan,
 body .mermaid text {
   fill: var(--idunn-mermaid-fg) !important;
+}
+
+body .mermaid tspan {
+  fill: inherit;
 }
 
 /*
