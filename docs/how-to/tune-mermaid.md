@@ -20,6 +20,8 @@ Do **not** put Mermaid hex into `tokens.css` unless they become shared brand tok
 | Sequence | S4 | Screen-teal actors, lifelines, signals |
 | Quadrant | S4 | Screen-teal title/points, steel internal axes |
 | Pie | S4 | screen-teal → steel → link → muted (legend paired in CSS) |
+| Gantt | S5 | Section wash · task teal / active link / done steel · today = link |
+| Timeline | S5 | Panel nodes, teal→steel→blue→link frames, muted connectors |
 
 Preview: `previews/mermaid-style-less.html` (`themeVariables`). Obsidian theme uses CSS overrides — pie/quadrant pairing may need DevTools checks after Mermaid upgrades.
 
@@ -35,7 +37,7 @@ Preview: `previews/mermaid-style-less.html` (`themeVariables`). Obsidian theme u
 1. Edit `--idunn-mermaid-*` under the right scheme only.  
 2. Keep flowchart edges (`.edgePath` / `.flowchart-link`) separate from sequence (`.messageLine*`).  
 3. `npm run build`.  
-4. Verify Dark + Light on flowchart, sequence, quadrant, and pie (slice **and** legend).  
+4. Verify Dark + Light on flowchart, sequence, quadrant, pie, gantt, and timeline.  
 5. Prefer token edits over new `!important` selectors.  
 6. After copying `theme.css` into the vault, reload Obsidian (or toggle the theme) so Mermaid re-renders.
 

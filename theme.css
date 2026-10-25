@@ -364,6 +364,8 @@ body.theme-dark .markdown-source-view.mod-cm6 .mermaid > svg {
   --idunn-mermaid-blue: #569cd6;
   --idunn-mermaid-link: #4daafc;
   --idunn-mermaid-accent: #0078d4;
+  /* Text on filled gantt/timeline bars (bright teal / blue) */
+  --idunn-mermaid-on-bar: #1a1a1a;
 }
 
 .theme-light {
@@ -379,6 +381,7 @@ body.theme-dark .markdown-source-view.mod-cm6 .mermaid > svg {
   --idunn-mermaid-blue: #1d4ed8;
   --idunn-mermaid-link: #1d4ed8;
   --idunn-mermaid-accent: #2563eb;
+  --idunn-mermaid-on-bar: #f8fafc;
 }
 
 /* ——— Flowchart (S3): teal frames, muted edges ——— */
@@ -591,6 +594,296 @@ body .mermaid .pieTitleText,
 body .mermaid .slice,
 body .mermaid .legend text {
   fill: var(--idunn-mermaid-fg) !important;
+}
+
+/* ——— Gantt (S5 / IDE chrome) ——— */
+
+body .mermaid .exclude-range {
+  fill: var(--idunn-mermaid-border) !important;
+  opacity: 0.35 !important;
+}
+
+body .mermaid .section {
+  stroke: none !important;
+}
+
+body .mermaid .section0,
+body .mermaid .section2 {
+  fill: var(--idunn-mermaid-raised) !important;
+  opacity: 0.45 !important;
+}
+
+body .mermaid .section1,
+body .mermaid .section3 {
+  fill: var(--idunn-mermaid-panel) !important;
+  opacity: 0.35 !important;
+}
+
+body .mermaid .sectionTitle,
+body .mermaid .sectionTitle0,
+body .mermaid .sectionTitle1,
+body .mermaid .sectionTitle2,
+body .mermaid .sectionTitle3,
+body .mermaid .titleText,
+body .mermaid .titleText > tspan {
+  fill: var(--idunn-mermaid-screen-teal) !important;
+  stroke: none !important;
+}
+
+body .mermaid .grid .tick {
+  stroke: var(--idunn-mermaid-border) !important;
+  opacity: 0.9 !important;
+}
+
+body .mermaid .grid .tick text,
+body .mermaid .grid .tick text > tspan {
+  fill: var(--idunn-mermaid-muted) !important;
+  stroke: none !important;
+}
+
+body .mermaid .grid path {
+  stroke-width: 0 !important;
+}
+
+body .mermaid .today {
+  fill: none !important;
+  stroke: var(--idunn-mermaid-link) !important;
+  stroke-width: 2px !important;
+}
+
+/* Default task bars — screen-teal like sequence chrome */
+body .mermaid .task0,
+body .mermaid .task1,
+body .mermaid .task2,
+body .mermaid .task3 {
+  fill: var(--idunn-mermaid-screen-teal) !important;
+  stroke: var(--idunn-mermaid-steel) !important;
+  stroke-width: 1.5px !important;
+}
+
+body .mermaid .taskText,
+body .mermaid .taskText0,
+body .mermaid .taskText1,
+body .mermaid .taskText2,
+body .mermaid .taskText3,
+body .mermaid .taskText > tspan,
+body .mermaid .taskText0 > tspan,
+body .mermaid .taskText1 > tspan,
+body .mermaid .taskText2 > tspan,
+body .mermaid .taskText3 > tspan {
+  fill: var(--idunn-mermaid-on-bar) !important;
+  stroke: none !important;
+}
+
+body .mermaid .taskTextOutsideRight,
+body .mermaid .taskTextOutsideLeft,
+body .mermaid .taskTextOutside0,
+body .mermaid .taskTextOutside1,
+body .mermaid .taskTextOutside2,
+body .mermaid .taskTextOutside3,
+body .mermaid .taskTextOutsideRight > tspan,
+body .mermaid .taskTextOutsideLeft > tspan {
+  fill: var(--idunn-mermaid-fg) !important;
+  stroke: none !important;
+}
+
+/* Active */
+body .mermaid .active0,
+body .mermaid .active1,
+body .mermaid .active2,
+body .mermaid .active3 {
+  fill: var(--idunn-mermaid-link) !important;
+  stroke: var(--idunn-mermaid-blue) !important;
+}
+
+body .mermaid .activeText0,
+body .mermaid .activeText1,
+body .mermaid .activeText2,
+body .mermaid .activeText3,
+body .mermaid .activeText0 > tspan,
+body .mermaid .activeText1 > tspan,
+body .mermaid .activeText2 > tspan,
+body .mermaid .activeText3 > tspan {
+  fill: var(--idunn-mermaid-on-bar) !important;
+}
+
+/* Done */
+body .mermaid .done0,
+body .mermaid .done1,
+body .mermaid .done2,
+body .mermaid .done3 {
+  fill: var(--idunn-mermaid-steel) !important;
+  stroke: var(--idunn-mermaid-muted) !important;
+}
+
+body .mermaid .doneText0,
+body .mermaid .doneText1,
+body .mermaid .doneText2,
+body .mermaid .doneText3,
+body .mermaid .doneText0 > tspan,
+body .mermaid .doneText1 > tspan,
+body .mermaid .doneText2 > tspan,
+body .mermaid .doneText3 > tspan {
+  fill: var(--idunn-mermaid-on-bar) !important;
+}
+
+/* Outside labels on done bars stay diagram-fg */
+body .mermaid .doneText0.taskTextOutsideLeft,
+body .mermaid .doneText0.taskTextOutsideRight,
+body .mermaid .doneText1.taskTextOutsideLeft,
+body .mermaid .doneText1.taskTextOutsideRight,
+body .mermaid .doneText2.taskTextOutsideLeft,
+body .mermaid .doneText2.taskTextOutsideRight,
+body .mermaid .doneText3.taskTextOutsideLeft,
+body .mermaid .doneText3.taskTextOutsideRight {
+  fill: var(--idunn-mermaid-fg) !important;
+}
+
+/* Critical */
+body .mermaid .crit0,
+body .mermaid .crit1,
+body .mermaid .crit2,
+body .mermaid .crit3 {
+  fill: var(--idunn-mermaid-accent) !important;
+  stroke: var(--idunn-mermaid-link) !important;
+}
+
+body .mermaid .critText0,
+body .mermaid .critText1,
+body .mermaid .critText2,
+body .mermaid .critText3,
+body .mermaid .critText0 > tspan,
+body .mermaid .critText1 > tspan,
+body .mermaid .critText2 > tspan,
+body .mermaid .critText3 > tspan {
+  fill: var(--idunn-mermaid-on-bar) !important;
+}
+
+/* ——— Timeline (S5 — same accent ladder as pie) ——— */
+
+body .mermaid .eventWrapper {
+  filter: none !important;
+}
+
+body .mermaid .lineWrapper line {
+  stroke: var(--idunn-mermaid-muted) !important;
+  stroke-width: 1.75px !important;
+}
+
+body .mermaid .edge {
+  stroke: var(--idunn-mermaid-muted) !important;
+  fill: none !important;
+}
+
+/* Section / event nodes — cycle teal → steel → blue → link */
+body .mermaid .section-0 rect,
+body .mermaid .section-0 path,
+body .mermaid .section-0 circle,
+body .mermaid .section-type-0,
+body .mermaid .task-type-0 {
+  fill: var(--idunn-mermaid-panel) !important;
+  stroke: var(--idunn-mermaid-screen-teal) !important;
+  stroke-width: 1.75px !important;
+}
+
+body .mermaid .section-1 rect,
+body .mermaid .section-1 path,
+body .mermaid .section-1 circle,
+body .mermaid .section-type-1,
+body .mermaid .task-type-1 {
+  fill: var(--idunn-mermaid-panel) !important;
+  stroke: var(--idunn-mermaid-steel) !important;
+  stroke-width: 1.75px !important;
+}
+
+body .mermaid .section-2 rect,
+body .mermaid .section-2 path,
+body .mermaid .section-2 circle,
+body .mermaid .section-type-2,
+body .mermaid .task-type-2 {
+  fill: var(--idunn-mermaid-panel) !important;
+  stroke: var(--idunn-mermaid-blue) !important;
+  stroke-width: 1.75px !important;
+}
+
+body .mermaid .section-3 rect,
+body .mermaid .section-3 path,
+body .mermaid .section-3 circle,
+body .mermaid .section-type-3,
+body .mermaid .task-type-3,
+body .mermaid .section-4 rect,
+body .mermaid .section-4 path,
+body .mermaid .section-4 circle,
+body .mermaid .section-type-4,
+body .mermaid .task-type-4,
+body .mermaid .section-5 rect,
+body .mermaid .section-5 path,
+body .mermaid .section-5 circle,
+body .mermaid .section-type-5,
+body .mermaid .task-type-5,
+body .mermaid .section-6 rect,
+body .mermaid .section-6 path,
+body .mermaid .section-6 circle,
+body .mermaid .section-type-6,
+body .mermaid .task-type-6,
+body .mermaid .section-7 rect,
+body .mermaid .section-7 path,
+body .mermaid .section-7 circle,
+body .mermaid .section-type-7,
+body .mermaid .task-type-7 {
+  fill: var(--idunn-mermaid-panel) !important;
+  stroke: var(--idunn-mermaid-link) !important;
+  stroke-width: 1.75px !important;
+}
+
+body .mermaid .section-0 text,
+body .mermaid .section-0 text > tspan,
+body .mermaid .section-1 text,
+body .mermaid .section-1 text > tspan,
+body .mermaid .section-2 text,
+body .mermaid .section-2 text > tspan,
+body .mermaid .section-3 text,
+body .mermaid .section-3 text > tspan,
+body .mermaid .section-4 text,
+body .mermaid .section-4 text > tspan,
+body .mermaid .section-5 text,
+body .mermaid .section-5 text > tspan,
+body .mermaid .section-6 text,
+body .mermaid .section-6 text > tspan,
+body .mermaid .section-7 text,
+body .mermaid .section-7 text > tspan,
+body .mermaid .section-root text,
+body .mermaid .section-root text > tspan,
+body .mermaid .eventWrapper text,
+body .mermaid .eventWrapper text > tspan,
+body .mermaid .taskWrapper text,
+body .mermaid .taskWrapper text > tspan {
+  fill: var(--idunn-mermaid-fg) !important;
+  stroke: none !important;
+  color: var(--idunn-mermaid-fg) !important;
+}
+
+body .mermaid .section-root rect,
+body .mermaid .section-root path,
+body .mermaid .section-root circle {
+  fill: var(--idunn-mermaid-panel) !important;
+  stroke: var(--idunn-mermaid-screen-teal) !important;
+  stroke-width: 1.75px !important;
+}
+
+body .mermaid .section-0 line,
+body .mermaid .section-1 line,
+body .mermaid .section-2 line,
+body .mermaid .section-3 line {
+  stroke: var(--idunn-mermaid-muted) !important;
+  stroke-width: 2px !important;
+}
+
+body .mermaid .section-edge-0,
+body .mermaid .section-edge-1,
+body .mermaid .section-edge-2,
+body .mermaid .section-edge-3 {
+  stroke: var(--idunn-mermaid-screen-teal) !important;
 }
 
 /* === src/ui.css === */

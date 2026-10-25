@@ -241,11 +241,42 @@ pie showData
   "Muted" : 15
       </pre>
     </div>
+
+    <div class="diagram">
+      <h3>Gantt</h3>
+      <pre class="mermaid">
+gantt
+  title Theme release schedule
+  dateFormat  YYYY-MM-DD
+  section Design
+  Palette tokens           :done,    des1, 2026-10-01, 2026-10-05
+  Mermaid chrome           :active,  des2, 2026-10-06, 5d
+  section Build
+  npm run build            :         bld1, after des2, 3d
+  Vault QA                 :         bld2, after bld1, 4d
+  section Release
+  Tag + assets             :crit,    rel1, after bld2, 2d
+      </pre>
+    </div>
+
+    <div class="diagram">
+      <h3>Timeline</h3>
+      <pre class="mermaid">
+timeline
+  title Idunn theme path
+  section Bootstrap
+    Manifest + CSS modules : Tokens : Dark / Light
+  section Mermaid
+    Center diagrams : S5 hybrid chrome : Gantt + Timeline
+  section Community
+    Screenshots : GitHub Release : Submit
+      </pre>
+    </div>
   </div>
 
   <footer>
-    Preview only — no <code>src/</code> changes until you pick a style.
-    File: <code>previews/mermaid-style-less.html</code> (needs network for Mermaid CDN).
+    Theme baseline is <strong>S5</strong> (incl. Gantt + Timeline). File:
+    <code>previews/mermaid-style-less.html</code> (needs network for Mermaid CDN).
   </footer>
 
   <script>
@@ -273,6 +304,7 @@ pie showData
         green: "#6a9955",
         labelBg: "#1a1a1a",
         noteBg: "#1a1a1a",
+        onBar: "#1a1a1a",
       },
       light: {
         bg: "#eef0f2",
@@ -294,8 +326,47 @@ pie showData
         green: "#166534",
         labelBg: "#eef0f2",
         noteBg: "#eef0f2",
+        onBar: "#f8fafc",
       },
     };
+
+    function ganttTimelineVars(c) {
+      return {
+        /* Gantt */
+        sectionBkgColor: c.raised,
+        sectionBkgColor2: c.raised,
+        altSectionBkgColor: c.panel,
+        excludeBkgColor: c.border,
+        taskBkgColor: c.screenTeal,
+        taskBorderColor: c.steel,
+        activeTaskBkgColor: c.link,
+        activeTaskBorderColor: c.blue,
+        doneTaskBkgColor: c.steel,
+        doneTaskBorderColor: c.muted,
+        critBkgColor: c.accent,
+        critBorderColor: c.link,
+        todayLineColor: c.link,
+        gridColor: c.border,
+        taskTextColor: c.onBar,
+        taskTextOutsideColor: c.fg,
+        taskTextLightColor: c.onBar,
+        taskTextDarkColor: c.onBar,
+        taskTextClickableColor: c.link,
+        /* Timeline / mindmap scale */
+        cScale0: c.panel,
+        cScale1: c.panel,
+        cScale2: c.panel,
+        cScale3: c.panel,
+        cScaleLabel0: c.fg,
+        cScaleLabel1: c.fg,
+        cScaleLabel2: c.fg,
+        cScaleLabel3: c.fg,
+        cScaleInv0: c.screenTeal,
+        cScaleInv1: c.steel,
+        cScaleInv2: c.blue,
+        cScaleInv3: c.link,
+      };
+    }
 
     const BLURBS = {
       M5: {
@@ -320,7 +391,7 @@ pie showData
       },
       S5: {
         title: "S5 — Hybrid (theme)",
-        text: "Chosen mix: flowchart = S3 (teal node/cluster frames, muted edges) · sequence = S4 screen-teal · quadrant = S4 · pie = S4 (screen-teal / steel / link / muted).",
+        text: "Flowchart S3 · sequence/quadrant/pie S4 · gantt bars screen-teal/link/steel · timeline nodes panel + teal/steel/blue/link frames.",
       },
     };
 
@@ -362,6 +433,7 @@ pie showData
         pieStrokeWidth: "1px",
         pieOuterStrokeColor: c.border,
         pieOpacity: "0.95",
+        ...ganttTimelineVars(c),
       };
 
       if (style === "M5") {
