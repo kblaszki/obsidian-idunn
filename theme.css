@@ -641,7 +641,7 @@ body .mermaid .today {
   stroke-width: 2px !important;
 }
 
-/* Default / active / done / crit bars — dark panel fills (readable light text) */
+/* Default / active / done / crit bars — dark panel fills */
 body .mermaid .task0,
 body .mermaid .task1,
 body .mermaid .task2,
@@ -679,26 +679,77 @@ body .mermaid .crit3 {
 }
 
 /*
- * All gantt copy → diagram fg (never Mermaid’s #333).
- * Attribute selectors catch doneText0 / activeText2 / taskTextOutsideLeft, etc.
+ * Mermaid injects `#<svgId> .doneText0 { fill:… !important }` which beats theme
+ * selectors on `fill`. Dark mode: invert the glyphs so #333 reads as light.
+ * (Do not invert .sectionTitle / .titleText — those already use our teal.)
  */
-body .mermaid [class*="taskText"],
-body .mermaid [class*="taskText"] > tspan,
-body .mermaid [class*="Text0"],
-body .mermaid [class*="Text1"],
-body .mermaid [class*="Text2"],
-body .mermaid [class*="Text3"],
-body .mermaid [class*="Text0"] > tspan,
-body .mermaid [class*="Text1"] > tspan,
-body .mermaid [class*="Text2"] > tspan,
-body .mermaid [class*="Text3"] > tspan,
-body .mermaid .grid .tick text,
-body .mermaid .grid .tick text > tspan,
-body .mermaid .grid text,
-body .mermaid .grid tspan {
+body.theme-dark .mermaid [class*="taskText"],
+body.theme-dark .mermaid [class*="taskText"] tspan,
+body.theme-dark .mermaid [class*="doneText"],
+body.theme-dark .mermaid [class*="doneText"] tspan,
+body.theme-dark .mermaid [class*="activeText"],
+body.theme-dark .mermaid [class*="activeText"] tspan,
+body.theme-dark .mermaid [class*="critText"],
+body.theme-dark .mermaid [class*="critText"] tspan,
+body.theme-dark .mermaid [class*="milestoneText"],
+body.theme-dark .mermaid .grid .tick text,
+body.theme-dark .mermaid .grid .tick text tspan,
+body.theme-dark .mermaid .grid > g > text,
+body.theme-dark .mermaid .timeline-node text,
+body.theme-dark .mermaid .timeline-node tspan,
+body.theme-dark .mermaid .taskWrapper text,
+body.theme-dark .mermaid .taskWrapper tspan,
+body.theme-dark .mermaid .eventWrapper text,
+body.theme-dark .mermaid .eventWrapper tspan,
+body.theme-dark .mermaid .section--1 text,
+body.theme-dark .mermaid .section--1 tspan,
+body.theme-dark .mermaid .section-0 text,
+body.theme-dark .mermaid .section-0 tspan,
+body.theme-dark .mermaid .section-1 text,
+body.theme-dark .mermaid .section-1 tspan,
+body.theme-dark .mermaid .section-2 text,
+body.theme-dark .mermaid .section-2 tspan,
+body.theme-dark .mermaid .section-3 text,
+body.theme-dark .mermaid .section-3 tspan,
+body.theme-dark .mermaid .section-root text,
+body.theme-dark .mermaid .section-root tspan {
+  filter: invert(1) !important;
+}
+
+/* Light mode: dark labels without invert */
+body.theme-light .mermaid [class*="taskText"],
+body.theme-light .mermaid [class*="doneText"],
+body.theme-light .mermaid [class*="activeText"],
+body.theme-light .mermaid [class*="critText"],
+body.theme-light .mermaid .grid .tick text,
+body.theme-light .mermaid .timeline-node text,
+body.theme-light .mermaid .taskWrapper text,
+body.theme-light .mermaid .eventWrapper text,
+body.theme-light .mermaid .section--1 text,
+body.theme-light .mermaid .section-0 text,
+body.theme-light .mermaid .section-1 text,
+body.theme-light .mermaid .section-2 text {
   fill: var(--idunn-mermaid-fg) !important;
   color: var(--idunn-mermaid-fg) !important;
-  stroke: none !important;
+  filter: none !important;
+}
+
+/*
+ * Axis date collision: Mermaid emits a tick per day; keep ~1/3 of labels.
+ * Smaller type helps residual overlap.
+ */
+body .mermaid .grid .tick text {
+  font-size: 10px !important;
+}
+
+body .mermaid .grid .tick:nth-child(3n+1) text,
+body .mermaid .grid .tick:nth-child(3n+2) text {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+body .mermaid .grid .tick:nth-child(3n) text {
+  opacity: 1 !important;
 }
 
 /* ——— Timeline (S5) — panel nodes; teal→steel→blue→link; no cScale purple ——— */

@@ -20,8 +20,8 @@ Do **not** put Mermaid hex into `tokens.css` unless they become shared brand tok
 | Sequence | S4 | Screen-teal actors, lifelines, signals |
 | Quadrant | S4 | Screen-teal title/points, steel internal axes |
 | Pie | S4 | screen-teal → steel → link → muted (legend paired in CSS) |
-| Gantt | S5 | Panel bars + teal/link/muted strokes · **all** labels use `--idunn-mermaid-fg` |
-| Timeline | S5 | Panel nodes (`section--1` + `timeline-node`), teal→steel→blue→link frames |
+| Gantt | S5 | Panel bars + accent strokes · dark-mode label invert · thinned axis ticks |
+| Timeline | S5 | Panel nodes (`section--1` + `timeline-node`) · dark-mode label invert |
 
 Preview: `previews/mermaid-style-less.html` (`themeVariables`). Obsidian theme uses CSS overrides — pie/quadrant pairing may need DevTools checks after Mermaid upgrades.
 
@@ -30,7 +30,8 @@ Preview: `previews/mermaid-style-less.html` (`themeVariables`). Obsidian theme u
 - Dark mode applies `filter: invert()` on Mermaid SVG; Idunn sets `filter: none` so panels stay dark and labels light.  
 - Node/edge text is often HTML (`foreignObject` / `.nodeLabel`) — set `color`, not only SVG `fill`.  
 - Sequence labels use SVG `tspan` (`text.actor > tspan`, `.messageText`) — override those, not only `text`.  
-- Gantt: prefer panel fills + light `--idunn-mermaid-fg` text (avoid dark-on-bar); axis ticks need `.grid text` / `tspan` overrides.  
+- Gantt/timeline labels: Mermaid scopes `#<svgId> .doneText0 { fill:… !important }`, which beats theme `fill`. Dark mode uses `filter: invert(1)` on those glyphs instead.  
+- Gantt axis: hide 2/3 of `.grid .tick` labels (`nth-child`) so dates don’t collide; diagram authors can also set a coarser `axisFormat` / range.  
 - Timeline first lane is often `.section--1` / `.timeline-node` (not only `.section-0`).  
 - Empty/branch edge-label rects look like dark squares if filled; keep `--idunn-mermaid-label-bg: transparent`.
 

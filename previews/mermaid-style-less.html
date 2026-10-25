@@ -81,14 +81,31 @@
       fill: color-mix(in srgb, var(--idunn-mermaid-accent) 28%, var(--idunn-mermaid-panel)) !important;
       stroke: var(--idunn-mermaid-accent) !important;
     }
-    .mermaid [class*="taskText"],
-    .mermaid [class*="taskText"] > tspan,
-    .mermaid [class*="Text0"], .mermaid [class*="Text1"],
-    .mermaid [class*="Text2"], .mermaid [class*="Text3"],
-    .mermaid .grid .tick text, .mermaid .grid text, .mermaid .grid tspan {
-      fill: var(--idunn-mermaid-fg) !important;
-      color: var(--idunn-mermaid-fg) !important;
+    /* Beat Mermaid #svgId !important fills in dark preview via glyph invert */
+    html[data-scheme="dark"] .mermaid [class*="taskText"],
+    html[data-scheme="dark"] .mermaid [class*="doneText"],
+    html[data-scheme="dark"] .mermaid [class*="activeText"],
+    html[data-scheme="dark"] .mermaid [class*="critText"],
+    html[data-scheme="dark"] .mermaid .grid .tick text,
+    html[data-scheme="dark"] .mermaid .timeline-node text,
+    html[data-scheme="dark"] .mermaid .taskWrapper text,
+    html[data-scheme="dark"] .mermaid .eventWrapper text,
+    html[data-scheme="dark"] .mermaid .section--1 text,
+    html[data-scheme="dark"] .mermaid .section-0 text,
+    html[data-scheme="dark"] .mermaid .section-1 text,
+    html[data-scheme="dark"] .mermaid .section-2 text {
+      filter: invert(1) !important;
     }
+    html[data-scheme="light"] .mermaid [class*="taskText"],
+    html[data-scheme="light"] .mermaid .grid .tick text,
+    html[data-scheme="light"] .mermaid .timeline-node text {
+      fill: var(--idunn-mermaid-fg) !important;
+      filter: none !important;
+    }
+    .mermaid .grid .tick text { font-size: 10px !important; }
+    .mermaid .grid .tick:nth-child(3n+1) text,
+    .mermaid .grid .tick:nth-child(3n+2) text { opacity: 0 !important; }
+    .mermaid .grid .tick:nth-child(3n) text { opacity: 1 !important; }
     .mermaid .lineWrapper line { stroke: var(--idunn-mermaid-screen-teal) !important; }
     .mermaid .timeline-node rect, .mermaid .timeline-node path, .mermaid .timeline-node circle,
     .mermaid .section--1 rect, .mermaid .section--1 path, .mermaid .section--1 circle,
@@ -104,11 +121,6 @@
     .mermaid .section-2 rect, .mermaid .section-2 path, .mermaid .section-2 circle {
       fill: var(--idunn-mermaid-panel) !important;
       stroke: var(--idunn-mermaid-blue) !important;
-    }
-    .mermaid .timeline-node text, .mermaid .section--1 text,
-    .mermaid .section-0 text, .mermaid .section-1 text, .mermaid .section-2 text,
-    .mermaid .section-root text, .mermaid .eventWrapper text, .mermaid .taskWrapper text {
-      fill: var(--idunn-mermaid-fg) !important;
     }
 
     * { box-sizing: border-box; }
@@ -420,10 +432,10 @@ timeline
         critBorderColor: c.link,
         todayLineColor: c.link,
         gridColor: c.border,
-        taskTextColor: c.onBar,
+        taskTextColor: c.fg,
         taskTextOutsideColor: c.fg,
-        taskTextLightColor: c.onBar,
-        taskTextDarkColor: c.onBar,
+        taskTextLightColor: c.fg,
+        taskTextDarkColor: c.fg,
         taskTextClickableColor: c.link,
         /* Timeline / mindmap scale */
         cScale0: c.panel,
