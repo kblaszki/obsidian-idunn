@@ -81,46 +81,33 @@
       fill: color-mix(in srgb, var(--idunn-mermaid-accent) 28%, var(--idunn-mermaid-panel)) !important;
       stroke: var(--idunn-mermaid-accent) !important;
     }
-    /* Beat Mermaid #svgId !important fills in dark preview via glyph invert */
-    html[data-scheme="dark"] .mermaid [class*="taskText"],
-    html[data-scheme="dark"] .mermaid [class*="doneText"],
-    html[data-scheme="dark"] .mermaid [class*="activeText"],
-    html[data-scheme="dark"] .mermaid [class*="critText"],
-    html[data-scheme="dark"] .mermaid .grid .tick text,
-    html[data-scheme="dark"] .mermaid .timeline-node text,
-    html[data-scheme="dark"] .mermaid .taskWrapper text,
-    html[data-scheme="dark"] .mermaid .eventWrapper text,
-    html[data-scheme="dark"] .mermaid .section--1 text,
-    html[data-scheme="dark"] .mermaid .section-0 text,
-    html[data-scheme="dark"] .mermaid .section-1 text,
-    html[data-scheme="dark"] .mermaid .section-2 text {
-      filter: invert(1) !important;
-    }
-    html[data-scheme="light"] .mermaid [class*="taskText"],
-    html[data-scheme="light"] .mermaid .grid .tick text,
-    html[data-scheme="light"] .mermaid .timeline-node text {
-      fill: var(--idunn-mermaid-fg) !important;
-      filter: none !important;
+    /* Dark preview: full SVG invert for gantt/timeline (same as theme) */
+    html[data-scheme="dark"] .mermaid:has(.grid) > svg,
+    html[data-scheme="dark"] .mermaid:has(.timeline-node) > svg {
+      filter: invert(100%) hue-rotate(180deg) saturate(1.25) !important;
     }
     .mermaid .grid .tick text { font-size: 10px !important; }
     .mermaid .grid .tick:nth-child(3n+1) text,
     .mermaid .grid .tick:nth-child(3n+2) text { opacity: 0 !important; }
     .mermaid .grid .tick:nth-child(3n) text { opacity: 1 !important; }
-    .mermaid .lineWrapper line { stroke: var(--idunn-mermaid-screen-teal) !important; }
-    .mermaid .timeline-node rect, .mermaid .timeline-node path, .mermaid .timeline-node circle,
-    .mermaid .section--1 rect, .mermaid .section--1 path, .mermaid .section--1 circle,
-    .mermaid .section-0 rect, .mermaid .section-0 path, .mermaid .section-0 circle,
-    .mermaid .section-root rect, .mermaid .section-root path, .mermaid .section-root circle {
+    /* Light-only chrome for gantt/timeline */
+    html[data-scheme="light"] .mermaid .task0,
+    html[data-scheme="light"] .mermaid .task1,
+    html[data-scheme="light"] .mermaid .task2,
+    html[data-scheme="light"] .mermaid .task3 {
       fill: var(--idunn-mermaid-panel) !important;
       stroke: var(--idunn-mermaid-screen-teal) !important;
     }
-    .mermaid .section-1 rect, .mermaid .section-1 path, .mermaid .section-1 circle {
-      fill: var(--idunn-mermaid-panel) !important;
-      stroke: var(--idunn-mermaid-steel) !important;
+    html[data-scheme="light"] .mermaid [class*="taskText"],
+    html[data-scheme="light"] .mermaid .grid .tick text,
+    html[data-scheme="light"] .mermaid .timeline-node text {
+      fill: var(--idunn-mermaid-fg) !important;
     }
-    .mermaid .section-2 rect, .mermaid .section-2 path, .mermaid .section-2 circle {
+    html[data-scheme="light"] .mermaid .timeline-node rect,
+    html[data-scheme="light"] .mermaid .section--1 rect,
+    html[data-scheme="light"] .mermaid .section-0 rect {
       fill: var(--idunn-mermaid-panel) !important;
-      stroke: var(--idunn-mermaid-blue) !important;
+      stroke: var(--idunn-mermaid-screen-teal) !important;
     }
 
     * { box-sizing: border-box; }
