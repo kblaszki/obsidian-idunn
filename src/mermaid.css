@@ -402,6 +402,7 @@ body .mermaid .done3 {
   stroke: var(--idunn-mermaid-muted) !important;
 }
 
+/* Steel done bars need light text (not on-bar dark) */
 body .mermaid .doneText0,
 body .mermaid .doneText1,
 body .mermaid .doneText2,
@@ -410,7 +411,7 @@ body .mermaid .doneText0 > tspan,
 body .mermaid .doneText1 > tspan,
 body .mermaid .doneText2 > tspan,
 body .mermaid .doneText3 > tspan {
-  fill: var(--idunn-mermaid-on-bar) !important;
+  fill: var(--idunn-mermaid-fg) !important;
 }
 
 /* Outside labels on done bars stay diagram-fg */
