@@ -41,3 +41,12 @@ Defined in `src/dark.css` and `src/light.css`: `--background-primary`, `--backgr
 | `--background-modifier-border` | `#bcc4cf` |
 | `--background-modifier-form-field` | `#f4f5f7` |
 | `--code-background` | `#e3e7ec` |
+
+## Mermaid (`src/mermaid.css`)
+
+Diagram-only tokens live on `.theme-dark` / `.theme-light` in `mermaid.css`, not in `tokens.css`. Hex tables, selector maps, and gantt pre-invert rules: [mermaid-css.md](mermaid-css.md).
+
+| Family | Examples |
+|--------|----------|
+| Diagram chrome | `--idunn-mermaid-panel`, `--idunn-mermaid-fg`, `--idunn-mermaid-teal`, `--idunn-mermaid-screen-teal`, `--idunn-mermaid-steel`, `--idunn-mermaid-blue`, `--idunn-mermaid-link`, … |
+| Gantt paints | `--idunn-mermaid-gantt-panel`, `--idunn-mermaid-gantt-teal`, `--idunn-mermaid-gantt-link`, … |

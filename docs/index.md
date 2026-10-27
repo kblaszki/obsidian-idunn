@@ -24,6 +24,7 @@
 - [File structure](reference/file-structure.md)
 - [Design tokens](reference/design-tokens.md)
 - [CSS variable map](reference/css-variable-map.md)
+- [Mermaid CSS](reference/mermaid-css.md)
 
 ## Project context (one glance)
 
