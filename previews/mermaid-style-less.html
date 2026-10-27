@@ -24,25 +24,26 @@
       --fg: #cccccc;
       --muted: #9d9d9d;
       --accent: #4ec9b0;
-      --idunn-mermaid-panel: #2a2e36;
-      --idunn-mermaid-raised: #32363f;
-      --idunn-mermaid-border: #3c3c3c;
+      --idunn-mermaid-panel: #252a33;
+      --idunn-mermaid-raised: #363c48;
+      --idunn-mermaid-border: #4a5160;
       --idunn-mermaid-fg: #e8e8e8;
-      --idunn-mermaid-muted: #8b919a;
+      --idunn-mermaid-muted: #9aa3b0;
+      --idunn-mermaid-teal: #4ec9b0;
       --idunn-mermaid-screen-teal: #5bb9a8;
-      --idunn-mermaid-steel: #5a7a90;
+      --idunn-mermaid-steel: #6b8fa8;
       --idunn-mermaid-blue: #569cd6;
       --idunn-mermaid-link: #4daafc;
-      --idunn-mermaid-accent: #0078d4;
-      --idunn-mermaid-on-bar: #1a1a1a;
+      --idunn-mermaid-accent: #0e6cb8;
+      --idunn-mermaid-on-bar: #111111;
       /* Pre-invert gantt paints (parity with src/mermaid.css) */
-      --idunn-mermaid-gantt-panel: #eef2f7;
-      --idunn-mermaid-gantt-raised: #f4f5f7;
-      --idunn-mermaid-gantt-border: #d0d7e2;
+      --idunn-mermaid-gantt-panel: #e8eef6;
+      --idunn-mermaid-gantt-raised: #f3f6fa;
+      --idunn-mermaid-gantt-border: #b8c4d4;
       --idunn-mermaid-gantt-teal: #0f766e;
       --idunn-mermaid-gantt-steel: #475569;
-      --idunn-mermaid-gantt-link: #1d4ed8;
-      --idunn-mermaid-gantt-accent: #2563eb;
+      --idunn-mermaid-gantt-link: #2563eb;
+      --idunn-mermaid-gantt-accent: #0e6cb8;
       --idunn-mermaid-gantt-muted: #64748b;
     }
     html[data-scheme="light"] {
@@ -56,21 +57,22 @@
       --fg: #0f172a;
       --muted: #64748b;
       --accent: #0f766e;
-      --idunn-mermaid-panel: #eef2f7;
-      --idunn-mermaid-raised: #f4f5f7;
-      --idunn-mermaid-border: #d0d7e2;
+      --idunn-mermaid-panel: #dce4ef;
+      --idunn-mermaid-raised: #f8fafc;
+      --idunn-mermaid-border: #b6c2d1;
       --idunn-mermaid-fg: #1f2937;
       --idunn-mermaid-muted: #64748b;
-      --idunn-mermaid-screen-teal: #0f766e;
+      --idunn-mermaid-teal: #0f766e;
+      --idunn-mermaid-screen-teal: #0d9488;
       --idunn-mermaid-steel: #475569;
-      --idunn-mermaid-blue: #1d4ed8;
-      --idunn-mermaid-link: #1d4ed8;
-      --idunn-mermaid-accent: #2563eb;
+      --idunn-mermaid-blue: #1e40af;
+      --idunn-mermaid-link: #2563eb;
+      --idunn-mermaid-accent: #0e6cb8;
       --idunn-mermaid-on-bar: #f8fafc;
       --idunn-mermaid-gantt-panel: var(--idunn-mermaid-panel);
       --idunn-mermaid-gantt-raised: var(--idunn-mermaid-raised);
       --idunn-mermaid-gantt-border: var(--idunn-mermaid-border);
-      --idunn-mermaid-gantt-teal: var(--idunn-mermaid-screen-teal);
+      --idunn-mermaid-gantt-teal: var(--idunn-mermaid-teal);
       --idunn-mermaid-gantt-steel: var(--idunn-mermaid-steel);
       --idunn-mermaid-gantt-link: var(--idunn-mermaid-link);
       --idunn-mermaid-gantt-accent: var(--idunn-mermaid-accent);
@@ -81,12 +83,12 @@
     .mermaid:has(.grid) .section0,
     .mermaid:has(.grid) .section2 {
       fill: var(--idunn-mermaid-gantt-raised) !important;
-      opacity: 0.45 !important;
+      opacity: 0.55 !important;
     }
     .mermaid:has(.grid) .section1,
     .mermaid:has(.grid) .section3 {
       fill: var(--idunn-mermaid-gantt-panel) !important;
-      opacity: 0.35 !important;
+      opacity: 0.5 !important;
     }
     html[data-scheme="light"] .mermaid:has(.grid) .sectionTitle,
     html[data-scheme="light"] .mermaid:has(.grid) .titleText {
@@ -100,27 +102,27 @@
     }
     .mermaid:has(.grid) .task0, .mermaid:has(.grid) .task1,
     .mermaid:has(.grid) .task2, .mermaid:has(.grid) .task3 {
-      fill: color-mix(in srgb, var(--idunn-mermaid-gantt-teal) 14%, var(--idunn-mermaid-gantt-panel)) !important;
+      fill: color-mix(in srgb, var(--idunn-mermaid-gantt-teal) 34%, var(--idunn-mermaid-gantt-panel)) !important;
       stroke: var(--idunn-mermaid-gantt-teal) !important;
-      stroke-width: 1.75px !important;
+      stroke-width: 2px !important;
     }
     .mermaid:has(.grid) .active0, .mermaid:has(.grid) .active1,
     .mermaid:has(.grid) .active2, .mermaid:has(.grid) .active3 {
-      fill: color-mix(in srgb, var(--idunn-mermaid-gantt-link) 26%, var(--idunn-mermaid-gantt-panel)) !important;
+      fill: color-mix(in srgb, var(--idunn-mermaid-gantt-link) 42%, var(--idunn-mermaid-gantt-panel)) !important;
       stroke: var(--idunn-mermaid-gantt-link) !important;
-      stroke-width: 1.75px !important;
+      stroke-width: 2px !important;
     }
     .mermaid:has(.grid) .done0, .mermaid:has(.grid) .done1,
     .mermaid:has(.grid) .done2, .mermaid:has(.grid) .done3 {
-      fill: color-mix(in srgb, var(--idunn-mermaid-gantt-steel) 12%, var(--idunn-mermaid-gantt-raised)) !important;
+      fill: color-mix(in srgb, var(--idunn-mermaid-gantt-steel) 28%, var(--idunn-mermaid-gantt-raised)) !important;
       stroke: var(--idunn-mermaid-gantt-muted) !important;
-      stroke-width: 1.5px !important;
+      stroke-width: 1.75px !important;
     }
     .mermaid:has(.grid) .crit0, .mermaid:has(.grid) .crit1,
     .mermaid:has(.grid) .crit2, .mermaid:has(.grid) .crit3 {
-      fill: color-mix(in srgb, var(--idunn-mermaid-gantt-accent) 30%, var(--idunn-mermaid-gantt-panel)) !important;
+      fill: color-mix(in srgb, var(--idunn-mermaid-gantt-accent) 48%, var(--idunn-mermaid-gantt-panel)) !important;
       stroke: var(--idunn-mermaid-gantt-accent) !important;
-      stroke-width: 1.75px !important;
+      stroke-width: 2px !important;
     }
     /* Dark preview: SVG invert for gantt + dark ink so invert → white labels */
     html[data-scheme="dark"] .mermaid:has(.grid) > svg {
@@ -400,43 +402,41 @@ timeline
     /* Tokens aligned with old/style.less (--cpp-*) + Idunn light counterparts */
     const IDE = {
       dark: {
-        bg: "#1a1a1a",
-        panel: "#2a2e36",
-        raised: "#32363f",
-        border: "#3c3c3c",
+        bg: "#1a1c1e",
+        panel: "#252a33",
+        raised: "#363c48",
+        border: "#4a5160",
         codeBg: "#3c3c3c",
         fg: "#e8e8e8",
-        muted: "#8b919a",
+        muted: "#9aa3b0",
         teal: "#4ec9b0",
-        /* Slightly cyan teal from vault screens */
         screenTeal: "#5bb9a8",
-        /* Flowchart node frames from architecture shot */
-        steel: "#5a7a90",
+        steel: "#6b8fa8",
         blue: "#569cd6",
         link: "#4daafc",
-        accent: "#0078d4",
+        accent: "#0e6cb8",
         purple: "#c586c0",
         yellow: "#dcdcaa",
         orange: "#ce9178",
         green: "#6a9955",
         labelBg: "#1a1a1a",
         noteBg: "#1a1a1a",
-        onBar: "#1a1a1a",
+        onBar: "#111111",
       },
       light: {
         bg: "#eef0f2",
-        panel: "#eef2f7",
-        raised: "#f4f5f7",
-        border: "#d0d7e2",
+        panel: "#dce4ef",
+        raised: "#f8fafc",
+        border: "#b6c2d1",
         codeBg: "#e2e8f0",
         fg: "#1f2937",
         muted: "#64748b",
         teal: "#0f766e",
-        screenTeal: "#0f766e",
+        screenTeal: "#0d9488",
         steel: "#475569",
-        blue: "#1d4ed8",
-        link: "#1d4ed8",
-        accent: "#2563eb",
+        blue: "#1e40af",
+        link: "#2563eb",
+        accent: "#0e6cb8",
         purple: "#7e22ce",
         yellow: "#a16207",
         orange: "#9a3412",

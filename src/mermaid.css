@@ -62,53 +62,55 @@ body.theme-dark .markdown-source-view.mod-cm6 .mermaid:has(.grid) tspan {
  * Scoped here so surface tokens in dark.css / light.css stay unchanged.
  */
 .theme-dark {
-  --idunn-mermaid-panel: #2a2e36;
-  --idunn-mermaid-raised: #32363f;
-  --idunn-mermaid-border: #3c3c3c;
+  /* Surfaces sit above --background-primary (#1a1c1e); raised clearer than panel */
+  --idunn-mermaid-panel: #252a33;
+  --idunn-mermaid-raised: #363c48;
+  --idunn-mermaid-border: #4a5160;
   --idunn-mermaid-label-bg: transparent;
   --idunn-mermaid-fg: #e8e8e8;
-  --idunn-mermaid-muted: #8b919a;
+  --idunn-mermaid-muted: #9aa3b0;
+  /* Distinct accents: flowchart teal ≠ sequence screen-teal ≠ blues */
   --idunn-mermaid-teal: #4ec9b0;
   --idunn-mermaid-screen-teal: #5bb9a8;
-  --idunn-mermaid-steel: #5a7a90;
+  --idunn-mermaid-steel: #6b8fa8;
   --idunn-mermaid-blue: #569cd6;
   --idunn-mermaid-link: #4daafc;
-  --idunn-mermaid-accent: #0078d4;
-  /* Text on filled gantt/timeline bars (bright teal / blue) */
-  --idunn-mermaid-on-bar: #1a1a1a;
+  --idunn-mermaid-accent: #0e6cb8;
+  --idunn-mermaid-on-bar: #111111;
   /*
-   * Gantt pre-invert paints — SVG filter flips these into dark Idunn chrome
-   * (teal / steel / blue). Same family as light tokens.
+   * Gantt pre-invert paints — saturated light-family hex so after SVG invert
+   * task/active/done/crit stay visually separated (teal / link / steel / ocean).
    */
-  --idunn-mermaid-gantt-panel: #eef2f7;
-  --idunn-mermaid-gantt-raised: #f4f5f7;
-  --idunn-mermaid-gantt-border: #d0d7e2;
+  --idunn-mermaid-gantt-panel: #e8eef6;
+  --idunn-mermaid-gantt-raised: #f3f6fa;
+  --idunn-mermaid-gantt-border: #b8c4d4;
   --idunn-mermaid-gantt-teal: #0f766e;
   --idunn-mermaid-gantt-steel: #475569;
-  --idunn-mermaid-gantt-link: #1d4ed8;
-  --idunn-mermaid-gantt-accent: #2563eb;
+  --idunn-mermaid-gantt-link: #2563eb;
+  --idunn-mermaid-gantt-accent: #0e6cb8;
   --idunn-mermaid-gantt-muted: #64748b;
 }
 
 .theme-light {
-  --idunn-mermaid-panel: #eef2f7;
-  --idunn-mermaid-raised: #f4f5f7;
-  --idunn-mermaid-border: #d0d7e2;
+  /* Panel cooler than note bg (#eef0f2); raised lighter for clusters */
+  --idunn-mermaid-panel: #dce4ef;
+  --idunn-mermaid-raised: #f8fafc;
+  --idunn-mermaid-border: #b6c2d1;
   --idunn-mermaid-label-bg: transparent;
   --idunn-mermaid-fg: #1f2937;
   --idunn-mermaid-muted: #64748b;
   --idunn-mermaid-teal: #0f766e;
-  --idunn-mermaid-screen-teal: #0f766e;
+  --idunn-mermaid-screen-teal: #0d9488;
   --idunn-mermaid-steel: #475569;
-  --idunn-mermaid-blue: #1d4ed8;
-  --idunn-mermaid-link: #1d4ed8;
-  --idunn-mermaid-accent: #2563eb;
+  --idunn-mermaid-blue: #1e40af;
+  --idunn-mermaid-link: #2563eb;
+  --idunn-mermaid-accent: #0e6cb8;
   --idunn-mermaid-on-bar: #f8fafc;
   /* Gantt paints (no invert) — alias diagram tokens */
   --idunn-mermaid-gantt-panel: var(--idunn-mermaid-panel);
   --idunn-mermaid-gantt-raised: var(--idunn-mermaid-raised);
   --idunn-mermaid-gantt-border: var(--idunn-mermaid-border);
-  --idunn-mermaid-gantt-teal: var(--idunn-mermaid-screen-teal);
+  --idunn-mermaid-gantt-teal: var(--idunn-mermaid-teal);
   --idunn-mermaid-gantt-steel: var(--idunn-mermaid-steel);
   --idunn-mermaid-gantt-link: var(--idunn-mermaid-link);
   --idunn-mermaid-gantt-accent: var(--idunn-mermaid-accent);
@@ -361,13 +363,13 @@ body .mermaid:has(.grid) .section {
 body .mermaid:has(.grid) .section0,
 body .mermaid:has(.grid) .section2 {
   fill: var(--idunn-mermaid-gantt-raised) !important;
-  opacity: 0.45 !important;
+  opacity: 0.55 !important;
 }
 
 body .mermaid:has(.grid) .section1,
 body .mermaid:has(.grid) .section3 {
   fill: var(--idunn-mermaid-gantt-panel) !important;
-  opacity: 0.35 !important;
+  opacity: 0.5 !important;
 }
 
 body.theme-light .mermaid:has(.grid) .sectionTitle,
@@ -391,14 +393,14 @@ body .mermaid:has(.grid) .today {
   stroke-width: 2px !important;
 }
 
-/* Default task — soft teal wash + teal frame (flowchart kinship) */
+/* Default task — teal wash + teal frame (flowchart kinship) */
 body .mermaid:has(.grid) .task0,
 body .mermaid:has(.grid) .task1,
 body .mermaid:has(.grid) .task2,
 body .mermaid:has(.grid) .task3 {
-  fill: color-mix(in srgb, var(--idunn-mermaid-gantt-teal) 14%, var(--idunn-mermaid-gantt-panel)) !important;
+  fill: color-mix(in srgb, var(--idunn-mermaid-gantt-teal) 34%, var(--idunn-mermaid-gantt-panel)) !important;
   stroke: var(--idunn-mermaid-gantt-teal) !important;
-  stroke-width: 1.75px !important;
+  stroke-width: 2px !important;
 }
 
 /* Active — link-blue wash */
@@ -406,9 +408,9 @@ body .mermaid:has(.grid) .active0,
 body .mermaid:has(.grid) .active1,
 body .mermaid:has(.grid) .active2,
 body .mermaid:has(.grid) .active3 {
-  fill: color-mix(in srgb, var(--idunn-mermaid-gantt-link) 26%, var(--idunn-mermaid-gantt-panel)) !important;
+  fill: color-mix(in srgb, var(--idunn-mermaid-gantt-link) 42%, var(--idunn-mermaid-gantt-panel)) !important;
   stroke: var(--idunn-mermaid-gantt-link) !important;
-  stroke-width: 1.75px !important;
+  stroke-width: 2px !important;
 }
 
 /* Done — muted / steel */
@@ -416,19 +418,19 @@ body .mermaid:has(.grid) .done0,
 body .mermaid:has(.grid) .done1,
 body .mermaid:has(.grid) .done2,
 body .mermaid:has(.grid) .done3 {
-  fill: color-mix(in srgb, var(--idunn-mermaid-gantt-steel) 12%, var(--idunn-mermaid-gantt-raised)) !important;
+  fill: color-mix(in srgb, var(--idunn-mermaid-gantt-steel) 28%, var(--idunn-mermaid-gantt-raised)) !important;
   stroke: var(--idunn-mermaid-gantt-muted) !important;
-  stroke-width: 1.5px !important;
+  stroke-width: 1.75px !important;
 }
 
-/* Crit — accent blue */
+/* Crit — ocean accent (deeper than link) */
 body .mermaid:has(.grid) .crit0,
 body .mermaid:has(.grid) .crit1,
 body .mermaid:has(.grid) .crit2,
 body .mermaid:has(.grid) .crit3 {
-  fill: color-mix(in srgb, var(--idunn-mermaid-gantt-accent) 30%, var(--idunn-mermaid-gantt-panel)) !important;
+  fill: color-mix(in srgb, var(--idunn-mermaid-gantt-accent) 48%, var(--idunn-mermaid-gantt-panel)) !important;
   stroke: var(--idunn-mermaid-gantt-accent) !important;
-  stroke-width: 1.75px !important;
+  stroke-width: 2px !important;
 }
 
 body.theme-light .mermaid:has(.grid) [class*="taskText"],
@@ -507,7 +509,12 @@ body .mermaid .section-4 rect,
 body .mermaid .section-4 path,
 body .mermaid .section-4 circle,
 body .mermaid .section-type-4,
-body .mermaid .task-type-4,
+body .mermaid .task-type-4 {
+  fill: var(--idunn-mermaid-panel) !important;
+  stroke: var(--idunn-mermaid-link) !important;
+  stroke-width: 1.75px !important;
+}
+
 body .mermaid .section-5 rect,
 body .mermaid .section-5 path,
 body .mermaid .section-5 circle,
@@ -524,7 +531,7 @@ body .mermaid .section-7 circle,
 body .mermaid .section-type-7,
 body .mermaid .task-type-7 {
   fill: var(--idunn-mermaid-panel) !important;
-  stroke: var(--idunn-mermaid-link) !important;
+  stroke: var(--idunn-mermaid-accent) !important;
   stroke-width: 1.75px !important;
 }
 

@@ -13,19 +13,19 @@ Defined on `.theme-dark` / `.theme-light` in `src/mermaid.css` (not in `tokens.c
 
 | Token | Dark | Light | Role |
 |-------|------|-------|------|
-| `--idunn-mermaid-panel` | `#2a2e36` | `#eef2f7` | Node / actor / timeline fill |
-| `--idunn-mermaid-raised` | `#32363f` | `#f4f5f7` | Cluster / activation fill |
-| `--idunn-mermaid-border` | `#3c3c3c` | `#d0d7e2` | Alias source for gantt border (light) |
+| `--idunn-mermaid-panel` | `#252a33` | `#dce4ef` | Node / actor / timeline fill (above note bg) |
+| `--idunn-mermaid-raised` | `#363c48` | `#f8fafc` | Cluster / activation fill |
+| `--idunn-mermaid-border` | `#4a5160` | `#b6c2d1` | Alias source for gantt border (light) |
 | `--idunn-mermaid-label-bg` | `transparent` | `transparent` | Edge-label chip background |
 | `--idunn-mermaid-fg` | `#e8e8e8` | `#1f2937` | Labels, SVG `text` / `tspan`, HTML `color` |
-| `--idunn-mermaid-muted` | `#8b919a` | `#64748b` | Flowchart edges, pie slice 4, timeline connectors |
+| `--idunn-mermaid-muted` | `#9aa3b0` | `#64748b` | Flowchart edges, pie slice 4, timeline connectors |
 | `--idunn-mermaid-teal` | `#4ec9b0` | `#0f766e` | Flowchart node/cluster stroke |
-| `--idunn-mermaid-screen-teal` | `#5bb9a8` | `#0f766e` | Sequence / quadrant / pie / timeline primary stroke |
-| `--idunn-mermaid-steel` | `#5a7a90` | `#475569` | Pie slice 2, timeline lane 1 |
-| `--idunn-mermaid-blue` | `#569cd6` | `#1d4ed8` | Timeline lane 2 |
-| `--idunn-mermaid-link` | `#4daafc` | `#1d4ed8` | Pie slice 3, timeline lanes 3–7 |
-| `--idunn-mermaid-accent` | `#0078d4` | `#2563eb` | Alias source for gantt crit (light) |
-| `--idunn-mermaid-on-bar` | `#1a1a1a` | `#f8fafc` | Reserved; unused by current rules |
+| `--idunn-mermaid-screen-teal` | `#5bb9a8` | `#0d9488` | Sequence / quadrant / pie / timeline primary stroke |
+| `--idunn-mermaid-steel` | `#6b8fa8` | `#475569` | Pie slice 2, timeline lane 1 |
+| `--idunn-mermaid-blue` | `#569cd6` | `#1e40af` | Timeline lane 2 |
+| `--idunn-mermaid-link` | `#4daafc` | `#2563eb` | Pie slice 3, timeline lanes 3–4 |
+| `--idunn-mermaid-accent` | `#0e6cb8` | `#0e6cb8` | Ocean; gantt crit; timeline lanes 5–7 |
+| `--idunn-mermaid-on-bar` | `#111111` | `#f8fafc` | Reserved; unused by current rules |
 
 ### Gantt paints (`--idunn-mermaid-gantt-*`)
 
@@ -33,13 +33,13 @@ Dark values are **pre-invert** (light-family hex): Obsidian keeps SVG `filter: i
 
 | Token | Dark (pre-invert) | Light | Role |
 |-------|-------------------|-------|------|
-| `--idunn-mermaid-gantt-panel` | `#eef2f7` | `var(--idunn-mermaid-panel)` | Section / task base fill |
-| `--idunn-mermaid-gantt-raised` | `#f4f5f7` | `var(--idunn-mermaid-raised)` | Alternate section / done wash base |
-| `--idunn-mermaid-gantt-border` | `#d0d7e2` | `var(--idunn-mermaid-border)` | Grid ticks, exclude-range |
-| `--idunn-mermaid-gantt-teal` | `#0f766e` | `var(--idunn-mermaid-screen-teal)` | Default task stroke; light titles |
+| `--idunn-mermaid-gantt-panel` | `#e8eef6` | `var(--idunn-mermaid-panel)` | Section / task base fill |
+| `--idunn-mermaid-gantt-raised` | `#f3f6fa` | `var(--idunn-mermaid-raised)` | Alternate section / done wash base |
+| `--idunn-mermaid-gantt-border` | `#b8c4d4` | `var(--idunn-mermaid-border)` | Grid ticks, exclude-range |
+| `--idunn-mermaid-gantt-teal` | `#0f766e` | `var(--idunn-mermaid-teal)` | Default task stroke; light titles |
 | `--idunn-mermaid-gantt-steel` | `#475569` | `var(--idunn-mermaid-steel)` | Done fill mix |
-| `--idunn-mermaid-gantt-link` | `#1d4ed8` | `var(--idunn-mermaid-link)` | Active task; today line |
-| `--idunn-mermaid-gantt-accent` | `#2563eb` | `var(--idunn-mermaid-accent)` | Crit task |
+| `--idunn-mermaid-gantt-link` | `#2563eb` | `var(--idunn-mermaid-link)` | Active task; today line |
+| `--idunn-mermaid-gantt-accent` | `#0e6cb8` | `var(--idunn-mermaid-accent)` | Crit task (ocean, deeper than link) |
 | `--idunn-mermaid-gantt-muted` | `#64748b` | `var(--idunn-mermaid-muted)` | Done stroke |
 
 ### Hardcoded paints (not tokens)
@@ -146,15 +146,15 @@ All bar/section rules are scoped with `:has(.grid)`. Layout helpers (tick thinni
 |---------|-----------|------------|---------------|
 | Exclude range | `.exclude-range` | `fill`, `opacity` | `gantt-border`, `0.35` |
 | Section stroke | `.section` | `stroke` | `none` |
-| Sections 0, 2 | `.section0`, `.section2` | `fill`, `opacity` | `gantt-raised`, `0.45` |
-| Sections 1, 3 | `.section1`, `.section3` | `fill`, `opacity` | `gantt-panel`, `0.35` |
+| Sections 0, 2 | `.section0`, `.section2` | `fill`, `opacity` | `gantt-raised`, `0.55` |
+| Sections 1, 3 | `.section1`, `.section3` | `fill`, `opacity` | `gantt-panel`, `0.5` |
 | Titles (light only) | `.sectionTitle`, `.sectionTitle0`–`3`, `.titleText` (+ tspan) | `fill` | `gantt-teal` |
 | Grid ticks | `.grid .tick` | `stroke` | `gantt-border` |
 | Today line | `.today` | `stroke` | `gantt-link` |
-| Default task | `.task0`–`.task3` | `fill`, `stroke` | `color-mix(teal 14%, panel)`, `gantt-teal` |
-| Active | `.active0`–`.active3` | `fill`, `stroke` | `color-mix(link 26%, panel)`, `gantt-link` |
-| Done | `.done0`–`.done3` | `fill`, `stroke` | `color-mix(steel 12%, raised)`, `gantt-muted` |
-| Crit | `.crit0`–`.crit3` | `fill`, `stroke` | `color-mix(accent 30%, panel)`, `gantt-accent` |
+| Default task | `.task0`–`.task3` | `fill`, `stroke` | `color-mix(teal 34%, panel)`, `gantt-teal` |
+| Active | `.active0`–`.active3` | `fill`, `stroke` | `color-mix(link 42%, panel)`, `gantt-link` |
+| Done | `.done0`–`.done3` | `fill`, `stroke` | `color-mix(steel 28%, raised)`, `gantt-muted` |
+| Crit | `.crit0`–`.crit3` | `fill`, `stroke` | `color-mix(accent 48%, panel)`, `gantt-accent` |
 | Task / axis text (light) | `[class*="taskText"]`, `[class*="doneText"]`, `[class*="activeText"]`, `[class*="critText"]`, `.grid .tick text` | `fill`, `color` | `--idunn-mermaid-fg` |
 | All text (dark) | `:has(.grid) text`, `tspan`, `foreignObject` | `fill`, `color` | `#111111` (then invert → white) |
 
@@ -173,7 +173,8 @@ No SVG invert. First lane is often `.section--1` / `.timeline-node`.
 | Lane 0 / root / timeline-node | `.timeline-node` shapes; `.section--1`, `.section-root`, `.section-0` shapes; `.section-type-0`, `.task-type-0` | `fill`, `stroke` | `panel`, `screen-teal` |
 | Lane 1 | `.section-1` shapes; `.section-type-1`, `.task-type-1` | `fill`, `stroke` | `panel`, `steel` |
 | Lane 2 | `.section-2` shapes; `.section-type-2`, `.task-type-2` | `fill`, `stroke` | `panel`, `blue` |
-| Lanes 3–7 | `.section-3`–`.section-7` shapes; `.section-type-N`, `.task-type-N` | `fill`, `stroke` | `panel`, `link` |
+| Lanes 3–4 | `.section-3`–`.section-4` shapes; `.section-type-N`, `.task-type-N` | `fill`, `stroke` | `panel`, `link` |
+| Lanes 5–7 | `.section-5`–`.section-7` shapes; `.section-type-N`, `.task-type-N` | `fill`, `stroke` | `panel`, `accent` |
 | Node / event text | `.timeline-node`, `.section--1`, `.section-0`–`7`, `.section-root`, `.eventWrapper`, `.taskWrapper` `text` (+ tspan) | `fill`, `color` | `fg` |
 | Lane lines 0–3 | `.section--1` / `.section-0`–`3` `line` | `stroke` | `muted` |
 | Section edges | `.section-edge--1`, `.section-edge-0`–`3` | `stroke` | `screen-teal` |
