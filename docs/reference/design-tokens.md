@@ -42,6 +42,14 @@ Defined in `src/dark.css` and `src/light.css`: `--background-primary`, `--backgr
 | `--background-modifier-form-field` | `#f4f5f7` |
 | `--code-background` | `#e3e7ec` |
 
+## UI / plugins (`src/ui.css`)
+
+| Concern | Variables |
+|---------|-----------|
+| Status bar | `--status-bar-background`, `--status-bar-border-color`, `--status-bar-text-color` |
+| Graph | `--graph-text`, `--graph-line`, `--graph-node`, `--graph-node-focused`, `--graph-node-tag`, `--graph-node-attachment`, `--graph-node-unresolved` |
+| Canvas | `--canvas-background`, `--canvas-dot-pattern`, `--canvas-card-label-color`, `--canvas-color-1`…`6` |
+
 ## Markdown chrome (`src/markdown.css`)
 
 Bound on `body` to Obsidian variables (both modes inherit; callout **type** RGB lives in `dark.css` / `light.css`):

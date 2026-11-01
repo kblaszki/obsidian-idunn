@@ -15,7 +15,7 @@
 | `dark.css` / `light.css` | `.theme-dark` / `.theme-light` | also `--callout-*` type RGB triples |
 | `code.css` | `body` + token / CM selectors | `--code-size`, token colors |
 | `mermaid.css` | `.mermaid` + LP embeds | center/scale; S5 hybrid via `--idunn-mermaid-*`; gantt `--idunn-mermaid-gantt-*` — see [mermaid-css.md](mermaid-css.md) |
-| `ui.css` | `body` + workspace chrome | tabs, nav, dividers, focus |
+| `ui.css` | `body` + workspace chrome | tabs, nav, dividers, focus, status bar, graph, canvas, suggestion highlight |
 
 ## Conventions
 

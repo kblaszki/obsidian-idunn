@@ -1075,7 +1075,7 @@ body .mermaid .lineWrapper > line {
 }
 
 /* === src/ui.css === */
-/* App chrome — ribbon, sidebar, tabs, inputs */
+/* App chrome — ribbon, sidebar, tabs, inputs, graph, canvas, status bar */
 
 body {
   --tab-curve: 6px;
@@ -1098,6 +1098,31 @@ body {
 
   --modal-border-color: var(--background-modifier-border);
   --prompt-border-color: var(--background-modifier-border);
+
+  /* Status bar — muted, secondary surface */
+  --status-bar-background: var(--background-secondary);
+  --status-bar-border-color: var(--background-modifier-border);
+  --status-bar-text-color: var(--text-muted);
+
+  /* Graph — teal/cyan nodes, soft edges (restrained, no neon) */
+  --graph-text: var(--text-muted);
+  --graph-line: var(--background-modifier-border);
+  --graph-node: var(--idunn-cyan);
+  --graph-node-unresolved: var(--text-faint);
+  --graph-node-focused: var(--idunn-emerald);
+  --graph-node-tag: var(--idunn-emerald);
+  --graph-node-attachment: var(--idunn-ocean);
+
+  /* Canvas — surfaces + Idunn-tinted card palette */
+  --canvas-background: var(--background-primary);
+  --canvas-card-label-color: var(--text-muted);
+  --canvas-dot-pattern: var(--background-modifier-border);
+  --canvas-color-1: var(--text-error);
+  --canvas-color-2: var(--text-warning);
+  --canvas-color-3: var(--idunn-emerald-muted);
+  --canvas-color-4: var(--idunn-emerald);
+  --canvas-color-5: var(--idunn-cyan);
+  --canvas-color-6: var(--idunn-ocean);
 }
 
 .workspace-tab-header.is-active {
@@ -1111,6 +1136,11 @@ body {
 .sidebar-toggle-button:hover,
 .clickable-icon:hover {
   color: var(--idunn-cyan);
+}
+
+/* Quick switcher / command palette selection cue */
+.suggestion-item.is-selected {
+  background-color: color-mix(in srgb, var(--idunn-cyan) 16%, transparent);
 }
 
 /* Focus rings — accessible, on-brand */
