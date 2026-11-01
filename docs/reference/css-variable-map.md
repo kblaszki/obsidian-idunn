@@ -11,7 +11,8 @@
 | `dark.css` | `.theme-dark` | backgrounds, text, ribbon, `--code-*` |
 | `light.css` | `.theme-light` | same set for light scheme |
 | `typography.css` | `body` + heading selectors | `--h1-color` … `--h6-*` |
-| `markdown.css` | `body` + rendered markdown | links, blockquote, table, tag, callout |
+| `markdown.css` | `body` + rendered markdown | links, blockquote, table, tag, callout chrome, checkbox, metadata, embed |
+| `dark.css` / `light.css` | `.theme-dark` / `.theme-light` | also `--callout-*` type RGB triples |
 | `code.css` | `body` + token / CM selectors | `--code-size`, token colors |
 | `mermaid.css` | `.mermaid` + LP embeds | center/scale; S5 hybrid via `--idunn-mermaid-*`; gantt `--idunn-mermaid-gantt-*` — see [mermaid-css.md](mermaid-css.md) |
 | `ui.css` | `body` + workspace chrome | tabs, nav, dividers, focus |

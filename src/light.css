@@ -54,4 +54,20 @@
   --code-string: #9a3412;
   --code-tag: var(--idunn-ocean);
   --code-value: #166534;
+
+  /* Callout type colors — RGB triples (deeper for light surfaces) */
+  --callout-default: 37, 99, 235; /* cyan / note */
+  --callout-info: 29, 78, 216; /* ocean */
+  --callout-tip: 13, 148, 136; /* emerald */
+  --callout-success: 15, 118, 110;
+  --callout-summary: 30, 64, 175;
+  --callout-todo: 29, 78, 216;
+  --callout-important: 37, 99, 235;
+  --callout-question: 37, 99, 235;
+  --callout-example: 14, 108, 184;
+  --callout-quote: 100, 116, 139; /* muted */
+  --callout-warning: 161, 98, 7;
+  --callout-error: 185, 28, 28;
+  --callout-fail: 185, 28, 28;
+  --callout-bug: 185, 28, 28;
 }

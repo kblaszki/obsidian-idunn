@@ -1,4 +1,4 @@
-/* Markdown chrome — quotes, tables, callouts, links */
+/* Markdown chrome — quotes, tables, callouts, links, tasks, properties, embeds */
 
 body {
   --link-color: var(--idunn-cyan);
@@ -21,8 +21,51 @@ body {
   --tag-background: color-mix(in srgb, var(--idunn-emerald) 16%, transparent);
   --tag-background-hover: color-mix(in srgb, var(--idunn-emerald) 24%, transparent);
 
+  /* Callout chrome (type RGB colors live in dark.css / light.css) */
   --callout-border-width: 0 0 0 4px;
   --callout-radius: var(--radius-m);
+  --callout-border-opacity: 0.35;
+  --callout-padding: 0.75em 1em;
+  --callout-title-weight: 600;
+
+  /* Task checkboxes — brand teal fill, readable done state */
+  --checkbox-color: var(--idunn-emerald);
+  --checkbox-color-hover: var(--idunn-emerald-muted);
+  --checkbox-border-color: var(--text-muted);
+  --checkbox-border-color-hover: var(--idunn-cyan);
+  --checkbox-marker-color: var(--text-on-accent);
+  --checklist-done-color: var(--text-muted);
+  --checklist-done-decoration: line-through;
+
+  /* Properties / frontmatter pane */
+  --metadata-background: var(--background-primary-alt);
+  --metadata-padding: 0.75em 1em;
+  --metadata-border-color: var(--background-modifier-border);
+  --metadata-border-radius: var(--radius-m);
+  --metadata-border-width: 1px;
+  --metadata-gap: 0;
+  --metadata-divider-color: var(--background-modifier-border);
+  --metadata-divider-color-hover: var(--background-modifier-border-hover);
+  --metadata-divider-color-focus: var(--background-modifier-border-focus);
+  --metadata-property-padding: 0.35em 0;
+  --metadata-property-background: transparent;
+  --metadata-property-background-hover: var(--background-modifier-hover);
+  --metadata-property-background-active: var(--background-modifier-active-hover);
+  --metadata-label-text-color: var(--text-muted);
+  --metadata-label-text-color-hover: var(--text-normal);
+  --metadata-input-text-color: var(--text-normal);
+  --metadata-input-background: transparent;
+  --metadata-input-background-hover: var(--background-modifier-hover);
+  --metadata-input-background-active: var(--background-modifier-form-field);
+
+  /* Embeds (images, notes, PDF) — cyan start edge, soft panel fill */
+  --embed-background: var(--background-primary-alt);
+  --embed-padding: 0 0 0 0.85rem;
+  --embed-border-start: 3px solid var(--idunn-cyan);
+  --embed-border-end: none;
+  --embed-border-top: none;
+  --embed-border-bottom: none;
+  --embed-font-style: normal;
 }
 
 .markdown-rendered blockquote {

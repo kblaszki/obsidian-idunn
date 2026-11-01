@@ -48,4 +48,20 @@
   --code-string: #ce9178;
   --code-tag: var(--idunn-cyan);
   --code-value: #b5cea8;
+
+  /* Callout type colors — RGB triples for Obsidian rgb(var(--callout-*)) */
+  --callout-default: 94, 182, 245; /* cyan / note */
+  --callout-info: 14, 108, 184; /* ocean */
+  --callout-tip: 61, 184, 160; /* emerald */
+  --callout-success: 94, 207, 184; /* emerald-muted */
+  --callout-summary: 86, 156, 214; /* steel-blue */
+  --callout-todo: 14, 108, 184;
+  --callout-important: 94, 182, 245;
+  --callout-question: 94, 182, 245;
+  --callout-example: 77, 170, 252; /* link */
+  --callout-quote: 148, 154, 163; /* muted */
+  --callout-warning: 220, 220, 170; /* soft yellow */
+  --callout-error: 244, 71, 71;
+  --callout-fail: 244, 71, 71;
+  --callout-bug: 244, 71, 71;
 }

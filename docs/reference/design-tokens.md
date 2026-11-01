@@ -42,6 +42,17 @@ Defined in `src/dark.css` and `src/light.css`: `--background-primary`, `--backgr
 | `--background-modifier-form-field` | `#f4f5f7` |
 | `--code-background` | `#e3e7ec` |
 
+## Markdown chrome (`src/markdown.css`)
+
+Bound on `body` to Obsidian variables (both modes inherit; callout **type** RGB lives in `dark.css` / `light.css`):
+
+| Concern | Variables |
+|---------|-----------|
+| Callout chrome | `--callout-border-width`, `--callout-radius`, `--callout-border-opacity`, `--callout-padding` |
+| Tasks | `--checkbox-color`, `--checkbox-border-color`, `--checkbox-marker-color`, `--checklist-done-*` |
+| Properties | `--metadata-background`, `--metadata-border-*`, `--metadata-label-*`, `--metadata-input-*` |
+| Embeds | `--embed-background`, `--embed-border-start`, `--embed-padding` |
+
 ## Mermaid (`src/mermaid.css`)
 
 Diagram-only tokens live on `.theme-dark` / `.theme-light` in `mermaid.css`, not in `tokens.css`. Hex tables, selector maps, and gantt pre-invert rules: [mermaid-css.md](mermaid-css.md).
