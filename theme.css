@@ -434,9 +434,9 @@ body.theme-dark .mermaid:has(.grid) foreignObject,
 body.theme-dark .mermaid:has(.grid) foreignObject *,
 body.theme-dark .markdown-source-view.mod-cm6 .mermaid:has(.grid) text,
 body.theme-dark .markdown-source-view.mod-cm6 .mermaid:has(.grid) tspan {
-  fill: #111111 !important;
-  color: #111111 !important;
-  -webkit-text-fill-color: #111111 !important;
+  fill: var(--idunn-mermaid-on-bar) !important;
+  color: var(--idunn-mermaid-on-bar) !important;
+  -webkit-text-fill-color: var(--idunn-mermaid-on-bar) !important;
   stroke: none !important;
 }
 
@@ -465,7 +465,11 @@ body.theme-dark .markdown-source-view.mod-cm6 .mermaid:has(.grid) tspan {
   --idunn-mermaid-blue: #569cd6;
   --idunn-mermaid-link: #4daafc;
   --idunn-mermaid-accent: #0e6cb8;
+  /* Pre-invert gantt ink + sequence note card (shared light-family paints) */
   --idunn-mermaid-on-bar: #111111;
+  --idunn-mermaid-note: #fff5ad;
+  --idunn-mermaid-note-border: #decc93;
+  --idunn-mermaid-note-fg: #1f2937;
   /*
    * Gantt pre-invert paints — saturated light-family hex so after SVG invert
    * task/active/done/crit stay visually separated (teal / link / steel / ocean).
@@ -495,6 +499,9 @@ body.theme-dark .markdown-source-view.mod-cm6 .mermaid:has(.grid) tspan {
   --idunn-mermaid-link: #2563eb;
   --idunn-mermaid-accent: #0e6cb8;
   --idunn-mermaid-on-bar: #f8fafc;
+  --idunn-mermaid-note: #fff5ad;
+  --idunn-mermaid-note-border: #decc93;
+  --idunn-mermaid-note-fg: #1f2937;
   /* Gantt paints (no invert) — alias diagram tokens */
   --idunn-mermaid-gantt-panel: var(--idunn-mermaid-panel);
   --idunn-mermaid-gantt-raised: var(--idunn-mermaid-raised);
@@ -572,11 +579,20 @@ body .mermaid .sequenceNumber {
   fill: var(--idunn-mermaid-fg) !important;
 }
 
-body .mermaid .activation0,
-body .mermaid .activation1,
-body .mermaid .activation2 {
+body .mermaid [class^="activation"] {
   fill: var(--idunn-mermaid-raised) !important;
   stroke: var(--idunn-mermaid-screen-teal) !important;
+}
+
+body .mermaid .loopLine {
+  stroke: var(--idunn-mermaid-screen-teal) !important;
+  stroke-width: 1.5px !important;
+}
+
+body .mermaid .labelBox {
+  fill: var(--idunn-mermaid-panel) !important;
+  stroke: var(--idunn-mermaid-screen-teal) !important;
+  stroke-width: 1.5px !important;
 }
 
 /* Sequence arrowheads stay teal (not muted flowchart markers) */
@@ -611,15 +627,18 @@ body .mermaid .loopText > tspan {
 }
 
 /* Notes keep dark text on pale yellow for contrast */
-body .mermaid .note {
-  fill: #fff5ad !important;
-  stroke: #decc93 !important;
+body .mermaid .note,
+body .mermaid .noteGroup rect {
+  fill: var(--idunn-mermaid-note) !important;
+  stroke: var(--idunn-mermaid-note-border) !important;
 }
 
 body .mermaid .noteText,
-body .mermaid .noteText > tspan {
-  fill: #1f2937 !important;
-  color: #1f2937 !important;
+body .mermaid .noteText > tspan,
+body .mermaid .noteGroup text,
+body .mermaid .noteGroup text > tspan {
+  fill: var(--idunn-mermaid-note-fg) !important;
+  color: var(--idunn-mermaid-note-fg) !important;
   stroke: none !important;
 }
 
@@ -683,8 +702,30 @@ body .mermaid text.quadrant-title {
   fill: var(--idunn-mermaid-screen-teal) !important;
 }
 
+/* Soft quadrant fills — teal / steel / blue / link washes */
+body .mermaid .quadrant:nth-child(1),
+body .mermaid .quadrant0,
+body .mermaid g.quadrants > g:nth-child(1) > rect {
+  fill: color-mix(in srgb, var(--idunn-mermaid-screen-teal) 14%, var(--idunn-mermaid-panel)) !important;
+}
+body .mermaid .quadrant:nth-child(2),
+body .mermaid .quadrant1,
+body .mermaid g.quadrants > g:nth-child(2) > rect {
+  fill: color-mix(in srgb, var(--idunn-mermaid-steel) 14%, var(--idunn-mermaid-panel)) !important;
+}
+body .mermaid .quadrant:nth-child(3),
+body .mermaid .quadrant2,
+body .mermaid g.quadrants > g:nth-child(3) > rect {
+  fill: color-mix(in srgb, var(--idunn-mermaid-blue) 14%, var(--idunn-mermaid-panel)) !important;
+}
+body .mermaid .quadrant:nth-child(4),
+body .mermaid .quadrant3,
+body .mermaid g.quadrants > g:nth-child(4) > rect {
+  fill: color-mix(in srgb, var(--idunn-mermaid-link) 14%, var(--idunn-mermaid-panel)) !important;
+}
+
 /*
- * Pie (S4): screen-teal → steel → link → muted.
+ * Pie (S4): screen-teal → steel → link → muted → blue → accent (then cycle).
  * Keep slice + legend swatch in sync by pairing nth groups.
  */
 body .mermaid .pieCircle:nth-of-type(1),
@@ -706,6 +747,32 @@ body .mermaid .pieCircle:nth-of-type(4),
 body .mermaid path.pieCircle:nth-of-type(4),
 body .mermaid g.legend > g:nth-child(4) rect {
   fill: var(--idunn-mermaid-muted) !important;
+}
+body .mermaid .pieCircle:nth-of-type(5),
+body .mermaid path.pieCircle:nth-of-type(5),
+body .mermaid g.legend > g:nth-child(5) rect {
+  fill: var(--idunn-mermaid-blue) !important;
+}
+body .mermaid .pieCircle:nth-of-type(6),
+body .mermaid path.pieCircle:nth-of-type(6),
+body .mermaid g.legend > g:nth-child(6) rect {
+  fill: var(--idunn-mermaid-accent) !important;
+}
+body .mermaid .pieCircle:nth-of-type(7),
+body .mermaid path.pieCircle:nth-of-type(7),
+body .mermaid g.legend > g:nth-child(7) rect {
+  fill: var(--idunn-mermaid-teal) !important;
+}
+body .mermaid .pieCircle:nth-of-type(8),
+body .mermaid path.pieCircle:nth-of-type(8),
+body .mermaid g.legend > g:nth-child(8) rect {
+  fill: var(--idunn-mermaid-screen-teal) !important;
+}
+
+body .mermaid .pieOuterCircle,
+body .mermaid circle.pieOuterCircle {
+  stroke: var(--idunn-mermaid-border) !important;
+  fill: none !important;
 }
 
 body .mermaid .pieTitleText,
@@ -822,6 +889,26 @@ body .mermaid:has(.grid) .crit3 {
   stroke-width: 2px !important;
 }
 
+/* Combined active+crit / done+crit */
+body .mermaid:has(.grid) [class*="activeCrit"] {
+  fill: color-mix(in srgb, var(--idunn-mermaid-gantt-accent) 40%, var(--idunn-mermaid-gantt-link)) !important;
+  stroke: var(--idunn-mermaid-gantt-accent) !important;
+  stroke-width: 2px !important;
+}
+
+body .mermaid:has(.grid) [class*="doneCrit"] {
+  fill: color-mix(in srgb, var(--idunn-mermaid-gantt-steel) 30%, var(--idunn-mermaid-gantt-raised)) !important;
+  stroke: var(--idunn-mermaid-gantt-accent) !important;
+  stroke-width: 2px !important;
+}
+
+/* Milestones — diamond/marker uses accent */
+body .mermaid:has(.grid) [class*="milestone"] {
+  fill: var(--idunn-mermaid-gantt-accent) !important;
+  stroke: var(--idunn-mermaid-gantt-accent) !important;
+  stroke-width: 1.5px !important;
+}
+
 body.theme-light .mermaid:has(.grid) [class*="taskText"],
 body.theme-light .mermaid:has(.grid) [class*="doneText"],
 body.theme-light .mermaid:has(.grid) [class*="activeText"],
@@ -924,26 +1011,43 @@ body .mermaid .task-type-7 {
   stroke-width: 1.75px !important;
 }
 
+/* Lanes 8+ cycle screen-teal → steel → blue → link → accent */
+body .mermaid .section-8 rect,
+body .mermaid .section-8 path,
+body .mermaid .section-8 circle,
+body .mermaid .section-type-8,
+body .mermaid .task-type-8,
+body .mermaid .section-9 rect,
+body .mermaid .section-9 path,
+body .mermaid .section-9 circle,
+body .mermaid .section-type-9,
+body .mermaid .task-type-9 {
+  fill: var(--idunn-mermaid-panel) !important;
+  stroke: var(--idunn-mermaid-screen-teal) !important;
+  stroke-width: 1.75px !important;
+}
+
+body .mermaid .section-10 rect,
+body .mermaid .section-10 path,
+body .mermaid .section-10 circle,
+body .mermaid .section-type-10,
+body .mermaid .task-type-10,
+body .mermaid .section-11 rect,
+body .mermaid .section-11 path,
+body .mermaid .section-11 circle,
+body .mermaid .section-type-11,
+body .mermaid .task-type-11 {
+  fill: var(--idunn-mermaid-panel) !important;
+  stroke: var(--idunn-mermaid-steel) !important;
+  stroke-width: 1.75px !important;
+}
+
 body .mermaid .timeline-node text,
 body .mermaid .timeline-node text > tspan,
 body .mermaid .section--1 text,
 body .mermaid .section--1 text > tspan,
-body .mermaid .section-0 text,
-body .mermaid .section-0 text > tspan,
-body .mermaid .section-1 text,
-body .mermaid .section-1 text > tspan,
-body .mermaid .section-2 text,
-body .mermaid .section-2 text > tspan,
-body .mermaid .section-3 text,
-body .mermaid .section-3 text > tspan,
-body .mermaid .section-4 text,
-body .mermaid .section-4 text > tspan,
-body .mermaid .section-5 text,
-body .mermaid .section-5 text > tspan,
-body .mermaid .section-6 text,
-body .mermaid .section-6 text > tspan,
-body .mermaid .section-7 text,
-body .mermaid .section-7 text > tspan,
+body .mermaid [class^="section-"] text,
+body .mermaid [class^="section-"] text > tspan,
 body .mermaid .section-root text,
 body .mermaid .section-root text > tspan,
 body .mermaid .eventWrapper text,
@@ -956,19 +1060,13 @@ body .mermaid .taskWrapper text > tspan {
 }
 
 body .mermaid .section--1 line,
-body .mermaid .section-0 line,
-body .mermaid .section-1 line,
-body .mermaid .section-2 line,
-body .mermaid .section-3 line {
+body .mermaid [class^="section-"] line {
   stroke: var(--idunn-mermaid-muted) !important;
   stroke-width: 2px !important;
 }
 
 body .mermaid .section-edge--1,
-body .mermaid .section-edge-0,
-body .mermaid .section-edge-1,
-body .mermaid .section-edge-2,
-body .mermaid .section-edge-3 {
+body .mermaid [class^="section-edge-"] {
   stroke: var(--idunn-mermaid-screen-teal) !important;
 }
 

@@ -25,7 +25,10 @@ Defined on `.theme-dark` / `.theme-light` in `src/mermaid.css` (not in `tokens.c
 | `--idunn-mermaid-blue` | `#569cd6` | `#1e40af` | Timeline lane 2 |
 | `--idunn-mermaid-link` | `#4daafc` | `#2563eb` | Pie slice 3, timeline lanes 3–4 |
 | `--idunn-mermaid-accent` | `#0e6cb8` | `#0e6cb8` | Ocean; gantt crit; timeline lanes 5–7 |
-| `--idunn-mermaid-on-bar` | `#111111` | `#f8fafc` | Reserved; unused by current rules |
+| `--idunn-mermaid-on-bar` | `#111111` | `#f8fafc` | Dark gantt pre-invert text (→ white after filter) |
+| `--idunn-mermaid-note` | `#fff5ad` | `#fff5ad` | Sequence note fill |
+| `--idunn-mermaid-note-border` | `#decc93` | `#decc93` | Sequence note stroke |
+| `--idunn-mermaid-note-fg` | `#1f2937` | `#1f2937` | Sequence note text |
 
 ### Gantt paints (`--idunn-mermaid-gantt-*`)
 
@@ -41,14 +44,6 @@ Dark values are **pre-invert** (light-family hex): Obsidian keeps SVG `filter: i
 | `--idunn-mermaid-gantt-link` | `#2563eb` | `var(--idunn-mermaid-link)` | Active task; today line |
 | `--idunn-mermaid-gantt-accent` | `#0e6cb8` | `var(--idunn-mermaid-accent)` | Crit task (ocean, deeper than link) |
 | `--idunn-mermaid-gantt-muted` | `#64748b` | `var(--idunn-mermaid-muted)` | Done stroke |
-
-### Hardcoded paints (not tokens)
-
-| Value | Where | Role |
-|-------|-------|------|
-| `#111111` | Dark gantt `text` / `tspan` / `foreignObject` | Pre-invert ink → white after SVG filter |
-| `#fff5ad` / `#decc93` | Sequence `.note` fill / stroke | Pale yellow note card |
-| `#1f2937` | Sequence `.noteText` | Dark text on note |
 
 ## Obsidian invert model
 
@@ -106,11 +101,12 @@ Set both `fill` (SVG) and `color` (HTML/`foreignObject`) when changing label ink
 | Lifelines | `.actor-line`, `.actor-man line` | `stroke` | `screen-teal` |
 | Messages | `.messageLine0`, `.messageLine1` | `stroke` | `screen-teal` |
 | Sequence number | `.sequenceNumber` | `fill` | `fg` |
-| Activations | `.activation0`–`.activation2` | `fill`, `stroke` | `raised`, `screen-teal` |
+| Activations | `[class^="activation"]` | `fill`, `stroke` | `raised`, `screen-teal` |
+| Loop / fragment | `.loopLine`, `.labelBox` | `stroke` / `fill`+`stroke` | `screen-teal` / `panel`+`screen-teal` |
 | Arrowheads / person | `[id$="arrowhead"] path`, `marker#arrowhead/crosshead/sequencenumber path`, `.actor-man circle` | `fill`, `stroke` | `screen-teal` |
 | Actor / message / loop text | `text.actor`, `text.actor-box`, `text.actor-man`, `.messageText`, `.labelText`, `.loopText` (+ `> tspan`) | `fill`, `color` | `fg` |
-| Note card | `.note` | `fill`, `stroke` | `#fff5ad`, `#decc93` |
-| Note text | `.noteText` (+ `> tspan`) | `fill`, `color` | `#1f2937` |
+| Note card | `.note`, `.noteGroup rect` | `fill`, `stroke` | `note`, `note-border` |
+| Note text | `.noteText`, `.noteGroup text` (+ tspans) | `fill`, `color` | `note-fg` |
 
 Override `tspan` as well as `text` — Mermaid often sets fill on the tspan only.
 
@@ -121,8 +117,7 @@ Override `tspan` as well as `text` — Mermaid often sets fill on the tspan only
 | Borders / axes | `.quadrant .border`, `.quadrant-border`, `.quadrants line`, `svg[aria-roledescription="quadrant-chart"] > g > rect` | `stroke` | `screen-teal` |
 | Points | `.quadrant-point`, `.data-point circle`, `circle.quadrant-point` | `fill`, `stroke` | `screen-teal` |
 | Titles | `.quadrantChart text[class*="title"]`, `text.quadrant-title` | `fill` | `screen-teal` |
-
-Quadrant **fills** (`quadrant1`–`4` / fill rects) are not painted in theme CSS. Preview HTML may set them via `themeVariables` only.
+| Fills | `.quadrant:nth-child(1–4)`, `.quadrant0`–`3`, `g.quadrants > g:nth-child(n) > rect` | `fill` | teal/steel/blue/link washes on `panel` |
 
 ## Pie (S4)
 
@@ -134,9 +129,9 @@ Slice and legend swatch stay paired by `nth` index.
 | Slice / legend 2 | `…:nth-of-type(2)` / `nth-child(2)` | `fill` | `steel` |
 | Slice / legend 3 | `…:nth-of-type(3)` / `nth-child(3)` | `fill` | `link` |
 | Slice / legend 4 | `…:nth-of-type(4)` / `nth-child(4)` | `fill` | `muted` |
+| Slice / legend 5–8 | `nth` 5→`blue`, 6→`accent`, 7→`teal`, 8→`screen-teal` | `fill` | cycle |
+| Outer circle | `.pieOuterCircle` | `stroke` | `border` |
 | Title / slice / legend text | `.pieTitleText`, `.slice`, `.legend text` | `fill` | `fg` |
-
-Slices 5+ have no Idunn rule (Mermaid defaults).
 
 ## Gantt (S5)
 
@@ -155,8 +150,11 @@ All bar/section rules are scoped with `:has(.grid)`. Layout helpers (tick thinni
 | Active | `.active0`–`.active3` | `fill`, `stroke` | `color-mix(link 42%, panel)`, `gantt-link` |
 | Done | `.done0`–`.done3` | `fill`, `stroke` | `color-mix(steel 28%, raised)`, `gantt-muted` |
 | Crit | `.crit0`–`.crit3` | `fill`, `stroke` | `color-mix(accent 48%, panel)`, `gantt-accent` |
+| Active+crit | `[class*="activeCrit"]` | `fill`, `stroke` | accent/link mix, `gantt-accent` |
+| Done+crit | `[class*="doneCrit"]` | `fill`, `stroke` | steel wash, `gantt-accent` |
+| Milestone | `[class*="milestone"]` | `fill`, `stroke` | `gantt-accent` |
 | Task / axis text (light) | `[class*="taskText"]`, `[class*="doneText"]`, `[class*="activeText"]`, `[class*="critText"]`, `.grid .tick text` | `fill`, `color` | `--idunn-mermaid-fg` |
-| All text (dark) | `:has(.grid) text`, `tspan`, `foreignObject` | `fill`, `color` | `#111111` (then invert → white) |
+| All text (dark) | `:has(.grid) text`, `tspan`, `foreignObject` | `fill`, `color` | `--idunn-mermaid-on-bar` (then invert → white) |
 
 Axis dates: hide ticks `nth-child(3n+1)` and `3n+2`; show `3n` only (`font-size: 10px` on tick text).
 
@@ -175,9 +173,10 @@ No SVG invert. First lane is often `.section--1` / `.timeline-node`.
 | Lane 2 | `.section-2` shapes; `.section-type-2`, `.task-type-2` | `fill`, `stroke` | `panel`, `blue` |
 | Lanes 3–4 | `.section-3`–`.section-4` shapes; `.section-type-N`, `.task-type-N` | `fill`, `stroke` | `panel`, `link` |
 | Lanes 5–7 | `.section-5`–`.section-7` shapes; `.section-type-N`, `.task-type-N` | `fill`, `stroke` | `panel`, `accent` |
-| Node / event text | `.timeline-node`, `.section--1`, `.section-0`–`7`, `.section-root`, `.eventWrapper`, `.taskWrapper` `text` (+ tspan) | `fill`, `color` | `fg` |
-| Lane lines 0–3 | `.section--1` / `.section-0`–`3` `line` | `stroke` | `muted` |
-| Section edges | `.section-edge--1`, `.section-edge-0`–`3` | `stroke` | `screen-teal` |
+| Lanes 8–11 | `.section-8`–`11` (+ type/task) | `fill`, `stroke` | cycle `screen-teal` / `steel` |
+| Node / event text | `.timeline-node`, `[class^="section-"]`, `.section-root`, `.eventWrapper`, `.taskWrapper` `text` (+ tspan) | `fill`, `color` | `fg` |
+| Lane lines | `.section--1 line`, `[class^="section-"] line` | `stroke` | `muted` |
+| Section edges | `.section-edge--1`, `[class^="section-edge-"]` | `stroke` | `screen-teal` |
 | Main line | `.lineWrapper > line` | `stroke` | `screen-teal` |
 
 ## How to define a new color
@@ -192,17 +191,9 @@ No SVG invert. First lane is often `.section--1` / `.timeline-node`.
 
 Do not put Mermaid-only hex into `src/tokens.css` unless it becomes a shared brand token.
 
-## Coverage gaps
+## Coverage notes
 
-Documented for future CSS work — not currently styled in Idunn:
-
-| Diagram | Unstyled / weak |
-|---------|-----------------|
-| Sequence | `.loopLine`, `.labelBox` / fragment boxes, `.noteGroup`, `.activation3+` |
-| Quadrant | Quadrant fill regions (`quadrant1`–`4`) |
-| Pie | Slice / legend 5+; outer circle |
-| Gantt | Combined states (`.activeCrit*`, `.doneCrit*`), `.milestone*` |
-| Timeline | `.section-8+`, `.section-edge-4+`, `.section-N line` beyond 3 |
+Phase-2 closed the previous gap list (sequence fragments, quadrant fills, pie 5–8, gantt milestone/combined, timeline lanes 8–11). Remaining edge cases after Mermaid upgrades may need DevTools checks.
 
 ## Related
 
